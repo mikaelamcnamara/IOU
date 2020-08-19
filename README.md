@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### run the front end
+### Run the front end
 Navigate to client directory and run `npm start`
 Open [http://localhost:3000] to view it in the browser.
 
