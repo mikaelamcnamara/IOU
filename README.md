@@ -1,17 +1,28 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Starting for the first time
 
-### Run the front end
-Navigate to client directory and run `npm start`
-Open [http://localhost:3000] to view it in the browser.
+1. npm install
+2. cd client
+3. npm install
+4. cd ..
+5. npm run dev <-- boots up entire project (front-end on localhost:3000, back-end on localhost:5001)
 
-### Start the db
-start mongo
-Run 'use iou' in mongo shell
+OPTIONAL
 
-### Run the back end
-Navigate to server directory and run `nodemon index.js`
-Open [http://localhost:5000] to view it in the browser.
+1. Mess around with the form (open developer console) (its no good atm, but gives you a rough idea on how the whole stack talks)
+2. Want to see the api results directly? Log into the form, then go to localhost:5001/api/current_user on your browser
 
-### To do
-- Integrate webpack so both front and backend run with one command
-- Console log db is up, running and connected successfully
+#### Good Coding Practices/Recommendations
+
+1. Install Prettier on your IDE. Make sure to enable "format on save", "semicolons", and "single-quote" settings.
+
+### Important Stuff
+
+ALL front-end work is in the client folder.
+
+There are now TWO SETS of node_modules.
+
+#### Need Information from the database?
+
+1. Check out routes/authRoutes.js or routes/apiRoutes.js <-- contains ALL endpoints for the database (liable to change)
+2. "models" defines ALL database schemas. Modify classes and attributes here.
+3. The services/passport.js file handles user login
