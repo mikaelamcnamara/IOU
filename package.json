@@ -1,0 +1,25 @@
+{
+  "name": "anti-cheating-examination-system",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.ts",
+    "server": "nodemon index.ts",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server \" \"npm run client\""
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "concurrently": "^5.3.0",
+    "cookie-session": "^1.4.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.5",
+    "mongoose": "^5.10.0",
+    "nodemon": "^2.0.4",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "typescript": "^3.9.7"
+  }
+}
