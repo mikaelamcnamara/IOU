@@ -1,0 +1,54 @@
+.signin-img-text {
+  margin-top: 30px;
+}
+
+.signin-desc-header {
+  color: white;
+  font-size: 50px;
+  font-weight: 700;
+  margin-bottom: 0px;
+}
+
+.signin-desc-body {
+  color: white;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 400;
+  width: 550px;
+}
+
+.signin-grid {
+  display: grid;
+  grid-template-columns: 872px auto;
+}
+
+.signin-img {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+  width: 872px;
+  height: 1073px;
+}
+
+.signin-title {
+  margin: 40px 0px;
+}
+
+.signin-button {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 25px;
+  color: white;
+  padding: 10px 0px;
+  width: 452px;
+  background-color: #01c48a;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.signin-account-text {
+  margin-top: 0px;
+  font-size: 20px;
+  cursor: pointer;
+}

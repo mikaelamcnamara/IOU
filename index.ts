@@ -5,6 +5,7 @@ const keys = require('./config/keys');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
 require('./models/User');
+require('./models/Favour');
 require('./services/passport');
 
 mongoose.connect(keys.mongoURI, {

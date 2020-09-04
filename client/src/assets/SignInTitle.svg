@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="431" height="71" viewBox="0 0 431 71">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1.802" y1="-0.156" x2="0.136" y2="0.772" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ff566d"/>
+      <stop offset="1" stop-color="#ffb19c"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="1.731" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ff9494"/>
+      <stop offset="1" stop-color="#f83030"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_31" data-name="Group 31" transform="translate(-1206 -43)">
+    <text id="Sign_in_to_IOU" data-name="Sign in to          IOU" transform="translate(1206 96)" fill="#212121" font-size="50" font-family="Poppins-Bold, Poppins" font-weight="700"><tspan x="0" y="0" xml:space="preserve">Sign in to          IOU</tspan></text>
+    <g id="Group_30" data-name="Group 30" transform="translate(1247.233 20.65)">
+      <path id="favourite_24x24_1x" data-name="favourite(24x24)@1x" d="M54.553,7.66a15.374,15.374,0,0,0-22.052,0L30.559,9.645,28.617,7.66A15.456,15.456,0,0,0,17.563,3a15.281,15.281,0,0,0-11,4.66,16.214,16.214,0,0,0,0,22.552L30.588,54.778,52.611,32.226l1.942-1.985A16.249,16.249,0,0,0,54.553,7.66Z" transform="translate(208.906 28.921)" fill="url(#linear-gradient)"/>
+      <path id="Intersection_1" data-name="Intersection 1" d="M23.081,46.346,2.776,25.365A16.159,16.159,0,0,1,4.6,5.022C7.645,1.916,11.115,0,15.141,0A18.1,18.1,0,0,1,27.163,5.022l1.218,1.516c-1.872,1.078-5.56,3.579-5.56,6.56,0,4,6.622,5.409,6.622,8.85s-6.2,1.843-6.622,4.916,4.916,4.855,4.916,7.375-4.916,2.09-4.916,4.425,3.261,1.659,4.916,5.408a24.221,24.221,0,0,1,1.638,7.471l-.589.6Z" transform="translate(210.506 31.559)" fill="url(#linear-gradient-2)"/>
+    </g>
+  </g>
+</svg>
