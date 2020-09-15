@@ -80,7 +80,7 @@ module.exports = (app: any) => {
           } else {
             return res.send({
               success: true,
-              message: 'Account created. Confirmation email has been sent!',
+              message: 'Account created!',
             });
           }
         });

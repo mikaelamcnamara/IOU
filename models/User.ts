@@ -41,11 +41,23 @@ const userSchema = new Schema(
     //boolean to log if user has requested a new password.
     //without this the forgot password function shouldn't work
 
-    userType: {
-      //student or teacher
-      type: String,
+    experiencePoints: {
+      type: Number,
       required: true,
+      default: 0,
     },
+
+    //should the user want to add a description on their profile page
+    personalDescription: {
+      type: String,
+      required: false,
+    },
+
+    //favours the user has made
+    myFavours: [{ type: Schema.Types.ObjectId, ref: 'favours' }],
+
+    //favours the user has completed
+    completedFavours: [{ type: Schema.Types.ObjectId, ref: 'favours' }],
   },
   {
     timestamps: true, //Adds last modified and user creation time to MongoDB collection

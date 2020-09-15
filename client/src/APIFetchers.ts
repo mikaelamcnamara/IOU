@@ -12,9 +12,9 @@ const login = async (email: String, password: String) => {
   try {
     let resp = await fetch('/auth/login', requestOptions);
     let result = await resp.json();
-    console.log(result);
+    return result;
   } catch (e) {
-    console.log(e);
+    return e;
   } finally {
   }
 };
@@ -41,9 +41,9 @@ const register = async (
   try {
     let resp = await fetch('/auth/signup', requestOptions);
     let result = await resp.json();
-    console.log(result);
+    return result;
   } catch (e) {
-    console.log(e);
+    return e;
   } finally {
   }
 };
@@ -52,9 +52,9 @@ const getCurrentUser = async () => {
   try {
     const resp = await fetch('/api/current_user');
     const result = await resp.text();
-    console.log(result);
+    return result;
   } catch (e) {
-    console.log(e);
+    return e;
   } finally {
   }
 };
@@ -67,9 +67,9 @@ const logout = async () => {
   try {
     const resp = await fetch('/api/logout', requestOptions);
     const result = await resp.text();
-    console.log(result);
+    return result;
   } catch (e) {
-    console.log(e);
+    return e;
   } finally {
   }
 };
