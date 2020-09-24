@@ -3,10 +3,11 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { AnimatedRoute } from 'react-router-transition';
 
 import './App.css';
+
 import Home from './components/Home/Home';
 import SignIn from './components/SignIn/SignIn';
 
-function App() {
+const App = () => {
   return (
     <div className='App'>
       <Router>
@@ -33,6 +34,6 @@ function App() {
       </Router>
     </div>
   );
-}
+};
 
 export default App;
