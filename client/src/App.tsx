@@ -13,7 +13,6 @@ function App() {
         <Switch>
           <AnimatedRoute
             atEnter={{ opacity: 0 }}
-            atLeave={{ opacity: 0 }}
             atActive={{ opacity: 1 }}
             timeout={500}
             path='/'
