@@ -73,6 +73,11 @@ const Home = () => {
           <p className='sign-up-button' onClick={() => handleRegistration()}>
             Sign Up
           </p>
+          <br />
+
+          <Link to='/'>
+            <p className='cancel-button'>Cancel</p>
+          </Link>
           <p className='home-account-text'>
             Already have an account?{' '}
             <Link className='link' to='/SignIn'>

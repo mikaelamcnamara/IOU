@@ -6,6 +6,8 @@ import './App.css';
 
 import Home from './components/Home/Home';
 import SignIn from './components/SignIn/SignIn';
+import SearchPage from './components/SearchPage/SearchPage';
+import Navbar from './components/common/Navbar/Navbar';
 
 const App = () => {
   return (
@@ -18,6 +20,16 @@ const App = () => {
             atActive={{ opacity: 1 }}
             timeout={500}
             path='/'
+            exact
+            component={Navbar}
+          />
+
+          <AnimatedRoute
+            atEnter={{ opacity: 0 }}
+            atLeave={{ opacity: 0 }}
+            atActive={{ opacity: 1 }}
+            timeout={500}
+            path='/Register'
             exact
             component={Home}
           />
