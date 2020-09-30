@@ -5,10 +5,9 @@
 }
 
 .leader-title {
-  font-size: 30px;
+  font-size: 35px;
   font-weight: 700;
   margin-bottom: 0px;
-  padding: 50px;
   color: #3e3e3e;
   margin-right: 70%;
 }
@@ -23,4 +22,23 @@
 .leader-wrapper {
   border: 1px solid black;
   overflow: hidden; /* add this to contain floated children */
+}
+
+.favdeb {
+  text-align: left !important;
+  margin-left: 8%;
+  margin-top: 80px;
+}
+
+.title {
+  display: inline-block;
+  size: 18px;
+  color: lightgray;
+  margin-right: 25px;
+  font-size: 25px;
+}
+
+.active {
+  border-bottom: 6px solid #2bd19f;
+  padding: 0 0 1px;
 }

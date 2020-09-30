@@ -12,7 +12,12 @@ const LeaderBoard = () => {
         src={LeaderBoardHeader}
         alt='leaderboard-background'
       ></img>
-      <h1 className='leader-title'>LeaderBoard</h1>
+      <div className='favdeb'>
+        <h1 className='leader-title'>LeaderBoard</h1>
+        <h1 className='title active'>Favours</h1>
+        <h1 className='title'>Debt</h1>
+      </div>
+      <div className='content'></div>
     </div>
   );
 };
