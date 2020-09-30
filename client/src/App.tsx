@@ -5,6 +5,7 @@ import './App.css';
 import Register from './components/Register/Register';
 import SignIn from './components/SignIn/SignIn';
 import Home from './components/Home/Home';
+import LeaderBoard from './components/LeaderBoard/LeaderBoard';
 
 const App = () => {
   return (
@@ -38,6 +39,15 @@ const App = () => {
             path='/SignIn'
             exact
             component={SignIn}
+          />
+          <AnimatedRoute
+            atEnter={{ opacity: 0 }}
+            atLeave={{ opacity: 0 }}
+            atActive={{ opacity: 1 }}
+            timeout={500}
+            path='/LeaderBoard'
+            exact
+            component={LeaderBoard}
           />
         </Switch>
       </Router>
