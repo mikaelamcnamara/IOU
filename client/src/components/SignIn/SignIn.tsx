@@ -38,7 +38,7 @@ const SignUp = () => {
       <div>
         <img className='signin-title' src={SignInTitle} alt='Sign In to IOU' />
         <br />
-        <img src={SignInPhone} alt='Sign in image' />
+        <img src={SignInPhone} alt='Sign in' />
         <TextField
           icon={EmailIcon}
           label='Email'
@@ -56,9 +56,13 @@ const SignUp = () => {
         <p className='signin-button' onClick={() => handleLogin()}>
           Sign In
         </p>
+        <br />
+        <Link to='/'>
+          <p className='cancel-button'>Cancel</p>
+        </Link>
         <p className='signin-account-text'>
-          Don't have an account?{' '}
-          <Link className='link' to='/'>
+          Don't have an account?
+          <Link className='link' to='/Register'>
             Register
           </Link>
         </p>

@@ -1,28 +1,25 @@
-.signin-img-text {
-  margin-top: 30px;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
 }
 
-.signin-desc-header {
+.home-desc-header {
   color: white;
   font-size: 50px;
   font-weight: 700;
   margin-bottom: 0px;
 }
 
-.signin-desc-body {
+.home-desc-body {
   color: white;
   display: inline-block;
   font-size: 20px;
   font-weight: 400;
-  width: 550px;
+  width: 516px;
 }
 
-.signin-grid {
-  display: grid;
-  grid-template-columns: 872px auto;
-}
-
-.signin-img {
+.home-img {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -31,11 +28,25 @@
   height: 1073px;
 }
 
-.signin-title {
-  margin: 40px 0px;
+.home-grid {
+  display: grid;
+  grid-template-columns: 872px auto;
 }
 
-.signin-button {
+.home-img-text {
+  margin-top: 80px;
+}
+
+.home-register-title {
+  font-size: 50px;
+}
+
+.home-profile-icon {
+  width: 90px;
+  height: 90px;
+}
+
+.sign-up-button {
   display: inline-block;
   font-weight: bold;
   font-size: 25px;
@@ -44,6 +55,12 @@
   width: 452px;
   background-color: #01c48a;
   border-radius: 15px;
+  cursor: pointer;
+}
+
+.home-account-text {
+  margin-top: 0px;
+  font-size: 20px;
   cursor: pointer;
 }
 
@@ -56,11 +73,5 @@
   width: 452px;
   background-color: #ec3030;
   border-radius: 15px;
-  cursor: pointer;
-}
-
-.signin-account-text {
-  margin-top: 0px;
-  font-size: 20px;
   cursor: pointer;
 }

@@ -1,0 +1,77 @@
+.favours-card {
+  width: 1000px;
+  height: 100px;
+  margin: 50px auto;
+  border-radius: 10px;
+  border: 2px solid #dbdbdb;
+  -webkit-box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+  -moz-box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+  box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+}
+
+.favours-card-square-bg {
+  background-color: #ff6464;
+  height: 100%;
+  float: left;
+  width: 100px;
+  overflow: hidden;
+}
+
+.avatar {
+  width: 70px !important;
+  height: 100px !important;
+}
+
+.title-txt {
+  margin-top: 10px;
+  margin-left: 20px;
+  text-align: left;
+  float: left;
+  margin-right: 30px;
+  font-size: 15px;
+  color: #8b9ca8;
+}
+
+.card-text {
+  font-size: 17px;
+  color: #596773;
+  font-weight: bold;
+  display: inline;
+  float: left;
+  margin-left: 20px;
+}
+
+.points-text {
+  color: #15b987;
+  float: left;
+  text-align: left;
+  margin-left: 20px;
+  font-weight: bolder;
+}
+
+.do-favour-btn {
+  float: right;
+  display: inline;
+  transition-duration: 0.3s;
+  font-family: 'Montserrat', sans-serif;
+  background: #fe8e51;
+  border-radius: 5px;
+  width: 150px;
+  border: none;
+  margin-right: 40px;
+  height: 40px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+}
+
+.tag {
+  color: #4d6bff;
+  display: block;
+  border-radius: 30px;
+  font-weight: bold;
+  margin-top: 8px;
+  width: 100px;
+  height: 25px;
+  background-color: #afd2ff;
+}

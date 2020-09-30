@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="69.983" height="63.441" viewBox="0 0 69.983 63.441">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1.802" y1="-0.156" x2="0.136" y2="0.772" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ff566d"/>
+      <stop offset="1" stop-color="#ffb19c"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="1.731" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ff9494"/>
+      <stop offset="1" stop-color="#f83030"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_7" data-name="Group 7" transform="translate(-210.506 -31.559)">
+    <path id="favourite_24x24_1x" data-name="favourite(24x24)@1x" d="M65.943,8.67a18.706,18.706,0,0,0-26.831,0l-2.363,2.415L34.385,8.67A18.806,18.806,0,0,0,20.935,3,18.593,18.593,0,0,0,7.555,8.67a19.728,19.728,0,0,0,0,27.44L36.784,66l26.8-27.44,2.363-2.415A19.771,19.771,0,0,0,65.943,8.67Z" transform="translate(208.993 29)" fill="url(#linear-gradient)"/>
+    <path id="Intersection_1" data-name="Intersection 1" d="M30.823,62.287,6.117,36.758A19.662,19.662,0,0,1,8.331,12.007C12.041,8.227,16.263,5.9,21.163,5.9A22.029,22.029,0,0,1,35.79,12.007l1.482,1.844c-2.277,1.311-6.765,4.355-6.765,7.982,0,4.861,8.058,6.581,8.058,10.768s-7.538,2.243-8.058,5.981,5.981,5.908,5.981,8.973-5.981,2.543-5.981,5.384,3.967,2.019,5.981,6.58a29.471,29.471,0,0,1,1.993,9.09l-.716.728Z" transform="translate(207.767 25.663)" fill="url(#linear-gradient-2)"/>
+  </g>
+</svg>
