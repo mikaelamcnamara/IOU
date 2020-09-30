@@ -38,7 +38,7 @@ const SignUp = () => {
       <div>
         <img className='signin-title' src={SignInTitle} alt='Sign In to IOU' />
         <br />
-        <img src={SignInPhone} alt='Sign in image' />
+        <img src={SignInPhone} alt='Sign in' />
         <TextField
           icon={EmailIcon}
           label='Email'

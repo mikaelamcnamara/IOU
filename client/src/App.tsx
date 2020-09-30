@@ -1,13 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { AnimatedRoute } from 'react-router-transition';
-
 import './App.css';
-
-import Home from './components/Home/Home';
+import Register from './components/Register/Register';
 import SignIn from './components/SignIn/SignIn';
-import SearchPage from './components/SearchPage/SearchPage';
-import Navbar from './components/common/Navbar/Navbar';
+import Home from './components/Home/Home';
 
 const App = () => {
   return (
@@ -21,7 +18,7 @@ const App = () => {
             timeout={500}
             path='/'
             exact
-            component={Navbar}
+            component={Home}
           />
 
           <AnimatedRoute
@@ -31,7 +28,7 @@ const App = () => {
             timeout={500}
             path='/Register'
             exact
-            component={Home}
+            component={Register}
           />
           <AnimatedRoute
             atEnter={{ opacity: 0 }}

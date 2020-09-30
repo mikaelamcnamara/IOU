@@ -1,90 +1,40 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import TextField from '../common/TextField';
-import { register } from '../../APIFetchers';
-import HomeBackground from '../../assets/HomeBackground.png';
-import HomeProfileIcon from '../../assets/HomeProfileIcon.svg';
-import NameIcon from '../../assets/NameIcon.svg';
-import EmailIcon from '../../assets/EmailIcon.svg';
-import PasswordIcon from '../../assets/PasswordIcon.svg';
-import ConfirmPasswordIcon from '../../assets/ConfirmPasswordIcon.svg';
-
-import '../../App.css';
 import './Home.css';
+import BackgroundNew from '../../assets/bg-new.svg';
+import ChattyMessage from '../../assets/chatting_isometric.svg';
+import NavBar from '../common/Navbar/Navbar';
+import AvatarCard from '../common/AvatarCard/AvatarCard';
 
 const Home = () => {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-
-  const handleRegistration = async () => {
-    const res = await register(fullName, email, password, confirmPassword);
-    window.alert(res.message);
-    //if res.success is true, redirect to sign in, else alert (sweet alert time!)
-  };
-
   return (
     <>
-      <div className='home-grid'>
-        <div className='home-img-text'>
-          <h1 className='home-desc-header'>Let's start with you</h1>
-          <p className='home-desc-body'>
-            View favours which you can request and complete. Earn points and add
-            friends. What better way is there to enjoy your good deeds?
-          </p>
-          <img
-            className='home-img'
-            src={HomeBackground}
-            alt='home-background'
-          ></img>
+      <div>
+        <div className='main-content'>
+          <div className='content'>
+            <NavBar />
+            <img className='isometric-img' src={ChattyMessage} alt='' />
+            <img className='background-img' src={BackgroundNew} alt='' />
+          </div>
         </div>
-        <div>
-          <h1 className='home-register-title'>Create an account</h1>
-          <img className='home-profile-icon' src={HomeProfileIcon} />
-          <TextField
-            icon={NameIcon}
-            label='Full Name'
-            type='text'
-            value={fullName}
-            setValue={(event) => setFullName(event.target.value)}
-          />
-          <TextField
-            icon={EmailIcon}
-            label='Email'
-            type='text'
-            value={email}
-            setValue={(event) => setEmail(event.target.value)}
-          />
-          <TextField
-            icon={PasswordIcon}
-            label='Password'
-            type='password'
-            value={password}
-            setValue={(event) => setPassword(event.target.value)}
-          />
-          <TextField
-            icon={ConfirmPasswordIcon}
-            label='Confirm Password'
-            type='password'
-            value={confirmPassword}
-            setValue={(event) => setConfirmPassword(event.target.value)}
-          />
-          <p className='sign-up-button' onClick={() => handleRegistration()}>
-            Sign Up
-          </p>
-          <br />
-
-          <Link to='/'>
-            <p className='cancel-button'>Cancel</p>
-          </Link>
-          <p className='home-account-text'>
-            Already have an account?{' '}
-            <Link className='link' to='/SignIn'>
-              Login
-            </Link>
-          </p>
-        </div>
+        <h1 className='content-txt'>
+          Complete favours <br /> in a fun way
+        </h1>
+        <p className='content-txt-below'>
+          Our platform is intuitive and entertaining to use.
+        </p>
+        <Link to='/Register'>
+          <button className='register-btn'>Register Now</button>
+        </Link>
+        <h2 className='public-title'>Public Favours</h2>
+        <p className='public-favour-text-below'>
+          Our platform is intuitive and entertaining to use.
+        </p>
+        <AvatarCard />
+        <AvatarCard />
+        <AvatarCard />
+        <AvatarCard />
+        <AvatarCard />
       </div>
     </>
   );
