@@ -7,9 +7,7 @@
 .leader-title {
   font-size: 35px;
   font-weight: 700;
-  margin-bottom: 0px;
   color: #3e3e3e;
-  margin-right: 70%;
 }
 
 .leaderboard-img {
@@ -25,21 +23,15 @@
   overflow: hidden; /* add this to contain floated children */
 }
 
-.favdeb {
-  text-align: left !important;
-  margin-left: 8%;
+.content {
+  text-align: center !important;
   margin-top: 80px;
 }
 
-.title {
+.leader-subtitle {
   display: inline-block;
-  size: 18px;
-  color: lightgray;
+  font-size: 20px;
+  font-weight: 400;
+  color: #7e7c7c;
   margin-right: 25px;
-  font-size: 25px;
-}
-
-.active {
-  /* border-bottom: 4px solid #2bd19f; */
-  /* padding: 0 0 1px; */
 }
