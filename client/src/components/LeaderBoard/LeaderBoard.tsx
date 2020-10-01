@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import LeaderBoardHeader from '../../assets/LeaderBoardHeader.jpg';
 
 import '../../App.css';
 import './LeaderBoard.css';
+import NavBar from '../common/Navbar/Navbar';
 
 const LeaderBoard = () => {
   return (
     <div className='leaderboard'>
+      <NavBar />
       <img
         className='leaderboard-img'
         src={LeaderBoardHeader}

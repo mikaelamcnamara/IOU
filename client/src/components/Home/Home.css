@@ -12,7 +12,7 @@
 
 .main-content {
   width: 100vw;
-  height: 100vh;
+  /* height: 100vh; Didnt realise that there was anything below it with this height - should we remove this? up to you guys */
   position: relative;
   overflow-x: hidden;
 }
@@ -78,6 +78,7 @@
 
 .public-title {
   font-size: 50px;
+  color: #464646;
 }
 
 .navbar-top {
