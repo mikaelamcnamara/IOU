@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Heart from '../../../assets/heart.svg';
+import './Navbar.css';
 
 //Dummy Data
 // import favoursList from '../../common/dummyData.json';
@@ -28,9 +29,11 @@ const Navbar = () => {
                 <img className='nav-logo' alt='heart' src={Heart} />
               </div>
             </div>
-            <div className='iou-logo'>
-              <h2 className='iou-logo-txt'>IOU</h2>
-            </div>
+            <Link style={{ textDecoration: 'none' }} to='/'>
+              <div className='iou-logo'>
+                <h2 id='iou-logo-txt'>IOU</h2>
+              </div>
+            </Link>
             <div className='nav-middle'>
               <form className='search-form'>
                 <input
@@ -40,7 +43,6 @@ const Navbar = () => {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
-
                 <button type='submit' className='search-btn'>
                   <FontAwesomeIcon
                     className='search-icon'
@@ -51,9 +53,12 @@ const Navbar = () => {
               </form>
             </div>
             <div className='nav-right'>
-              <p id='home-txt'>Home</p>
-              <p id='leaderboard-txt'>LeaderBoard</p>
-
+              <Link style={{ textDecoration: 'none' }} to='/'>
+                <p id='home-txt'>Home</p>
+              </Link>
+              <Link style={{ textDecoration: 'none' }} to='/Leaderboard'>
+                <p id='leaderboard-txt'>LeaderBoard</p>
+              </Link>
               <Link to='/SignIn'>
                 <button className='signout-btn'>Login</button>
               </Link>

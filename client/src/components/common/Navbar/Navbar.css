@@ -1,17 +1,18 @@
-.iou-logo-txt {
-  color: #ffffff;
-  font-size: 40px;
+#iou-logo-txt {
+  color: #464646 !important;
+  font-size: 40px !important;
 }
 
 .navbar-top {
-  position: absolute;
+  position: absolute !important;
   left: 0;
   top: 0;
+  background-color: #ffffff;
   width: 100vw;
   height: 7.5vh;
-  /* box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.08),
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.08),
     0 4px 4px rgba(0, 0, 0, 0.08), 0 8px 8px rgba(0, 0, 0, 0.08),
-    0 16px 16px rgba(0, 0, 0, 0.08); */
+    0 16px 16px rgba(0, 0, 0, 0.08);
   z-index: 50;
   display: flex;
   justify-content: space-between;
@@ -31,19 +32,23 @@
   width: 25%;
   margin-right: 0%;
 }
+
 #home-txt {
   margin-top: 1%;
-  border-bottom: 3px solid #8a2980;
+  color: #464646;
   cursor: pointer;
 }
+
 #home-txt:hover {
   border-bottom: 3px solid #8a2980 !important;
 }
 
 #leaderboard-txt {
   margin-top: 1%;
+  color: #464646;
   border-bottom: 3px solid #ffffff;
   cursor: pointer;
+  text-decoration: none !important;
 }
 
 #leaderboard-txt:hover {
@@ -53,24 +58,24 @@
 .signout-btn {
   transition-duration: 0.3s;
   font-family: 'Montserrat', sans-serif;
-  background: white;
+  background-color: #0cbe88;
   border-radius: 5px;
   width: 180px;
   height: 30px;
   border: 2px solid #0cbe88;
   font-weight: 600;
-  color: #0cbe88;
+  color: white;
   cursor: pointer;
 }
 .signout-btn:hover {
   transition-duration: 0.3s;
-  background-color: #0cbe88;
+  background-color: #269c79;
   color: #ffffff;
 }
 .signout-btn:focus {
   outline: none;
   color: #ffffff;
-  background-color: #0cbe88;
+  background-color: #269c79;
 }
 .nav-logo {
   height: 50px;
