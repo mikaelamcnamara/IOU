@@ -61,7 +61,7 @@ const SignUp = () => {
           <p className='cancel-button'>Cancel</p>
         </Link>
         <p className='signin-account-text'>
-          Don't have an account?
+          Don't have an account?{' '}
           <Link className='link' to='/Register'>
             Register
           </Link>
