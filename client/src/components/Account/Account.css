@@ -1,0 +1,157 @@
+.account-bg {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 1920px;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.account-bg img {
+  z-index: -1;
+  margin-left: -250px;
+  margin-top: -100px;
+}
+
+.account-header {
+  margin-top: 100px;
+  color: white;
+  font-size: 50px;
+}
+
+.account-subtext {
+  margin-top: 30px;
+  color: white;
+  font-size: 20px;
+}
+
+.account-display {
+  margin: 50px auto;
+  width: 1250px;
+  background-color: white;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+  -moz-box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+  box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+}
+
+.account-display * {
+  margin: 10px auto;
+}
+
+.account-display h1 {
+  color: #8b9ca8;
+  font-size: 74px;
+}
+
+.account-avatar {
+  background-color: #ff6464;
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  margin-top: 100px;
+}
+
+.account-avatar img {
+  margin-top: 40px;
+}
+
+.edit-icon {
+  float: right;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.ranking-stat {
+  width: 130px;
+  height: 20px;
+  color: #4d6bff;
+  background-color: #afd2ff;
+  font-size: 10px;
+  font-weight: bolder;
+  border-radius: 10px;
+}
+
+.ranking-stat * {
+  margin: 2px 0 0 0;
+}
+
+.account-display h2 {
+  margin-top: 30px;
+  font-size: 40px;
+  color: #15b987;
+}
+
+.progress-card {
+  margin: 60px auto;
+  border-radius: 5px;
+  width: 960px;
+  -webkit-box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+  -moz-box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+  box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+}
+
+.progress-card img {
+  float: left;
+  margin-left: 20px;
+  width: 90px;
+}
+
+.progress-card p {
+  display: inline-block;
+  color: #596773;
+  font-weight: bold;
+}
+
+.progress-bar {
+  margin-top: -20px;
+  width: 700px;
+  text-align: left;
+}
+
+.progress-bar p {
+  display: inline-block;
+  color: #4d6bff;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.account-header2 {
+  margin-top: 70px;
+  color: #505050;
+  font-size: 40px;
+  text-align: left;
+  margin-left: 100px;
+}
+
+.recent-favours {
+  margin: 50px auto;
+  width: 1700px;
+  background-color: #eceaea;
+  -webkit-box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+  -moz-box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+  box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+}
+
+.friend-grid {
+  margin: 50px auto;
+  width: 1600px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  column-gap: 40px;
+  row-gap: 40px;
+}
+
+.friend-grid > * {
+  margin: auto;
+}
+
+.padder {
+  height: 100px;
+}
