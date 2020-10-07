@@ -9,7 +9,7 @@ const ProgressBar = (props) => {
     backgroundColor: '#e0e0de',
     borderRadius: 50,
     overflow: 'hidden',
-    margin: '0',
+    margin: 0,
   };
 
   const fillerStyles = {
@@ -19,7 +19,7 @@ const ProgressBar = (props) => {
     borderRadius: 'inherit',
     textAlign: 'right',
     overflow: 'hidden',
-    margin: '0',
+    margin: 0,
   };
 
   const labelStyles = {
