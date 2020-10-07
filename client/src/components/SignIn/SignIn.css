@@ -1,3 +1,5 @@
+
+
 .signin-img-text {
   margin-top: 30px;
 }
@@ -15,6 +17,13 @@
   font-size: 20px;
   font-weight: 400;
   width: 550px;
+}
+
+
+
+.animation-login{
+  margin-top:-50px;
+  
 }
 
 .signin-grid {
@@ -63,4 +72,47 @@
   margin-top: 0px;
   font-size: 20px;
   cursor: pointer;
+}
+
+
+.slide {
+  position: absolute;
+  top: 0px;
+  left: -1000px;
+  z-index: -1;
+  width: 872px;
+  height: 1073px;
+  -webkit-animation: slide 0.5s forwards;
+  -webkit-animation-delay: 0.5s;
+  animation: slide 0.5s forwards;
+  animation-delay: 0.5s;
+}
+
+@-webkit-keyframes slide {
+  100% { left: 0; }
+}
+
+@keyframes slide {
+  100% { left: 0; }
+}
+
+
+.slide-up {
+  position: relative;
+  top: -1000px;
+  -webkit-animation: slide 0.25s forwards;
+  -webkit-animation-delay: 0.25s;
+  animation: slideup 0.25s forwards;
+  animation-delay: 0.25s;
+}
+
+
+@-webkit-keyframes slideup {
+  100% { 
+    top:0;}
+}
+
+@keyframes slideup {
+  100% { 
+    top:0; }
 }

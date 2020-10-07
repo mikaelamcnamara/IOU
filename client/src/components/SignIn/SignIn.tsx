@@ -4,9 +4,10 @@ import TextField from '../common/TextField';
 import { login } from '../../APIFetchers';
 import SignInBackground from '../../assets/SignInBackground.svg';
 import SignInTitle from '../../assets/SignInTitle.svg';
-import SignInPhone from '../../assets/SignInPhone.svg';
 import EmailIcon from '../../assets/EmailIcon.svg';
 import PasswordIcon from '../../assets/PasswordIcon.svg';
+import Lottie from 'react-lottie';
+import animationData from '../../assets/Login.json';
 
 import '../../App.css';
 import './SignIn.css';
@@ -21,6 +22,17 @@ const SignUp = () => {
     //if res.success is true, redirect to dashboard, else alert (sweet alert time!)
   };
 
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  };
+
+
+
   return (
     <div className='signin-grid'>
       <div className='signin-img-text'>
@@ -29,16 +41,24 @@ const SignUp = () => {
           Let's quickly login so you can check the latest favours from your
           friends and also see who owes you debt.
         </p>
-        <img
-          className='signin-img'
-          src={SignInBackground}
-          alt='signin-background'
-        ></img>
+        <div
+          className="slide">
+          <img
+            className='signin-img'
+            src={SignInBackground}
+            alt='signin-background'
+          ></img>
+        </div>
       </div>
-      <div>
+      <div className="slide-up">
         <img className='signin-title' src={SignInTitle} alt='Sign In to IOU' />
         <br />
-        <img src={SignInPhone} alt='Sign in' />
+        <div className="animation-login" >
+          <Lottie options={defaultOptions}
+            height={400}
+            width={400}
+          />
+        </div>
         <TextField
           icon={EmailIcon}
           label='Email'
@@ -57,6 +77,7 @@ const SignUp = () => {
           Sign In
         </p>
         <br />
+
         <Link to='/'>
           <p className='cancel-button'>Cancel</p>
         </Link>
@@ -66,8 +87,9 @@ const SignUp = () => {
             Register
           </Link>
         </p>
+
       </div>
-    </div>
+    </div >
   );
 };
 
