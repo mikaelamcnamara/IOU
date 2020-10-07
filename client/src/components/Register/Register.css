@@ -75,3 +75,43 @@
   border-radius: 15px;
   cursor: pointer;
 }
+
+.slide-bottom {
+  position: absolute;
+  z-index: -1;
+  width: 872px;
+  height: 1073px;
+  bottom: -1500px;
+  -webkit-animation: slide 0.5s forwards;
+  -webkit-animation-delay: 0.5s;
+  animation: slidedown 0.5s forwards;
+  animation-delay: 0.5s;
+}
+
+
+@-webkit-keyframes slidedown {
+  100% { 
+    bottom:-100px;}
+}
+
+@keyframes slidedown {
+  100% { 
+    bottom:-100px; }
+}
+
+.slide-right {
+  position: relative;
+  right:-1000px;
+  -webkit-animation: slide 0.25s forwards;
+  -webkit-animation-delay: 0.25s;
+  animation: slideright 0.25s forwards;
+  animation-delay: 0.25s;
+}
+
+@-webkit-keyframes slideright {
+  100% { right: 0; }
+}
+
+@keyframes slideright {
+  100% { right: 0; }
+}

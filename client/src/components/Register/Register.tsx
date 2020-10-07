@@ -26,20 +26,24 @@ const Register = () => {
 
   return (
     <>
+
       <div className='home-grid'>
+
         <div className='home-img-text'>
           <h1 className='home-desc-header'>Let's start with you</h1>
           <p className='home-desc-body'>
             View favours which you can request and complete. Earn points and add
             friends. What better way is there to enjoy your good deeds?
           </p>
-          <img
-            className='home-img'
-            src={HomeBackground}
-            alt='home-background'
-          ></img>
+          <div className="slide-bottom">
+            <img
+              className='home-img'
+              src={HomeBackground}
+              alt='home-background'
+            ></img>
+          </div>
         </div>
-        <div>
+        <div className="slide-right">
           <h1 className='home-register-title'>Create an account</h1>
           <img
             className='home-profile-icon'
