@@ -6,6 +6,10 @@ import Register from './components/Register/Register';
 import SignIn from './components/SignIn/SignIn';
 import Home from './components/Home/Home';
 import LeaderBoard from './components/LeaderBoard/LeaderBoard';
+import CreateFavour from './components/CreateFavour/CreateFavour';
+import FulfillFavour from './components/FulfillFavour/FulfillFavour';
+import ReviewFavour from './components/ReviewFavour/ReviewFavour';
+import PersonalDetails from './components/PersonalDetails/PersonalDetails';
 
 const App = () => {
   return (
@@ -48,6 +52,42 @@ const App = () => {
             path='/LeaderBoard'
             exact
             component={LeaderBoard}
+          />
+          <AnimatedRoute
+            atEnter={{ opacity: 0 }}
+            atLeave={{ opacity: 0 }}
+            atActive={{ opacity: 1 }}
+            timeout={500}
+            path='/CreateFavour'
+            exact
+            component={CreateFavour}
+          />
+          <AnimatedRoute
+            atEnter={{ opacity: 0 }}
+            atLeave={{ opacity: 0 }}
+            atActive={{ opacity: 1 }}
+            timeout={500}
+            path='/FulfillFavour'
+            exact
+            component={FulfillFavour}
+          />
+          <AnimatedRoute
+            atEnter={{ opacity: 0 }}
+            atLeave={{ opacity: 0 }}
+            atActive={{ opacity: 1 }}
+            timeout={500}
+            path='/ReviewFavour'
+            exact
+            component={ReviewFavour}
+          />
+          <AnimatedRoute
+            atEnter={{ opacity: 0 }}
+            atLeave={{ opacity: 0 }}
+            atActive={{ opacity: 1 }}
+            timeout={500}
+            path='/PersonalDetails'
+            exact
+            component={PersonalDetails}
           />
         </Switch>
       </Router>
