@@ -109,7 +109,12 @@
   text-align: left;
 }
 
+.progress-bar * {
+  margin: 0px;
+}
+
 .progress-bar p {
+  margin-top: 5px;
   display: inline-block;
   color: #4d6bff;
 }
