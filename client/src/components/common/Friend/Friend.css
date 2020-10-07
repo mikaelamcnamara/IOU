@@ -1,0 +1,56 @@
+.friend {
+  display: grid;
+  grid-template-columns: 135px 250px;
+}
+
+.friend * {
+  align-content: center;
+}
+
+.friend-desc {
+  background-color: white;
+  height: 155px;
+  -webkit-box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+  -moz-box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+  box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+}
+
+.friend-desc > p {
+  margin-top: 20px;
+  font-size: 30px;
+  color: #8b9ca8;
+  font-weight: bold;
+}
+
+.friend img {
+  height: 155px;
+  background-color: #ff6efb;
+  border-radius: 5px;
+  padding: 10px;
+  -webkit-box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+  -moz-box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+  box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+}
+
+.view-profile {
+  margin-top: 10px;
+  width: 130px;
+  height: 30px;
+  display: inline-block;
+  color: #4d6bff;
+  background-color: #afd2ff;
+  font-size: 10px;
+  font-weight: bolder;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.view-profile:hover {
+  color: #afd2ff;
+  background-color: #4d6bff;
+}
+
+.view-profile p {
+  margin-top: 7px;
+  font-size: 10px;
+}
