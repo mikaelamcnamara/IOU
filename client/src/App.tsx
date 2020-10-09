@@ -12,6 +12,7 @@ import ReviewFavour from './components/ReviewFavour/ReviewFavour';
 import PersonalDetails from './components/PersonalDetails/PersonalDetails';
 import Favours from './components/Favours/Favours';
 import Account from './components/Account/Account';
+import FriendsList from './components/FriendsList/FriendsList';
 
 const App = () => {
   return (
@@ -106,6 +107,15 @@ const App = () => {
             path='/Account'
             exact
             component={Account}
+          />
+          <AnimatedRoute
+            atEnter={{ opacity: 0 }}
+            atLeave={{ opacity: 0 }}
+            atActive={{ opacity: 1 }}
+            timeout={500}
+            path='/FriendsList'
+            exact
+            component={FriendsList}
           />
         </Switch>
       </Router>
