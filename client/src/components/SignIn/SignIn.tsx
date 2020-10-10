@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import TextField from '../common/TextField';
-import { login } from '../../APIFetchers';
+import { login, getCurrentUser } from '../../APIFetchers';
 import SignInBackground from '../../assets/SignInBackground.svg';
 import SignInTitle from '../../assets/SignInTitle.svg';
 import EmailIcon from '../../assets/EmailIcon.svg';
@@ -15,11 +15,16 @@ import './SignIn.css';
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const history = useHistory();
+  
   const handleLogin = async () => {
     const res = await login(email, password);
-    window.alert(res.message);
-    //if res.success is true, redirect to dashboard, else alert (sweet alert time!)
+    if (res.success) {
+      const user = await getCurrentUser();
+      localStorage.setItem('user', user);
+      history.push('/');
+    }
+    else window.alert("Email or password is incorrect");
   };
 
   const defaultOptions = {

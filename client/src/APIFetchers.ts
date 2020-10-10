@@ -67,6 +67,7 @@ const logout = async () => {
   try {
     const resp = await fetch('/api/logout', requestOptions);
     const result = await resp.text();
+    localStorage.clear();
     return result;
   } catch (e) {
     return e;

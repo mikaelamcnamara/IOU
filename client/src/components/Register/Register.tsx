@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import TextField from '../common/TextField';
 import { register } from '../../APIFetchers';
 import HomeBackground from '../../assets/HomeBackground.png';
@@ -17,11 +17,13 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const history = useHistory();
 
   const handleRegistration = async () => {
     const res = await register(fullName, email, password, confirmPassword);
-    window.alert(res.message);
-    //if res.success is true, redirect to sign in, else alert (sweet alert time!)
+    console.log(res);
+    if (res.success) history.push('/SignIn');
+    else window.alert(res.message);
   };
 
   return (

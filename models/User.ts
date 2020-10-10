@@ -5,6 +5,12 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema(
   {
+    avatar: {
+      type: Number,
+      required: true,
+      default: 1,
+    },
+
     fullName: {
       type: String,
       required: true, //mandatory attribute
