@@ -23,6 +23,7 @@ const SignUp = () => {
       const user = await getCurrentUser();
       localStorage.setItem('user', user);
       history.push('/');
+      window.location.reload();
     }
     else window.alert("Email or password is incorrect");
   };

@@ -11,7 +11,7 @@ import './Navbar.css';
 
 const Navbar = () => {
   const [search, setSearch] = useState('');
-  const [loggedIn, setLoggedIn] = useState(localStorage.getItem('user') ? true : false);
+  const [loggedIn] = useState(localStorage.getItem('user') ? true : false);
 
   //Search functionality
   // const favours = useMemo(() => {
