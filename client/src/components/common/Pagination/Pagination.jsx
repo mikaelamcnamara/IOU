@@ -12,6 +12,7 @@ const Pagination = ({ totalAvatarCards }) => {
 
   return (
     <ul className="pagination">
+      <li className="avatar-item" >{"<"} </li>
       {pageNumbers.map(number => (
         <li key={number} className="avatar-item">
           <a href="#" className="page-link">
@@ -19,6 +20,7 @@ const Pagination = ({ totalAvatarCards }) => {
           </a>
         </li>
       ))}
+      <li className="avatar-item" >{">"} </li>
     </ul>
   )
 
