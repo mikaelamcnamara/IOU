@@ -18,7 +18,6 @@ const RequestCard = () => {
               <img src={burgerIcon} alt='' /> Food
             </span>
           </div>
-          <button className='do-favour-btn-2'>Do Favour</button>
           <p className='card-text'>
             Can someone buy me coffee? So I can turn that coffee into code.
             Cheers!

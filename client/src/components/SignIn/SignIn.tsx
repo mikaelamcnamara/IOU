@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import TextField from '../common/TextField';
-import { login } from '../../APIFetchers';
+import { login, getCurrentUser } from '../../APIFetchers';
 import SignInBackground from '../../assets/SignInBackground.svg';
 import SignInTitle from '../../assets/SignInTitle.svg';
 import EmailIcon from '../../assets/EmailIcon.svg';
@@ -11,15 +11,25 @@ import animationData from '../../assets/Login.json';
 
 import '../../App.css';
 import './SignIn.css';
+
 //TODO: Add Forgot Password link to page!
+
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const history = useHistory();
+  
   const handleLogin = async () => {
     const res = await login(email, password);
-    window.alert(res.message);
-    //if res.success is true, redirect to dashboard, else alert (sweet alert time!)
+    
+    if (res.success) {
+      const user = await getCurrentUser();
+      localStorage.setItem('user', user);
+      history.push('/');
+      window.location.reload();
+    }
+    else window.alert("Email or password is incorrect");
+        
   };
 
   const defaultOptions = {
@@ -27,11 +37,9 @@ const SignUp = () => {
     autoplay: true,
     animationData: animationData,
     rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice'
-    }
+      preserveAspectRatio: 'xMidYMid slice',
+    },
   };
-
-
 
   return (
     <div className='signin-grid'>
@@ -41,8 +49,7 @@ const SignUp = () => {
           Let's quickly login so you can check the latest favours from your
           friends and also see who owes you debt.
         </p>
-        <div
-          className="slide">
+        <div className='slide'>
           <img
             className='signin-img'
             src={SignInBackground}
@@ -50,14 +57,11 @@ const SignUp = () => {
           ></img>
         </div>
       </div>
-      <div className="slide-up">
+      <div className='slide-up'>
         <img className='signin-title' src={SignInTitle} alt='Sign In to IOU' />
         <br />
-        <div className="animation-login" >
-          <Lottie options={defaultOptions}
-            height={400}
-            width={400}
-          />
+        <div className='animation-login'>
+          <Lottie options={defaultOptions} height={400} width={400} />
         </div>
         <TextField
           icon={EmailIcon}
@@ -87,9 +91,8 @@ const SignUp = () => {
             Register
           </Link>
         </p>
-
       </div>
-    </div >
+    </div>
   );
 };
 

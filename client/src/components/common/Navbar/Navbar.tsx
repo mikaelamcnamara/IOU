@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { logout } from '../../../APIFetchers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Heart from '../../../assets/heart.svg';
@@ -10,6 +11,7 @@ import './Navbar.css';
 
 const Navbar = () => {
   const [search, setSearch] = useState('');
+  const [loggedIn] = useState(localStorage.getItem('user') ? true : false);
 
   //Search functionality
   // const favours = useMemo(() => {
@@ -18,6 +20,10 @@ const Navbar = () => {
   //     return favour.name.toLowerCase().includes(search.toLowerCase());
   //   });
   // }, [search]);
+  const handleLogout = async () => {
+    await logout();
+    window.location.reload();
+  }
 
   return (
     <>
@@ -53,14 +59,20 @@ const Navbar = () => {
               </form>
             </div>
             <div className='nav-right'>
-              <Link style={{ textDecoration: 'none' }} to='/'>
-                <p id='home-txt'>Home</p>
-              </Link>
               <Link style={{ textDecoration: 'none' }} to='/Leaderboard'>
-                <p id='leaderboard-txt'>LeaderBoard</p>
+                <p className='leaderboard-txt'>LeaderBoard</p>
+              </Link>
+              <Link to='/Favours' style={{ textDecoration: 'none', display: loggedIn ? 'inline-block' : 'none' }}>
+              <p className='leaderboard-txt'>Your Favours</p>
+              </Link>
+              <Link to='/Account' style={{ textDecoration: 'none', display: loggedIn ? 'inline-block' : 'none' }}>
+              <p className='leaderboard-txt'>Profile</p>
+              </Link>
+              <Link to='/' style={{ textDecoration: 'none', display: loggedIn ? 'inline-block' : 'none' }}>
+                <button className='signout-btn' onClick={() => handleLogout()}>Logout</button>
               </Link>
               <Link to='/SignIn'>
-                <button className='signout-btn'>Login</button>
+                <button className='signin-btn' style={{display: loggedIn ? 'none' : 'inline-block'}}>Login</button>
               </Link>
             </div>
           </div>
