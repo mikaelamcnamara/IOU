@@ -1,10 +1,13 @@
 import React from 'react';
+import './Pagination.css'
 
 const Pagination = ({ totalAvatarCards }) => {
+
+
   const pageNumbers = [];
 
   for (let count = 1; count <= Math.ceil(totalAvatarCards / 10); count++) {
-    pageNumbers.push[count];
+    pageNumbers.push(count);
   }
 
   return (

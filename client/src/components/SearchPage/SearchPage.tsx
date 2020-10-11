@@ -17,8 +17,9 @@ const SearchPage = () => {
           <AvatarCard />
           <AvatarCard />
           <AvatarCard />
+          <Pagination totalAvatarCards={100} />
         </div>
-        <Pagination totalAvatarCards={5} />
+
       </div>
     </>
   );
