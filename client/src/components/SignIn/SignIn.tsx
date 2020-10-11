@@ -8,7 +8,6 @@ import EmailIcon from '../../assets/EmailIcon.svg';
 import PasswordIcon from '../../assets/PasswordIcon.svg';
 import Lottie from 'react-lottie';
 import animationData from '../../assets/Login.json';
-import { useHistory } from 'react-router-dom';
 
 import '../../App.css';
 import './SignIn.css';
@@ -16,7 +15,6 @@ import './SignIn.css';
 //TODO: Add Forgot Password link to page!
 
 const SignUp = () => {
-  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
