@@ -9,7 +9,6 @@ import SkeletonCard from '../common/SkeletonLoad/Skeleton';
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
-
   useEffect(() => {
     setLoading(false);
     const timer = setTimeout(() => {
@@ -35,7 +34,7 @@ const Home = () => {
         <p className='content-txt-below'>
           Our platform is intuitive and entertaining to use.
         </p>
-        <Link to='/Register'>
+        <Link to='/Register' style={{display: localStorage.getItem('user') ? 'none' : 'inline-block'}}>
           <button className='register-btn'>Register Now</button>
         </Link>
 
