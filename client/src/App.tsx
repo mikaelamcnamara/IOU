@@ -12,6 +12,7 @@ import ReviewFavour from './components/ReviewFavour/ReviewFavour';
 import PersonalDetails from './components/PersonalDetails/PersonalDetails';
 import Favours from './components/Favours/Favours';
 import Account from './components/Account/Account';
+import SearchPage from './components/SearchPage/SearchPage';
 
 const App = () => {
   return (
@@ -35,7 +36,7 @@ const App = () => {
             path='/Register'
             exact
           >
-            {localStorage.getItem('user') ? <Redirect to="/"/> : <Register />}
+            {localStorage.getItem('user') ? <Redirect to="/" /> : <Register />}
           </Route>
           <Route
             //atEnter={{ opacity: 0 }}
@@ -45,7 +46,7 @@ const App = () => {
             path='/SignIn'
             exact
           >
-            {localStorage.getItem('user') ? <Redirect to="/"/> : <SignIn />}
+            {localStorage.getItem('user') ? <Redirect to="/" /> : <SignIn />}
           </Route>
           <AnimatedRoute
             atEnter={{ opacity: 0 }}
@@ -64,7 +65,7 @@ const App = () => {
             path='/CreateFavour'
             exact
           >
-            {localStorage.getItem('user') ? <CreateFavour /> : <Redirect to="/SignIn"/>}
+            {localStorage.getItem('user') ? <CreateFavour /> : <Redirect to="/SignIn" />}
           </Route>
           <Route
             //atEnter={{ opacity: 0 }}
@@ -74,7 +75,7 @@ const App = () => {
             path='/FulfillFavour'
             exact
           >
-            {localStorage.getItem('user') ? <FulfillFavour /> : <Redirect to="/SignIn"/>}
+            {localStorage.getItem('user') ? <FulfillFavour /> : <Redirect to="/SignIn" />}
           </Route>
           <Route
             //atEnter={{ opacity: 0 }}
@@ -84,7 +85,7 @@ const App = () => {
             path='/ReviewFavour'
             exact
           >
-            {localStorage.getItem('user') ? <ReviewFavour /> : <Redirect to="/SignIn"/>}
+            {localStorage.getItem('user') ? <ReviewFavour /> : <Redirect to="/SignIn" />}
           </Route>
           <Route
             //atEnter={{ opacity: 0 }}
@@ -94,7 +95,7 @@ const App = () => {
             path='/PersonalDetails'
             exact
           >
-            {localStorage.getItem('user') ? <PersonalDetails /> : <Redirect to="/SignIn"/>}
+            {localStorage.getItem('user') ? <PersonalDetails /> : <Redirect to="/SignIn" />}
           </Route>
           <Route
             //atEnter={{ opacity: 0 }}
@@ -104,7 +105,7 @@ const App = () => {
             path='/Favours'
             exact
           >
-            {localStorage.getItem('user') ? <Favours /> : <Redirect to="/SignIn"/>}
+            {localStorage.getItem('user') ? <Favours /> : <Redirect to="/SignIn" />}
           </Route>
           <Route
             //atEnter={{ opacity: 0 }}
@@ -114,7 +115,16 @@ const App = () => {
             path='/Account'
             exact
           >
-            {localStorage.getItem('user') ? <Account /> : <Redirect to="/SignIn"/>}
+            {localStorage.getItem('user') ? <Account /> : <Redirect to="/SignIn" />}
+          </Route>
+          <Route
+            //atEnter={{ opacity: 0 }}
+            //atLeave={{ opacity: 0 }}
+            //atActive={{ opacity: 1 }}
+            //timeout={500}
+            path='/SearchPage'
+            exact component={SearchPage}
+          >
           </Route>
         </Switch>
       </Router>

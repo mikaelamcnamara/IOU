@@ -13,6 +13,7 @@ const Navbar = () => {
   const [search, setSearch] = useState("");
   const [loggedIn] = useState(localStorage.getItem("user") ? true : false);
 
+
   //Search functionality
   // const favours = useMemo(() => {
   //   if (!search) return favoursList;
@@ -49,13 +50,19 @@ const Navbar = () => {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
-                <button type="submit" className="search-btn">
-                  <FontAwesomeIcon
-                    className="search-icon"
-                    icon={faSearch}
-                    color="#8A2980"
-                  />
-                </button>
+                <Link style={{ textDecoration: 'none' }} to='/SearchPage'>
+                  <button type='submit' className='search-btn'>
+
+                    <FontAwesomeIcon
+                      className='search-icon'
+                      icon={faSearch}
+                      color='#8A2980'
+                    />
+
+                  </button>
+
+                </Link>
+
               </form>
             </div>
             <div className="nav-right">
