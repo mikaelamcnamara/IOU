@@ -1,31 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import './FriendsList.css';
 import FriendBG from '../../assets/friendlist.svg';
-import ChattyMessage from '../../assets/chatting_isometric.svg';
 import NavBar from '../common/Navbar/Navbar';
-import AvatarCard from '../common/AvatarCard/AvatarCard';
-import SkeletonCard from '../common/SkeletonLoad/Skeleton';
+import Friend from '../common/Friend/Friend';
 
 const FriendsList = () => {
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(false);
-    const timer = setTimeout(() => {
-      setLoading(true);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
+  const [search, setSearch] = useState('');
 
   return (
     <>
       <div>
-        <div className='main-content'>
-          {/* <div className='content'> */}
+        <div className='content'>
           <NavBar />
           <img className='friend-img' src={FriendBG} alt='friend-img'></img>
-          {/* </div> */}
+          <h1 className='leader-title'>Friends List</h1>
+          <h4 className='leader-subtitle'></h4>
+          <div className='nav-middle'>
+            <form className='search-form'>
+              <input
+                type='text'
+                className='search-input'
+                placeholder='Search for friends....'
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </form>
+            <button className='button-all'>Friend List</button>
+            <button className='button-all '>Friend Requests</button>
+            <button className='button-all'>Pending Requests</button>
+
+            <Friend />
+            <Friend />
+            <Friend />
+          </div>
         </div>
       </div>
     </>
