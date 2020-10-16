@@ -1,26 +1,26 @@
 import React from 'react';
 import './Pagination.css'
 
-const Pagination = ({ totalAvatarCards }) => {
+const Pagination = ({ postsPerPage, totalAvatarCards, paginate }) => {
 
 
   const pageNumbers = [];
 
-  for (let count = 1; count <= Math.ceil(totalAvatarCards / 10); count++) {
+  for (let count = 1; count <= Math.ceil(totalAvatarCards / postsPerPage); count++) {
     pageNumbers.push(count);
   }
 
   return (
     <ul className="pagination">
-      <li className="avatar-item" >{"<"} </li>
+      {/* <li className="avatar-item" >{"<"} </li> */}
       {pageNumbers.map(number => (
         <li key={number} className="avatar-item">
-          <span className="page-link">
+          <a onClick={() => paginate(number)} href="#" className="page-link">
             {number}
-          </span>
+          </a>
         </li>
       ))}
-      <li className="avatar-item" >{">"} </li>
+      {/* <li className="avatar-item" >{">"} </li> */}
     </ul>
   )
 
