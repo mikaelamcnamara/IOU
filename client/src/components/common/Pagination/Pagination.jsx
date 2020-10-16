@@ -15,9 +15,9 @@ const Pagination = ({ totalAvatarCards }) => {
       <li className="avatar-item" >{"<"} </li>
       {pageNumbers.map(number => (
         <li key={number} className="avatar-item">
-          <a href="#" className="page-link">
+          <span className="page-link">
             {number}
-          </a>
+          </span>
         </li>
       ))}
       <li className="avatar-item" >{">"} </li>

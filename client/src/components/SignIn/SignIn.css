@@ -62,10 +62,12 @@
   font-size: 25px;
   color: white;
   padding: 10px 0px;
-  width: 452px;
+  margin-top:20px;
+  margin-bottom: 10px;
   background-color: #ec3030;
   border-radius: 15px;
   cursor: pointer;
+  width: 452px !important;
 }
 
 .signin-account-text {
