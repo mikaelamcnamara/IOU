@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import NavBar from '../common/Navbar/Navbar';
 import AvatarCard from '../common/AvatarCard/AvatarCard';
 import './SearchPage.css';
@@ -11,13 +11,14 @@ const SearchPage = props => {
   const searchValue = queryString.extract(props.location.search);
 
 
-  //Search functionality
-  // const favours = useMemo(() => {
-  //   if (!search) return favoursList;
-  //   return favoursList.filter((favour) => {
-  //     return favour.name.toLowerCase().includes(search.toLowerCase());
-  //   });
-  // }, [search]);
+  // Search functionality
+  const favours = useMemo(() => {
+    if (!searchValue) return favoursList;
+    return favoursList.filter((favour) => {
+      return favour.name.toLowerCase().includes(searchValue.toLowerCase());
+    });
+  }, [searchValue]);
+
   return (
     <>
       <div>
