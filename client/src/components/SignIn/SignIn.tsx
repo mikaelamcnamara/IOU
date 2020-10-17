@@ -18,10 +18,10 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
-  
+
   const handleLogin = async () => {
     const res = await login(email, password);
-    
+
     if (res.success) {
       const user = await getCurrentUser();
       localStorage.setItem('user', user);
@@ -29,7 +29,7 @@ const SignUp = () => {
       window.location.reload();
     }
     else window.alert("Email or password is incorrect");
-        
+
   };
 
   const defaultOptions = {

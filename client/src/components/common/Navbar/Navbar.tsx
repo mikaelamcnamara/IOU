@@ -1,30 +1,38 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { logout } from "../../../APIFetchers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Heart from "../../../assets/heart.svg";
 import "./Navbar.css";
 
-//Dummy Data
-// import favoursList from '../../common/dummyData.json';
+
 
 const Navbar = () => {
+  const history = useHistory();
   const [search, setSearch] = useState("");
   const [loggedIn] = useState(localStorage.getItem("user") ? true : false);
 
 
-  //Search functionality
-  // const favours = useMemo(() => {
-  //   if (!search) return favoursList;
-  //   return favoursList.filter((favour) => {
-  //     return favour.name.toLowerCase().includes(search.toLowerCase());
-  //   });
-  // }, [search]);
   const handleLogout = async () => {
     await logout();
     window.location.reload();
   };
+
+  const handleSearch = (e) => {
+    const data = e.target.value;
+    setSearch(data);
+  }
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    history.push({
+      pathname: '/SearchPage',
+      search
+    });
+  };
+
+
 
   return (
     <>
@@ -42,28 +50,26 @@ const Navbar = () => {
               </div>
             </Link>
             <div className="nav-middle">
-              <form className="search-form">
+              <form className="search-form" onSubmit={handleOnSubmit}>
                 <input
                   type="text"
                   className="search-input"
                   placeholder="Search for favours...."
+                  onChange={handleSearch}
                   value={search}
-                  onChange={(e) => setSearch(e.target.value)}
                 />
-                <Link style={{ textDecoration: 'none' }} to='/SearchPage'>
-                  <button type='submit' className='search-btn'>
+                {/* <Link style={{ textDecoration: 'none' }} to='/SearchPage'> */}
+                <button className='search-btn ' type="submit">
+                  <FontAwesomeIcon
+                    className='search-icon'
+                    icon={faSearch}
+                    color='#8A2980'
 
-                    <FontAwesomeIcon
-                      className='search-icon'
-                      icon={faSearch}
-                      color='#8A2980'
-                    />
-
-                  </button>
-
-                </Link>
-
+                  />
+                </button>
+                {/* </Link> */}
               </form>
+
             </div>
             <div className="nav-right">
               <Link style={{ textDecoration: "none" }} to="/Leaderboard">
