@@ -19,11 +19,13 @@ const Navbar = () => {
     window.location.reload();
   };
 
+  // Updates as user enters keys on the input search field
   const handleSearch = (e) => {
     const data = e.target.value;
     setSearch(data);
   }
 
+  // Functionality which passses the search term or value from the input field to the SearchPage route
   const handleOnSubmit = (e) => {
     e.preventDefault();
     history.push({
