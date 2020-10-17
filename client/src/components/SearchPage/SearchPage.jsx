@@ -10,13 +10,14 @@ import favoursList from '../common/dummyData.json';
 import searchAnimation from '../../assets/Searching.json';
 
 const SearchPage = props => {
+  // Configuring all the states and hooks
   const searchValue = queryString.extract(props.location.search);
   const [filteredFavours, setFilteredFavours] = useState([]);
   const [favours, setFavours] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
 
-
+  // Initialises the properties for lottie library 
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -27,6 +28,7 @@ const SearchPage = props => {
   };
 
 
+  // The search functionality which receives a searchValue prop from the navbar input and performs function
   useEffect(() => {
     setFilteredFavours(
       favoursList.filter((favours) =>
@@ -36,14 +38,15 @@ const SearchPage = props => {
   }, [searchValue, favours]);
 
 
-
+  // Responsible for pagination as the variable names suggest
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredFavours.slice(indexOfFirstPost, indexOfLastPost);
 
+  // Function which keeps track of the current page
   const paginate = pageNumbers => setCurrentPage(pageNumbers);
 
-
+  // Renders the number of cards based on matching results from search on the dummydata.json
   const renderCards = () => {
     return (<div className="search-bg">
       {currentPosts.map((favours, index) => {
