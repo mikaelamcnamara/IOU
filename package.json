@@ -21,6 +21,7 @@
     "nodemon": "^2.0.4",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "query-string": "^6.13.5",
     "react-loading-skeleton": "^2.1.1",
     "react-lottie": "^1.2.3",
     "typescript": "^3.9.7"

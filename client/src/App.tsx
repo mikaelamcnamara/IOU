@@ -123,7 +123,7 @@ const App = () => {
             //atActive={{ opacity: 1 }}
             //timeout={500}
             path='/SearchPage'
-            exact component={SearchPage}
+            component={SearchPage}
           >
           </Route>
         </Switch>
