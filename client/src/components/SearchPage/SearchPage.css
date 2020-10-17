@@ -6,12 +6,27 @@
 
 }
 
+.failed-content{
+  overflow: hidden;
+}
+
+.failed-search{
+  margin-top:-50px;
+  overflow: hidden;
+}
+
 .search-number-results{
 margin-top:15px;
 margin-left:130px;
   text-align: left;
   font-size:20px;
   color: #9F9F9F;
+}
+
+.search-fail-animation{
+  margin-top: -100px;
+  overflow: hidden;
+
 }
 
 .search-bg{
