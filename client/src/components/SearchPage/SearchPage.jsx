@@ -4,7 +4,7 @@ import AvatarCard from '../common/AvatarCard/AvatarCard';
 import './SearchPage.css';
 import Pagination from '../common/Pagination/Pagination';
 import queryString from 'query-string';
-
+import Cards from '../common/Cards/Cards';
 import favoursList from '../common/dummyData.json';
 
 const SearchPage = props => {
@@ -23,9 +23,11 @@ const SearchPage = props => {
     );
   }, [searchValue, favours]);
 
+
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = favoursList.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = filteredFavours.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = pageNumbers => setCurrentPage(pageNumbers);
 
@@ -36,8 +38,8 @@ const SearchPage = props => {
         <h1 className="search-results" >{`Search Results: ${searchValue}`} </h1>
         <p className="search-number-results"> {`Showing ${filteredFavours.length} results for ${searchValue}`} </p>
         <div className="search-bg">
-          {filteredFavours.map((favours, index) => {
-            return <AvatarCard posts={currentPosts} key={index} {...favours} />
+          {currentPosts.map((favours, index) => {
+            return <AvatarCard key={index} {...favours} />
           })}
           <Pagination postsPerPage={postsPerPage} totalAvatarCards={filteredFavours.length} paginate={paginate} />
         </div>
