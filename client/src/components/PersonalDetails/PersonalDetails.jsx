@@ -3,8 +3,9 @@ import NavBar from "../common/Navbar/Navbar";
 
 import "../../App.css";
 import "./PersonalDetails.css";
-import { getCurrentUser } from "../../APIFetchers";
+import { getCurrentUser, update } from "../../APIFetchers";
 import userEvent from "@testing-library/user-event";
+import { updateArrayBindingPattern } from "typescript";
 
 const PersonalDetails = () => {
   const [name, setName] = useState("");
@@ -17,28 +18,22 @@ const PersonalDetails = () => {
       const currentUser = await getCurrentUser();
       setName(currentUser.fullName);
       setEmail(currentUser.email);
-      // let loggedIn = (localStorage.getItem('user'));
-
-      // user.findById
-      // setEmail(data.email);
-      // setEmail(loggedIn.email);
-      // ...
     }
     fetchData();
-  }, [name, email]);
+  }, []);
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    const res = await update(email, name);
+    // await alert('fuck yeah');
 
 
-
-  // let currentUser = getCurrentUser();
-  // let data = JSON.parse(currentUser);
-
-
+  }
 
 
   return (
     <div className="PersonalDetails">
       <NavBar />
-      {console.log(email)}
       <br></br>
       <br></br>
       <br></br>
@@ -57,28 +52,25 @@ const PersonalDetails = () => {
             <label>
               Full Name
               <br></br>
-              <input type="text" name="FullName" defaultValue={name} />
+              <input type="text" name="FullName" onChange={(e) => setName(e.target.value)} defaultValue={name} />
             </label>
-
             <br></br>
-
             <br></br>
             <label>
               Email
               <br></br>
-              <input type="text" name="Email" defaultValue={email} />
+              <input type="text" name="Email" onChange={(e) => setEmail(e.target.value)} defaultValue={email} />
             </label>
             <br></br>
             <br></br>
 
             <div className="form-submit">
               <br></br>
-              <input type="submit" defaultValue="Reset Password" />
+              <input type="submit" onClick={(e) => handleUpdate(e)} defaultValue="Reset Password" />
             </div>
           </form>
         </div>
       </div>
-
       <br></br>
       <br></br>
       <br></br>

@@ -19,6 +19,31 @@ const login = async (email: String, password: String) => {
   }
 };
 
+
+
+const update = async (email: String, fullName: String) => {
+  const body = {
+    email: email,
+    fullName: fullName,
+  };
+
+  const requestOptions = {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  };
+  try {
+    let resp = await fetch('/api/current_user', requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
+
+
 const register = async (
   fullName: String,
   email: String,
@@ -76,4 +101,4 @@ const logout = async () => {
   }
 };
 
-export { login, register, getCurrentUser, logout };
+export { login, register, getCurrentUser, update, logout };
