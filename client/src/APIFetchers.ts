@@ -75,4 +75,67 @@ const logout = async () => {
   }
 };
 
-export { login, register, getCurrentUser, logout };
+
+const addFriend = async (
+  friend: String,
+) => {
+  const body = {
+    friend: friend
+  };
+
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  };
+
+  try {
+    let resp = await fetch('/api/addFriend', requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
+const removeFriend = async (
+  friend: String,
+) => {
+  const body = {
+    friend: friend
+  };
+
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  };
+
+  try {
+    let resp = await fetch('/api/removeFriend', requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
+const leaderboard = async () => {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  try {
+    let resp = await fetch('/api/leaderboard', requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
+export { login, register, getCurrentUser, logout, addFriend, removeFriend, leaderboard };
