@@ -1,3 +1,7 @@
+export { };
+const mongoose = require("mongoose");
+const User = mongoose.model('users');
+
 module.exports = (app) => {
   app.post('/api/logout', (req: any, res: any) => {
     req.logout(); //kills cookie
@@ -5,6 +9,10 @@ module.exports = (app) => {
   });
 
   app.get('/api/current_user', (req: any, res: any) => {
-    res.send(req.session.passport.user);
+    User.findById(req.session.passport.user).select('email fullName').exec(function (err, user) {
+      if (err) return res.send(err);
+      res.send(user);
+    });
   });
 };
+

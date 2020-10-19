@@ -1,14 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../common/Navbar/Navbar";
 
 import "../../App.css";
 import "./PersonalDetails.css";
+import { getCurrentUser } from "../../APIFetchers";
+import userEvent from "@testing-library/user-event";
 
 const PersonalDetails = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
+
+  useEffect(() => {
+    async function fetchData() {
+      // You can await here
+      const currentUser = await getCurrentUser();
+      setName(currentUser.fullName);
+      setEmail(currentUser.email);
+      // let loggedIn = (localStorage.getItem('user'));
+
+      // user.findById
+      // setEmail(data.email);
+      // setEmail(loggedIn.email);
+      // ...
+    }
+    fetchData();
+  }, [name, email]);
+
+
+
+  // let currentUser = getCurrentUser();
+  // let data = JSON.parse(currentUser);
+
+
+
+
   return (
     <div className="PersonalDetails">
       <NavBar />
-
+      {console.log(email)}
       <br></br>
       <br></br>
       <br></br>
@@ -27,7 +57,7 @@ const PersonalDetails = () => {
             <label>
               Full Name
               <br></br>
-              <input type="text" />
+              <input type="text" name="FullName" defaultValue={name} />
             </label>
 
             <br></br>
@@ -36,21 +66,14 @@ const PersonalDetails = () => {
             <label>
               Email
               <br></br>
-              <input type="text" />
+              <input type="text" name="Email" defaultValue={email} />
             </label>
-
             <br></br>
-
             <br></br>
-            <label>
-              Password
-              <br></br>
-              <input type="password" />
-            </label>
 
             <div className="form-submit">
               <br></br>
-              <input type="submit" value="Reset Password" />
+              <input type="submit" defaultValue="Reset Password" />
             </div>
           </form>
         </div>
