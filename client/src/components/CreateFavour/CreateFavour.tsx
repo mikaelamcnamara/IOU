@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import NavBar from "../common/Navbar/Navbar";
-import { createFavour } from '../../APIFetchers'; 
+import { createFavour } from '../../APIFetchers';
+import { useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
 import "../../App.css";
 import "./CreateFavour.css";
@@ -12,12 +14,18 @@ const CreateFavour = () => {
   const [category, setCategory] = useState('food');
   const [points, setPoints] = useState(0);
   const [date, setDate] = useState('');
+  const history = useHistory();
 
   const submit = async (event) => {
     event.preventDefault();
 
     const result = await createFavour(title, description, assignee, category, points, date);
-    console.log(result);
+    if (result.success) {
+      await Swal.fire("Favour Created!", "You created has been successfully created.", "success");
+      history.push('/Favours');
+      window.location.reload();
+    }
+    else Swal.fire("Error Creating Favour", "Your favour has not been created due to an error.", "error");
   };
 
   return (

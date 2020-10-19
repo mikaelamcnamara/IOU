@@ -9,6 +9,7 @@ const favourSchema = new Schema(
       required: true, //mandatory attribute
       trim: true, //cuts whitespace at the end of the input field
       minlength: 3, //sets min name length to 3 chars
+      maxlength: 20,
       default: '',
     },
 
@@ -17,6 +18,7 @@ const favourSchema = new Schema(
       required: true,
       trim: true,
       minlength: 3,
+      maxlength: 500,
       default: '',
     },
 
@@ -35,6 +37,8 @@ const favourSchema = new Schema(
       type: Number,
       required: true,
       default: 0,
+      minlength: 0,
+      maxlength: 250,
     },
 
     date: {
