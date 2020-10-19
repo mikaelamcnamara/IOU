@@ -26,8 +26,8 @@ const favourSchema = new Schema(
     },
 
     category: {
-      type: Schema.Types.ObjectId,
-      ref: 'category',
+      type: String,
+      required: true,
     },
 
     //units TBD
