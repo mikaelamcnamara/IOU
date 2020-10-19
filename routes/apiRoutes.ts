@@ -10,7 +10,7 @@ module.exports = (app) => {
   });
 
   app.get('/api/current_user', (req: any, res: any) => {
-    User.findById(req.session.passport.user).select('email fullName').exec(function (err, user) {
+    User.findById(req.session.passport.user).select('avatar email fullName experiencePoints completedFavours').exec(function (err, user) {
       if (err) return res.send(err);
       res.send(user);
     });

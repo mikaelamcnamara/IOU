@@ -45,7 +45,7 @@ const userSchema = new Schema(
       default: false,
     },
     //boolean to log if user has requested a new password.
-    //without this the forgot password function shouldn't work
+    //without this the forgot password function won't work
 
     experiencePoints: {
       type: Number,
