@@ -90,6 +90,46 @@ const createFavour = async (
     category: category,
     points: points,
     date: date,
+    };
+  
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+    };
+
+try {
+    let resp = await fetch('/api/createFavour', requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+  
+  const addFriend = async (
+  friend: String,
+) => {
+  const body = {
+    friend: friend
+  };
+  
+  try {
+    let resp = await fetch('/api/addFriend', requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
+  const removeFriend = async (
+  friend: String,
+) => {
+  const body = {
+    friend: friend
   };
 
   const requestOptions = {
@@ -99,7 +139,7 @@ const createFavour = async (
   };
 
   try {
-    let resp = await fetch('/api/createFavour', requestOptions);
+    let resp = await fetch('/api/removeFriend', requestOptions);
     let result = await resp.json();
     return result;
   } catch (e) {
@@ -108,4 +148,20 @@ const createFavour = async (
   }
 };
 
-export { login, register, getCurrentUser, logout, createFavour };
+const leaderboard = async () => {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  try {
+    let resp = await fetch('/api/leaderboard', requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
+export { login, register, getCurrentUser, logout, addFriend, removeFriend, leaderboard, createFavour };
