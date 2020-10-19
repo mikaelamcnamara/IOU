@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../common/Navbar/Navbar';
 import CompletedCard from '../common/CompletedCard/CompletedCard';
 import Friend from '../common/Friend/Friend';
@@ -7,9 +7,32 @@ import manAvatar from '../../assets/first-man-avatar.svg';
 import EditIcon from '../../assets/EditIcon.svg';
 import Gold from '../../assets/gold.svg';
 import ProgressBar from '../common/ProgressBar/ProgressBar';
+import { getCurrentUser} from '../../APIFetchers';
 import './Account.css';
+import Avatars from '../common/Avatars/Avatars';
 
 const Account = () => {
+  const [name, setName] = useState('');
+  const [avatar, setAvatar] = useState(0);
+  const [experiencePoints, setExperiencePoints] = useState(0);
+  const [numCompletedFavours, setNumCompletedFavours] = useState(0);
+  const [level, setLevel] = useState(0);
+  const [progress, setProgress] = useState(0);
+
+  const getUserDetails = async () => {
+    const result = await getCurrentUser();
+    setName(result.fullname);
+    setAvatar(result.avatar);
+    setExperiencePoints(result.experiencePoints);
+    setNumCompletedFavours(result.completedFavours.length);
+    setLevel(Math.floor(experiencePoints/1000));
+    setProgress(((level + 1) * 1000 - experiencePoints)/1000 * 100);
+  }
+
+  useEffect(() => {
+    getUserDetails();
+  });
+
   return (
     <div className='account'>
       <Navbar />
@@ -18,22 +41,22 @@ const Account = () => {
         View your stats, recent favours, and friends
       </p>
       <div className='account-display'>
-        <img className='edit-icon' src={EditIcon} alt='edit icon' />
-        <div className='account-avatar'>
-          <img src={manAvatar} alt='Account avatar' />
+        <a href="/PersonalDetails"><img className='edit-icon' src={EditIcon} alt='edit icon' /></a>
+        <div className='account-avatar' style={{backgroundColor: Avatars[avatar].color}}>
+          <img src={Avatars[avatar].avatar} alt='Account avatar' />
         </div>
-        <h1>James Doe</h1>
+        <h1>{name}</h1>
         <div className='ranking-stat'>
           <p>#12 Most Favours</p>
         </div>
-        <h2>Level: 20</h2>
+        <h2>Level: {level}</h2>
         <div className='progress-card'>
-          <p>Number of Favours: 200</p>
+          <p>Number of Favours: {numCompletedFavours}</p>
           <img src={Gold} alt='trophy' />
           <div className='progress-bar'>
-            <p className='left'>Total: 2500 XP</p>
-            <p className='right'>Goal: 3000 XP</p>
-            <ProgressBar bgcolor='#4D6BFF' completed='60' />
+            <p className='left'>Total: {experiencePoints} XP</p>
+            <p className='right'>Goal: {(level + 1) * 1000} XP</p>
+            <ProgressBar bgcolor='#4D6BFF' completed={progress} />
           </div>
         </div>
       </div>

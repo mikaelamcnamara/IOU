@@ -45,7 +45,7 @@ const userSchema = new Schema(
       default: false,
     },
     //boolean to log if user has requested a new password.
-    //without this the forgot password function shouldn't work
+    //without this the forgot password function won't work
 
     experiencePoints: {
       type: Number,
@@ -61,6 +61,9 @@ const userSchema = new Schema(
 
     //favours the user has made
     myFavours: [{ type: Schema.Types.ObjectId, ref: 'favours' }],
+
+    //friends the user has added
+    friends: [{ type: Schema.Types.ObjectId, ref: 'users' }],
 
     //favours the user has completed
     completedFavours: [{ type: Schema.Types.ObjectId, ref: 'favours' }],

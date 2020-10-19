@@ -1,31 +1,28 @@
 import React from 'react';
-import manAvatar from '../../../assets/first-man-avatar.svg';
+import Avatars from '../../common/Avatars/Avatars';
 import burgerIcon from '../../../assets/burger-icon.svg';
 import gold from '../../../assets/gold.svg';
 import './LeaderCard.css';
 
-const LeaderCard = () => {
+interface IProps {
+  avatar: number;
+  name: String;
+  xp: number;
+}
+
+const LeaderCard = ({avatar, name, xp} : IProps) => {
   return (
     <>
-      <div className='favours-card'>
-        <div className='favours-card-square-bg'>
-          <img className='avatar' src={manAvatar} alt='avatar' />
+      <div className='leader-card'>
+        <div className='leader-card-square-bg' style={{backgroundColor: Avatars[avatar].color}}>
+          <img className='avatar' src={Avatars[avatar].avatar} alt='avatar' />
         </div>
         <div className='right-details'>
-          <h4 className='title-txt'>Damien</h4>
-          <div className='tag-content'>
-            <span className='tag'>
-              <img src={burgerIcon} alt='' /> Food
-            </span>
-          </div>
-          <div className='favours-card-trophy'>
+          <h4 className='leader-title-txt'>{name}</h4>
+          <div className='leader-card-trophy'>
             <img className='gold' src={gold} alt='gold' />
           </div>
-          <p className='card-text'>
-            Can someone buy me coffee? So I can turn that coffee into code.
-            Cheers!
-          </p>
-          <p className='points-text'>+ EARN 100XP</p>
+          <p className='leader-points-text'>{`${xp}XP`}</p>
         </div>
       </div>
     </>

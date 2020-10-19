@@ -1,4 +1,4 @@
-export {}; //trick TS into accepting below imports
+export { }; //trick TS into accepting below imports
 const mongoose = require('mongoose');
 const User = mongoose.model('users');
 const passport = require('passport');
@@ -14,28 +14,28 @@ module.exports = (app: any) => {
     if (!inputName) {
       return res.send({
         success: false,
-        message: 'Full Name cannot be blank!',
+        message: 'Full Name cannot be blank',
       });
     }
 
-    if (inputName.length < 4) {
+    if (inputName.split(" ").length < 2) {
       return res.send({
         success: false,
-        message: 'Enter a legitimate full name!',
+        message: 'Enter a first and last name',
       });
     }
 
     if (!email) {
       return res.send({
         success: false,
-        message: 'Email cannot be blank!',
+        message: 'Email cannot be blank',
       });
     }
 
     if (!password) {
       return res.send({
         success: false,
-        message: 'Password cannot be blank!',
+        message: 'Password cannot be blank',
       });
     }
 
@@ -65,6 +65,7 @@ module.exports = (app: any) => {
       if (/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}/.test(email)) {
         //saving new user in DB
         const newUser = new User();
+        newUser.avatar = Math.floor((Math.random() *5) + 1);
         newUser.fullName = inputName;
         newUser.email = email.toLowerCase();
         newUser.userType = 'Student';

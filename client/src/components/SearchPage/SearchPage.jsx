@@ -71,8 +71,6 @@ const SearchPage = props => {
               <h1 className="failed-search">Oops...we could not find that favour.</h1>
             </div> : renderCards()
         }
-
-
       </div>
     </>
   );

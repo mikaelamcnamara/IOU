@@ -20,10 +20,12 @@ const Favours = () => {
       <AvatarCard />
       <AvatarCard />
 
+      <a href="/CreateFavour">
       <div className='create-request'>
         <img src={RequestPlus} alt='request plus' />
         <h1 className='create-request-header'>Create a request</h1>
       </div>
+      </a>
       <h1 className='favours-header' style={{ color: '#464646' }}>
         Your Active Requests
       </h1>

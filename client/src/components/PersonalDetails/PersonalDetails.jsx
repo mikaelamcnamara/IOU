@@ -1,14 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../common/Navbar/Navbar";
 
 import "../../App.css";
 import "./PersonalDetails.css";
+import { getCurrentUser, update } from "../../APIFetchers";
 
 const PersonalDetails = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
+
+  useEffect(() => {
+    async function fetchData() {
+      // You can await here
+      const currentUser = await getCurrentUser();
+
+      setName(currentUser.fullName);
+      setEmail(currentUser.email);
+    }
+    fetchData();
+  }, []);
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    const res = await update(email, name);
+  }
+
+
   return (
     <div className="PersonalDetails">
       <NavBar />
-
       <br></br>
       <br></br>
       <br></br>
@@ -27,35 +48,25 @@ const PersonalDetails = () => {
             <label>
               Full Name
               <br></br>
-              <input type="text" />
+              <input type="text" name="FullName" onChange={(e) => setName(e.target.value)} defaultValue={name} />
             </label>
-
             <br></br>
-
             <br></br>
             <label>
               Email
               <br></br>
-              <input type="text" />
+              <input type="text" name="Email" onChange={(e) => setEmail(e.target.value)} defaultValue={email} />
             </label>
-
             <br></br>
-
             <br></br>
-            <label>
-              Password
-              <br></br>
-              <input type="password" />
-            </label>
 
             <div className="form-submit">
               <br></br>
-              <input type="submit" value="Reset Password" />
+              <input type="submit" onClick={(e) => handleUpdate(e)} defaultValue="Reset Password" />
             </div>
           </form>
         </div>
       </div>
-
       <br></br>
       <br></br>
       <br></br>

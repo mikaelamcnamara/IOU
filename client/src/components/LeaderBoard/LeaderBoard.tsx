@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { leaderboard } from '../../APIFetchers';
 import LeaderBoardHeader from '../../assets/leaderboard.svg';
 
 import '../../App.css';
@@ -12,16 +13,19 @@ import ConfettiGenerator from 'confetti-js';
 
 const LeaderBoard = () => {
   const [loading, setLoading] = useState(false);
+  const [topUsers, setTopUsers] = useState([]);
 
-  useEffect(() => {
+  const populateLeaderboard = async () => {
+    setLoading(true);
+    let leaders = await leaderboard();
+    leaders = leaders.map(leader => <LeaderCard key={leader.fullName} avatar={leader.avatar} name={leader.fullName} xp={leader.experiencePoints} />);
+    setTopUsers(leaders);
+    console.log(topUsers);
     setLoading(false);
-    const timer = setTimeout(() => {
-      setLoading(true);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
+  }
 
   useEffect(() => {
+    populateLeaderboard();
     const confettiSettings = { target: 'my-canvas' };
     const confetti = new ConfettiGenerator(confettiSettings);
     confetti.render();
@@ -37,30 +41,26 @@ const LeaderBoard = () => {
         alt='leaderboard-background'
       ></img>
       <canvas id='my-canvas'></canvas>
-
       <div className='leader-content'>
         <h1 className='leader-title'>LeaderBoard</h1>
         <h4 className='leader-subtitle'>
-          These users have the highest amount of favours blah
+          These users have earned the most experience points! 
         </h4>
 
-        {!loading && (
-          <div className='loading-card'>
+        {loading &&
+          <div className="loading-card">
             <SkeletonCard />
           </div>
-        )}
-
-        {loading && (
+        }
+        {!loading &&
           <div>
-            <LeaderCard />
-            <LeaderCard />
-            <LeaderCard />
-            <LeaderCard />
+            {topUsers}
           </div>
-        )}
+        }
       </div>
     </div>
   );
+        
 };
 
 export default LeaderBoard;

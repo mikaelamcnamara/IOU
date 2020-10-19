@@ -3,7 +3,8 @@
 }
 
 .PersonalDetails {
-  background-image: url("../../assets/PersonalBackground.png");
+  background-image: url("../../assets/editingBackground.svg");
+  height:100vh;
 }
 
 .greybox-centre {

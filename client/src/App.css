@@ -37,3 +37,7 @@
   color: #0fb785;
   text-decoration: none;
 }
+
+.swal2-icon {
+  overflow: hidden !important;
+}
