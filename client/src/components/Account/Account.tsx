@@ -25,8 +25,8 @@ const Account = () => {
     setAvatar(result.avatar);
     setExperiencePoints(result.experiencePoints);
     setNumCompletedFavours(result.completedFavours.length);
-    setLevel(experiencePoints/1000);
-    setProgress(experiencePoints/((level + 1) * 1000) * 100);
+    setLevel(Math.floor(experiencePoints/1000));
+    setProgress(((level + 1) * 1000 - experiencePoints)/1000 * 100);
   }
 
   useEffect(() => {
