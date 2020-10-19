@@ -5,12 +5,12 @@ const login = async (email: String, password: String) => {
   };
 
   const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   };
   try {
-    let resp = await fetch('/auth/login', requestOptions);
+    let resp = await fetch("/auth/login", requestOptions);
     let result = await resp.json();
     return result;
   } catch (e) {
@@ -33,13 +33,13 @@ const register = async (
   };
 
   const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   };
 
   try {
-    let resp = await fetch('/auth/signup', requestOptions);
+    let resp = await fetch("/auth/signup", requestOptions);
     let result = await resp.json();
     return result;
   } catch (e) {
@@ -50,7 +50,7 @@ const register = async (
 
 const getCurrentUser = async () => {
   try {
-    const resp = await fetch('/api/current_user');
+    const resp = await fetch("/api/current_user");
     const result = await resp.text();
     return result;
   } catch (e) {
@@ -61,11 +61,11 @@ const getCurrentUser = async () => {
 
 const logout = async () => {
   const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
   };
   try {
-    const resp = await fetch('/api/logout', requestOptions);
+    const resp = await fetch("/api/logout", requestOptions);
     const result = await resp.text();
     localStorage.clear();
     return result;
@@ -81,7 +81,7 @@ const createFavour = async (
   assignee: String,
   category: String,
   points: Number,
-  date: String,
+  date: String
 ) => {
   const body = {
     title: title,
@@ -90,33 +90,16 @@ const createFavour = async (
     category: category,
     points: points,
     date: date,
-    };
-  
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-    };
-
-try {
-    let resp = await fetch('/api/createFavour', requestOptions);
-    let result = await resp.json();
-    return result;
-  } catch (e) {
-    return e;
-  } finally {
-  }
-};
-  
-  const addFriend = async (
-  friend: String,
-) => {
-  const body = {
-    friend: friend
   };
-  
+
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  };
+
   try {
-    let resp = await fetch('/api/addFriend', requestOptions);
+    let resp = await fetch("/api/createFavour", requestOptions);
     let result = await resp.json();
     return result;
   } catch (e) {
@@ -125,21 +108,40 @@ try {
   }
 };
 
-  const removeFriend = async (
-  friend: String,
-) => {
+const addFriend = async (friend: String) => {
   const body = {
-    friend: friend
+    friend: friend,
   };
 
   const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   };
 
   try {
-    let resp = await fetch('/api/removeFriend', requestOptions);
+    let resp = await fetch("/api/addFriend", requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
+const removeFriend = async (friend: String) => {
+  const body = {
+    friend: friend,
+  };
+
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  };
+
+  try {
+    let resp = await fetch("/api/removeFriend", requestOptions);
     let result = await resp.json();
     return result;
   } catch (e) {
@@ -150,12 +152,12 @@ try {
 
 const leaderboard = async () => {
   const requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
   };
 
   try {
-    let resp = await fetch('/api/leaderboard', requestOptions);
+    let resp = await fetch("/api/leaderboard", requestOptions);
     let result = await resp.json();
     return result;
   } catch (e) {
@@ -164,4 +166,13 @@ const leaderboard = async () => {
   }
 };
 
-export { login, register, getCurrentUser, logout, addFriend, removeFriend, leaderboard, createFavour };
+export {
+  login,
+  register,
+  getCurrentUser,
+  logout,
+  addFriend,
+  removeFriend,
+  leaderboard,
+  createFavour,
+};
