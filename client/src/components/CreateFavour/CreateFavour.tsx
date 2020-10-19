@@ -1,10 +1,33 @@
 import React, { useState } from "react";
 import NavBar from "../common/Navbar/Navbar";
+import { createFavour } from '../../APIFetchers';
+import { useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
 import "../../App.css";
 import "./CreateFavour.css";
 
 const CreateFavour = () => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [assignee, setAssignee] = useState(localStorage.getItem('user') || 'person1');
+  const [category, setCategory] = useState('food');
+  const [points, setPoints] = useState(0);
+  const [date, setDate] = useState('');
+  const history = useHistory();
+
+  const submit = async (event) => {
+    event.preventDefault();
+
+    const result = await createFavour(title, description, assignee, category, points, date);
+    if (result.success) {
+      await Swal.fire("Favour Created!", "You created has been successfully created.", "success");
+      history.push('/Favours');
+      window.location.reload();
+    }
+    else Swal.fire("Error Creating Favour", "Your favour has not been created due to an error.", "error");
+  };
+
   return (
     <div className="CreateFavour">
       <NavBar />
@@ -23,11 +46,16 @@ const CreateFavour = () => {
 
       <div id="form-content" className="greybox-centre">
         <div className="greybox">
-          <form>
+          <form onSubmit={() => submit}>
             <label>
               Title
               <br></br>
-              <input placeholder="Create a name for this favour" type="text" />
+              <input
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Create a name for this favour"
+                type="text"
+              />
             </label>
 
             <br></br>
@@ -36,7 +64,12 @@ const CreateFavour = () => {
             <label>
               Description
               <br></br>
-              <input placeholder="Describe the favour" type="text" />
+              <input
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Describe the favour"
+                type="text"
+              />
             </label>
 
             <br></br>
@@ -71,6 +104,8 @@ const CreateFavour = () => {
             <label>XP Points Earned</label>
             <br></br>
             <input
+              value={points}
+              onChange={(e) => setPoints(parseInt(e.target.value))}
               placeholder="Points to earn"
               type="number"
               id=""
@@ -83,13 +118,18 @@ const CreateFavour = () => {
             <br></br>
             <label>Due date</label>
             <br></br>
-            <input type="date" id=""></input>
+            <input
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              type="date"
+              id=""
+            ></input>
 
             <br></br>
 
             <div className="form-submit">
               <br></br>
-              <input type="submit" value="Submit!" />
+              <input type="submit" onClick={(e) => submit(e)} value="Submit!" />
             </div>
           </form>
         </div>

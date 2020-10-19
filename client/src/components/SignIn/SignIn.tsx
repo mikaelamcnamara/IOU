@@ -8,6 +8,7 @@ import EmailIcon from '../../assets/EmailIcon.svg';
 import PasswordIcon from '../../assets/PasswordIcon.svg';
 import Lottie from 'react-lottie';
 import animationData from '../../assets/Login.json';
+import Swal from 'sweetalert2'
 
 import '../../App.css';
 import './SignIn.css';
@@ -28,8 +29,7 @@ const SignUp = () => {
       history.push('/');
       window.location.reload();
     }
-    else window.alert("Email or password is incorrect");
-
+    else Swal.fire("Authentication Failed", "Email or password is incorrect.", "error");
   };
 
   const defaultOptions = {
