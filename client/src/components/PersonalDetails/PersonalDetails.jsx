@@ -4,8 +4,6 @@ import NavBar from "../common/Navbar/Navbar";
 import "../../App.css";
 import "./PersonalDetails.css";
 import { getCurrentUser, update } from "../../APIFetchers";
-import userEvent from "@testing-library/user-event";
-import { updateArrayBindingPattern } from "typescript";
 
 const PersonalDetails = () => {
   const [name, setName] = useState("");
@@ -16,6 +14,7 @@ const PersonalDetails = () => {
     async function fetchData() {
       // You can await here
       const currentUser = await getCurrentUser();
+
       setName(currentUser.fullName);
       setEmail(currentUser.email);
     }
@@ -25,9 +24,6 @@ const PersonalDetails = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     const res = await update(email, name);
-    // await alert('fuck yeah');
-
-
   }
 
 

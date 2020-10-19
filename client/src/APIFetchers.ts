@@ -76,7 +76,7 @@ const register = async (
 const getCurrentUser = async () => {
   try {
     const resp = await fetch("/api/current_user");
-    const result = await resp.text();
+    const result = await resp.json();
     return result;
   } catch (e) {
     return e;
