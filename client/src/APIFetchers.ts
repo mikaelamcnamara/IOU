@@ -75,20 +75,46 @@ const logout = async () => {
   }
 };
 
+const createFavour = async (
+  title: String,
+  description: String,
+  assignee: String,
+  category: String,
+  points: Number,
+  date: String,
+) => {
+  const body = {
+    title: title,
+    description: description,
+    assignee: assignee,
+    category: category,
+    points: points,
+    date: date,
+    };
+  
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+    };
 
-const addFriend = async (
+try {
+    let resp = await fetch('/api/createFavour', requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+  
+  const addFriend = async (
   friend: String,
 ) => {
   const body = {
     friend: friend
   };
-
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  };
-
+  
   try {
     let resp = await fetch('/api/addFriend', requestOptions);
     let result = await resp.json();
@@ -99,7 +125,7 @@ const addFriend = async (
   }
 };
 
-const removeFriend = async (
+  const removeFriend = async (
   friend: String,
 ) => {
   const body = {
@@ -138,4 +164,4 @@ const leaderboard = async () => {
   }
 };
 
-export { login, register, getCurrentUser, logout, addFriend, removeFriend, leaderboard };
+export { login, register, getCurrentUser, logout, addFriend, removeFriend, leaderboard, createFavour };
