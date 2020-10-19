@@ -18,7 +18,7 @@ const Account = () => {
         View your stats, recent favours, and friends
       </p>
       <div className='account-display'>
-        <img className='edit-icon' src={EditIcon} alt='edit icon' />
+        <a href="/PersonalDetails"><img className='edit-icon' src={EditIcon} alt='edit icon' /></a>
         <div className='account-avatar'>
           <img src={manAvatar} alt='Account avatar' />
         </div>

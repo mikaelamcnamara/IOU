@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const favourSchema = new Schema(
   {
-    name: {
+    title: {
       type: String,
       required: true, //mandatory attribute
       trim: true, //cuts whitespace at the end of the input field
@@ -20,22 +20,26 @@ const favourSchema = new Schema(
       default: '',
     },
 
+    assignee: {
+      type: Schema.Types.ObjectId,
+      ref: 'users',
+    },
+
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: 'category',
+    },
+
     //units TBD
-    duration: {
+    points: {
       type: Number,
       required: true,
       default: 0,
     },
 
-    author: {
-      type: Schema.Types.ObjectId,
-      ref: 'users',
-      required: true,
-    },
-
-    recipient: {
-      type: Schema.Types.ObjectId,
-      ref: 'users',
+    date: {
+      type: Date,
+      ref: 'date',
     },
 
     applicants: [{ type: Schema.Types.ObjectId, ref: 'users' }],
