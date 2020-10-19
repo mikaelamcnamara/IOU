@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../common/Navbar/Navbar';
+import { Link } from 'react-router-dom';
 import CompletedCard from '../common/CompletedCard/CompletedCard';
 import Friend from '../common/Friend/Friend';
 import AccountBackground from '../../assets/AccountBackground.svg';
@@ -18,7 +19,8 @@ const Account = () => {
         View your stats, recent favours, and friends
       </p>
       <div className='account-display'>
-        <img className='edit-icon' src={EditIcon} alt='edit icon' />
+        <Link to="/EditAccount">  <img className='edit-icon' src={EditIcon} alt='edit icon' />
+        </Link>
         <div className='account-avatar'>
           <img src={manAvatar} alt='Account avatar' />
         </div>

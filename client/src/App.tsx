@@ -7,6 +7,7 @@ import SignIn from './components/SignIn/SignIn';
 import Home from './components/Home/Home';
 import LeaderBoard from './components/LeaderBoard/LeaderBoard';
 import CreateFavour from './components/CreateFavour/CreateFavour';
+import EditAccount from './components/EditAccount/EditAccount';
 import FulfillFavour from './components/FulfillFavour/FulfillFavour';
 import ReviewFavour from './components/ReviewFavour/ReviewFavour';
 import PersonalDetails from './components/PersonalDetails/PersonalDetails';
@@ -116,6 +117,16 @@ const App = () => {
             exact
           >
             {localStorage.getItem('user') ? <Account /> : <Redirect to="/SignIn" />}
+          </Route>
+          <Route
+            //atEnter={{ opacity: 0 }}
+            //atLeave={{ opacity: 0 }}
+            //atActive={{ opacity: 1 }}
+            //timeout={500}
+            path='/EditAccount'
+            exact
+          >
+            {localStorage.getItem('user') ? <EditAccount /> : <Redirect to="/SignIn" />}
           </Route>
           <Route
             //atEnter={{ opacity: 0 }}

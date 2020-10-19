@@ -29,7 +29,6 @@ const SignUp = () => {
       window.location.reload();
     }
     else window.alert("Email or password is incorrect");
-
   };
 
   const defaultOptions = {
