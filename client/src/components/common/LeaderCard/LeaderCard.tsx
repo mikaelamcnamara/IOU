@@ -1,21 +1,21 @@
 import React from 'react';
-import manAvatar from '../../../assets/first-man-avatar.svg';
+import Avatars from '../../common/Avatars/Avatars';
 import burgerIcon from '../../../assets/burger-icon.svg';
 import gold from '../../../assets/gold.svg';
 import './LeaderCard.css';
 
-const IProps = {
-  avatar: Number,
-  name: String,
-  xp: Number,
+interface IProps {
+  avatar: number;
+  name: String;
+  xp: number;
 }
 
-const LeaderCard = ({avatar, name, xp} : typeof IProps) => {
+const LeaderCard = ({avatar, name, xp} : IProps) => {
   return (
     <>
       <div className='leader-card'>
-        <div className='leader-card-square-bg'>
-          <img className='avatar' src={manAvatar} alt='avatar' />
+        <div className='leader-card-square-bg' style={{backgroundColor: Avatars[avatar].color}}>
+          <img className='avatar' src={Avatars[avatar].avatar} alt='avatar' />
         </div>
         <div className='right-details'>
           <h4 className='leader-title-txt'>{name}</h4>
