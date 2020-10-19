@@ -1,10 +1,59 @@
 import React, { useState } from "react";
 import NavBar from "../common/Navbar/Navbar";
+import axios from "axios";
 
 import "../../App.css";
 import "./CreateFavour.css";
 
 const CreateFavour = () => {
+
+  const state = {
+    title: '',
+    description: '',
+    favours: []
+  };
+
+  const componentDidMount = () => {
+    this.getFavours();
+  };
+
+
+  const getFavours = () => {
+    axios.get('/api')
+      .then((response) => {
+        const data = response.data;
+        this.setState({ favours: data });
+        console.log('Data has been received!!');
+      })
+      .catch(() => {
+        alert('Error retrieving data!!!');
+      });
+  }
+
+  const submit = (event) => {
+    event.preventDefault();
+
+    const payload = {
+      title: this.state.title,
+      description: this.state.description
+    };
+
+
+    axios({
+      url: '/api/save',
+      method: 'POST',
+      data: payload
+    })
+      .then(() => {
+        console.log('Data has been sent to the server');
+        this.resetUserInputs();
+        this.getFavours();
+      })
+      .catch(() => {
+        console.log('Internal server error');
+      });;
+  };
+
   return (
     <div className="CreateFavour">
       <NavBar />
@@ -23,11 +72,16 @@ const CreateFavour = () => {
 
       <div id="form-content" className="greybox-centre">
         <div className="greybox">
-          <form>
+          <form onSubmit={this.submit}>
             <label>
               Title
               <br></br>
-              <input placeholder="Create a name for this favour" type="text" />
+              <input
+                value={this.state.title}
+                onChange={this.handleChange}
+                placeholder="Create a name for this favour"
+                type="text"
+              />
             </label>
 
             <br></br>
@@ -36,7 +90,12 @@ const CreateFavour = () => {
             <label>
               Description
               <br></br>
-              <input placeholder="Describe the favour" type="text" />
+              <input
+                //value={this.state.description}
+                //onChange={this.handleChange}
+                placeholder="Describe the favour"
+                type="text"
+              />
             </label>
 
             <br></br>
@@ -71,6 +130,8 @@ const CreateFavour = () => {
             <label>XP Points Earned</label>
             <br></br>
             <input
+              //value={this.state.xp}
+              //onChange={this.handleChange}
               placeholder="Points to earn"
               type="number"
               id=""
@@ -83,13 +144,18 @@ const CreateFavour = () => {
             <br></br>
             <label>Due date</label>
             <br></br>
-            <input type="date" id=""></input>
+            <input
+              //value={this.state.date}
+              //onChange={this.handleChange}
+              type="date"
+              id=""
+            ></input>
 
             <br></br>
 
             <div className="form-submit">
               <br></br>
-              <input type="submit" value="Submit!" />
+              <button type="submit" value="Submit!" />
             </div>
           </form>
         </div>
