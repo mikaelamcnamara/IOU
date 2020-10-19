@@ -1,4 +1,4 @@
-export {}; //trick TS into accepting below imports
+export { }; //trick TS into accepting below imports
 const mongoose = require('mongoose');
 const User = mongoose.model('users');
 const passport = require('passport');

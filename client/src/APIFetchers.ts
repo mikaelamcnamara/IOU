@@ -19,6 +19,31 @@ const login = async (email: String, password: String) => {
   }
 };
 
+
+
+const update = async (email: String, fullName: String) => {
+  const body = {
+    email: email,
+    fullName: fullName,
+  };
+
+  const requestOptions = {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  };
+  try {
+    let resp = await fetch('/api/current_user', requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
+
+
 const register = async (
   fullName: String,
   email: String,
@@ -51,11 +76,12 @@ const register = async (
 const getCurrentUser = async () => {
   try {
     const resp = await fetch("/api/current_user");
-    const result = await resp.text();
+    const result = await resp.json();
     return result;
   } catch (e) {
     return e;
   } finally {
+
   }
 };
 
@@ -171,6 +197,7 @@ export {
   register,
   getCurrentUser,
   logout,
+  update,
   addFriend,
   removeFriend,
   leaderboard,
