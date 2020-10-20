@@ -22,6 +22,11 @@ const favourSchema = new Schema(
       default: '',
     },
 
+    creator: {
+      type: Schema.Types.ObjectId,
+      ref: 'users',
+    },
+    
     assignee: {
       type: Schema.Types.ObjectId,
       ref: 'users',
