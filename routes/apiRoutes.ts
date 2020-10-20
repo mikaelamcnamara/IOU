@@ -130,7 +130,6 @@ module.exports = (app) => {
         res.send(result);
       });
   });
-<<<<<<< HEAD
 
   app.get('/api/allFavours', (req: any, res: any) => {
     Favour.find({}, function (err, favours) {
@@ -145,10 +144,6 @@ module.exports = (app) => {
       res.send(users);
     });
   });
-
-};
-=======
->>>>>>> Get friends list when creating favour
 
   app.get("/api/getFriendNames", (req: any, res: any) => {
     User.findById(req.session.passport.user).populate("friends", 'fullName').exec(function (err, result) {

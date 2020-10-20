@@ -21,14 +21,16 @@ const CreateFavour = () => {
   const history = useHistory();
   var filter = new Filter();
 
-
-  //const [assignee, setAssignee] = useState([]);
   const showAssignee = async () => {
     const friendNames = await getFriendNames();
     setFriends(friendNames);
     const options = friendNames.map((friend, i) => <option key={i} value={friend.fullName}/>);
     setSuggestions(options);
   }
+
+  useEffect(() => {
+    showAssignee();
+  }, []);
 
   useEffect(() => {
     showAssignee();
