@@ -73,6 +73,14 @@ module.exports = (app) => {
             console.log(err);
           }
         );
+        User.findByIdAndUpdate(
+          assignee,
+          { $push: { myDebts: favour._id } },
+          { safe: true, new: true, upsert: true },
+          function (err) {
+            console.log(err);
+          }
+        );
         return res.send({
           success: true,
           message: "Favour created!",
@@ -117,12 +125,10 @@ module.exports = (app) => {
       });
   });
 
-  app.get("/api/getFriends", (req: any, res: any) => {
-    console.log("hey");
-    User.findById(req.session.passport.user, "friends")
-      .exec(function (err, result) {
+  app.get("/api/getFriendNames", (req: any, res: any) => {
+    User.findById(req.session.passport.user).populate("friends", 'fullName').exec(function (err, result) {
         if (err) return res.send(err);
-        res.send(result);
-      });
+        res.send(result.friends);
+      })
   });
 };

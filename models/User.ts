@@ -62,6 +62,9 @@ const userSchema = new Schema(
     //favours the user has made
     myFavours: [{ type: Schema.Types.ObjectId, ref: 'favours' }],
 
+    //favours the user owes
+    myDebts: [{ type: Schema.Types.ObjectId, ref: 'favours' }],
+
     //friends the user has added
     friends: [{ type: Schema.Types.ObjectId, ref: 'users' }],
 
