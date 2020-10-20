@@ -5,6 +5,8 @@ import FavoursBackground from '../../assets/FavoursBackground.svg';
 import RequestPlus from '../../assets/RequestPlus.svg';
 import NavBar from '../common/Navbar/Navbar';
 import './Favours.css';
+
+
 const Favours = () => {
   return (
     <div className='favours'>
