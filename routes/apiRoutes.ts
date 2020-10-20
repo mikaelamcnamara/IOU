@@ -19,7 +19,6 @@ module.exports = (app) => {
   app.put('/api/current_user', (req: any, res: any) => {
     User.findByIdAndUpdate(req.session.passport.user, { email: req.body.email, fullName: req.body.fullName }, { upsert: true }, function (err) {
       if (err) {
-        console.log("Error");
         res.send(err)
       }
       else {
@@ -77,14 +76,20 @@ module.exports = (app) => {
   });
 
   app.post("/api/addFriend", (req: any, res: any) => {
-    const friendId = req.friend;
+    const friendId = req.body.friend;
     User.findByIdAndUpdate(
       req.session.passport.user,
       { $push: { friends: friendId } },
       { safe: true, upsert: true, new: true },
-      function (err, model) {
-        if (err) return res.send("Added friend!");
-        res.send(err);
+      function (err) {
+        if (err) return res.send({
+          success: false,
+          message: 'Server error'
+        });
+        res.send({
+          success: true,
+          message: "Added friend!"
+        });
       }
     );
   });
@@ -96,8 +101,8 @@ module.exports = (app) => {
       { $pull: { friends: friendId } },
       { safe: true, upsert: true, new: true },
       function (err, model) {
-        if (err) return res.send("Added friend!");
-        res.send(err);
+        if (err) return res.send(err);
+        res.send("Added friend!");
       }
     );
   });

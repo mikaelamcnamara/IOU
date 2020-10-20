@@ -21,7 +21,7 @@ const Account = () => {
 
   const getUserDetails = async () => {
     const result = await getCurrentUser();
-    setName(result.fullname);
+    setName(result.fullName);
     setAvatar(result.avatar);
     setExperiencePoints(result.experiencePoints);
     setNumCompletedFavours(result.completedFavours.length);

@@ -8,8 +8,7 @@ import SkeletonCard from '../common/SkeletonLoad/Skeleton';
 import ConfettiGenerator from 'confetti-js';
 
 
-import { getAllUsers } from '../../APIFetchers';
-import { addAFriend } from '../../APIFetchers';
+import { getAllUsers, addAFriend } from '../../APIFetchers';
 
 
 const FriendsList = (props) => {
@@ -27,10 +26,8 @@ const FriendsList = (props) => {
     let users = await getAllUsers();
  
     users = users.map((user) => {
-      const key = user._id;
       return <div key={user._id}>
-      <FriendCard  avatar={user.avatar} name={user.fullName} xp={user.experiencePoints} id={user._id}/>
-      <button className='do-favour-btn' value={setFriendID(user._id)} onClick={() => addFriends(key)} >+ Add Friend</button>
+        <FriendCard avatar={user.avatar} name={user.fullName} xp={user.experiencePoints} id={user._id} addFriend={addFriends}/>
       </div>
      });
     setFriendsList(users);
@@ -38,9 +35,8 @@ const FriendsList = (props) => {
   }
 
   const addFriends = async (key) => {
-    console.log(key)
     let addFriend = await addAFriend(key);
-
+    console.log(addFriend);
   }
 
  

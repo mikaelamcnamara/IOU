@@ -8,11 +8,11 @@ interface IProps {
   avatar: number;
   name: String;
   xp: number;
-  _id: number;
-  key: number;
+  id: number;
+  addFriend: (id: number) => void;
 }
 
-const Friend = ({avatar, name, xp, _id, key} : IProps) => {
+const Friend = ({avatar, name, xp, id, addFriend} : IProps) => {
 
   return (
     <>
@@ -23,7 +23,7 @@ const Friend = ({avatar, name, xp, _id, key} : IProps) => {
         <div className='right-details'>
           <h4 className='leader-title-txt'>{name}</h4>
           <p className='leader-points-text'>{`${xp}XP`}</p>
-          {/* <button className='do-favour-btn'>+ Add Friend</button> */}
+          <button className='do-favour-btn' onClick={() => addFriend(id)} >+ Add Friend</button>
         </div>
        
       </div>
