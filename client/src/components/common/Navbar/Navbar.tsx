@@ -87,6 +87,15 @@ const Navbar = () => {
                 <p className="leaderboard-txt">Your Favours</p>
               </Link>
               <Link
+                to="/FriendsList"
+                style={{
+                  textDecoration: "none",
+                  display: loggedIn ? "inline-block" : "none",
+                }}
+              >
+                <p className="leaderboard-txt">Friends</p>
+              </Link>
+              <Link
                 to="/Account"
                 style={{
                   textDecoration: "none",
@@ -95,6 +104,7 @@ const Navbar = () => {
               >
                 <p className="leaderboard-txt">Profile</p>
               </Link>
+             
               <Link
                 to="/"
                 style={{
