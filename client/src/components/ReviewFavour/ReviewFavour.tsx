@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import NavBar from "../common/Navbar/Navbar";
-
+import Filter from "bad-words";
 import "../../App.css";
 import "./ReviewFavour.css";
 
 const ReviewFavour = () => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  var filter = new Filter();
   return (
     <div className="ReviewFavour">
       <NavBar />
@@ -43,7 +46,9 @@ const ReviewFavour = () => {
             <label>
               Description
               <br></br>
-              <input type="text" />
+              <input type="text"
+                value={description}
+                onChange={(e) => setDescription(filter.clean(e.target.value))} />
             </label>
 
             <br></br>

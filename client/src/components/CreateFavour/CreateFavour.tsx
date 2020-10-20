@@ -3,7 +3,7 @@ import NavBar from "../common/Navbar/Navbar";
 import { createFavour } from '../../APIFetchers';
 import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2'
-
+import Filter from "bad-words";
 import "../../App.css";
 import "./CreateFavour.css";
 
@@ -15,6 +15,7 @@ const CreateFavour = () => {
   const [points, setPoints] = useState(0);
   const [date, setDate] = useState('');
   const history = useHistory();
+  var filter = new Filter();
 
   const submit = async (event) => {
     event.preventDefault();
@@ -52,7 +53,7 @@ const CreateFavour = () => {
               <br></br>
               <input
                 value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={(e) => setTitle(filter.clean(e.target.value))}
                 placeholder="Create a name for this favour"
                 type="text"
               />
@@ -66,7 +67,7 @@ const CreateFavour = () => {
               <br></br>
               <input
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => setDescription(filter.clean(e.target.value))}
                 placeholder="Describe the favour"
                 type="text"
               />
