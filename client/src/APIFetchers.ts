@@ -96,6 +96,17 @@ const getAllUsers = async () => {
   }
 };
 
+const getAllFavours = async () => {
+  try {
+    const resp = await fetch("/api/allFavours");
+    const result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+}
+
 
 const logout = async () => {
   const requestOptions = {
@@ -213,6 +224,7 @@ export {
   update,
   addAFriend,
   removeFriend,
+  getAllFavours,
   leaderboard,
   createFavour,
 };

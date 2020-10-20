@@ -117,11 +117,18 @@ module.exports = (app) => {
       });
   });
 
+  app.get('/api/allFavours', (req: any, res: any) => {
+    Favour.find({}, function (err, favours) {
+      if (err) return res.send(err);
+      res.send(favours);
+    })
+  })
+
   app.get('/api/allUsers', (req: any, res: any) => {
-    User.find({}, function(err, users) {
+    User.find({}, function (err, users) {
       if (err) return res.send(err);
       res.send(users);
-   });
+    });
   });
 
 };

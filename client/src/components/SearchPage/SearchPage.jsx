@@ -6,13 +6,17 @@ import Pagination from '../common/Pagination/Pagination';
 import queryString from 'query-string';
 import Cards from '../common/Cards/Cards';
 import Lottie from 'react-lottie';
-import favoursList from '../common/dummyData.json';
+// import favoursList from '../common/dummyData.json';
 import searchAnimation from '../../assets/Searching.json';
+
+
+import { getAllFavours } from '../../APIFetchers';
 
 const SearchPage = props => {
   // Configuring all the states and hooks
   const searchValue = queryString.extract(props.location.search);
   const [filteredFavours, setFilteredFavours] = useState([]);
+  const [favoursList, setFavoursList] = useState([]);
   const [favours, setFavours] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
@@ -27,12 +31,18 @@ const SearchPage = props => {
     },
   };
 
+  const populateFavoursList = async () => {
+    let favours = await getAllFavours();
+    setFavoursList(favours);
+  }
+
 
   // The search functionality which receives a searchValue prop from the navbar input and performs function
   useEffect(() => {
+    populateFavoursList();
     setFilteredFavours(
       favoursList.filter((favours) =>
-        favours.name.toLowerCase().includes(searchValue.toLowerCase())
+        favours.title.toLowerCase().includes(searchValue.toLowerCase())
       )
     );
   }, [searchValue, favours]);
