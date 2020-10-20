@@ -16,9 +16,7 @@ const FriendsList = (props) => {
 
   const [loading, setLoading] = useState(false);
   const [search, setSearchFriend] = useState('');
-  const [favours, setFavours] = useState([]);
   const [friendsList, setFriendsList] = useState([]);
-  const [friendID, setFriendID] = useState('');
   const [filteredFriends, setFilteredFriends] = useState([]);
 
   const populateFriendsList = async () => {
@@ -28,9 +26,9 @@ const FriendsList = (props) => {
  
     users = users.map((user) => {
       const key = user._id;
-      return <div key={user._id}>
+      return <div>
       <FriendCard  avatar={user.avatar} name={user.fullName} xp={user.experiencePoints} id={user._id}/>
-      <button className='do-favour-btn' value={setFriendID(user._id)} onClick={() => addFriends(key)} >+ Add Friend</button>
+      <button className='do-favour-btn' onClick={() => addFriends(key)} >+ Add Friend</button>
       </div>
      });
     setFriendsList(users);
