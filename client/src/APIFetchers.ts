@@ -232,6 +232,22 @@ const getFriendNames = async () => {
   }
 };
 
+const getAvatar = async () => {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+
+  try {
+    let resp = await fetch("/api/getAvatar", requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
 export {
   login,
   register,
@@ -245,4 +261,5 @@ export {
   leaderboard,
   createFavour,
   getFriendNames,
+  getAvatar,
 };

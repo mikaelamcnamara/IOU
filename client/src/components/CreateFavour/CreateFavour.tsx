@@ -11,22 +11,23 @@ import "./CreateFavour.css";
 const CreateFavour = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  //const [assignee, setAssignee] = useState('');
   const [category, setCategory] = useState("");
   const [points, setPoints] = useState(0);
   const [date, setDate] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const [assignee, setAssignee] = useState('');
-  const [friends, setFriends] = useState([{fullName: "", _id: ""}]);
+  const [assignee, setAssignee] = useState("");
+  const [friends, setFriends] = useState([{ fullName: "", _id: "" }]);
   const history = useHistory();
   var filter = new Filter();
 
   const showAssignee = async () => {
     const friendNames = await getFriendNames();
     setFriends(friendNames);
-    const options = friendNames.map((friend, i) => <option key={i} value={friend.fullName}/>);
+    const options = friendNames.map((friend, i) => (
+      <option key={i} value={friend.fullName} />
+    ));
     setSuggestions(options);
-  }
+  };
 
   useEffect(() => {
     showAssignee();
@@ -38,7 +39,7 @@ const CreateFavour = () => {
 
   const submit = async (event) => {
     event.preventDefault();
-    const found = friends.find(i => i.fullName == assignee);
+    const found = friends.find((i) => i.fullName == assignee);
     const assignee_id = found ? found._id : "";
 
     const result = await createFavour(
@@ -116,10 +117,15 @@ const CreateFavour = () => {
             <br></br>
             <label>Assignee</label>
             <br></br>
-            <input list="assignee-favours" value={assignee} required onChange={(e) => setAssignee(e.target.value)}/>
-            <datalist id="assignee-favours">
-              {suggestions}
-            </datalist>
+            <input
+              placeholder="Assign a friend to this favour"
+              type="text"
+              list="assignee-favours"
+              value={assignee}
+              required
+              onChange={(e) => setAssignee(e.target.value)}
+            />
+            <datalist id="assignee-favours">{suggestions}</datalist>
 
             <br></br>
 
@@ -147,7 +153,6 @@ const CreateFavour = () => {
               onChange={(e) => setPoints(parseInt(e.target.value))}
               placeholder="Points to earn"
               type="number"
-              id=""
               min="1"
               max="250"
               required
