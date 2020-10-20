@@ -9,15 +9,17 @@ interface IProps {
   avatar: number;
   name: String;
   xp: number;
+  place: number,
 }
 
 
-const LeaderCard = ({avatar, name, xp} : IProps) => {
+const LeaderCard = ({avatar, name, xp, place} : IProps) => {
+  const colors = ['gold', 'silver', 'brown'];
 
   return (
     <>
       <div className='leader-card'>
-      <img className='rank' src={rankone}></img>
+        <div className="rank" style={{backgroundColor: colors[place]}}><p>{place+1}</p></div>
         <div className='leader-card-square-bg' style={{backgroundColor: Avatars[avatar].color}}>
           <img className='avatar' src={Avatars[avatar].avatar} alt='avatar' />
         </div>

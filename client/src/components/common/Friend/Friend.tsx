@@ -1,44 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Avatars from '../../common/Avatars/Avatars';
 import './Friend.css';
-
-
 
 interface IProps {
   avatar: number;
   name: String;
   xp: number;
-  id: number;
-  addFriend: (id: number) => void;
+  id: string;
+  addFriend: (id: string) => void;
+  removeFriend: (id: string) => void;
+  isFriend: Boolean
 }
 
-const Friend = ({avatar, name, xp, id, addFriend} : IProps) => {
-  const [active, setActive] = useState(false);
-
-  if (active === true) {
-
-  }
-
-
-  const onclick = () => {
-    addFriend(id);
-    setActive(true);
-    console.log(active);
-  }
-
+const Friend = ({avatar, name, xp, id, addFriend, removeFriend, isFriend} : IProps) => {
+  const method = isFriend ? removeFriend : addFriend;
   return (
     <>
-      <div className='friend-card'>
+      {id !== localStorage.getItem('user') && <div className='friend-card'>
         <div className='friend-card-square-bg' style={{backgroundColor: Avatars[avatar].color}}>
           <img className='avatar' src={Avatars[avatar].avatar} alt='avatar' />
         </div>
         <div className='right-details'>
           <h4 className='friend-title-txt'>{name}</h4>
           <p className='friend-points-text'>{`${xp}XP`}</p>
-          <button className='do-friend-btn' onClick={() => onclick()}  >+ Add Friend</button>
+          <button className='do-friend-btn' style={{backgroundColor: isFriend ? '#ff6464' : '#01C48A'}}onClick={() => method(id)} >{isFriend ? "Remove Friend" : "+ Add Friend"}</button>
         </div>
        
-      </div>
+      </div>}
     </>
   );
 };

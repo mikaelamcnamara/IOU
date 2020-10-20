@@ -1,10 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import NavBar from "../common/Navbar/Navbar";
+import { getAFavour } from '../../APIFetchers';
 
 import "../../App.css";
 import "./FulfillFavour.css";
 
+type Favour = {
+  title: string,
+  creator: {
+    fullName: string,
+    _id: string,
+    avatar: number,
+  },
+  description: string,
+}
+
 const FulfillFavour = () => {
+  const { id } = useParams();
+  const [submission, setSubmission] = useState('');
+  const [image, setImage] = useState('');
+  const [favour, setFavour] = useState<Favour>({
+    title: '',
+    creator: {
+      fullName: '',
+      _id: '',
+      avatar: 0,
+    },
+    description: '',
+  })
+  console.log(image);
+  const getFavourDetails = async () => {
+    const fav = await getAFavour(id);
+    console.log(fav);
+    setFavour(fav);
+  }
+
+  useEffect(() => {
+    getFavourDetails();
+  },[])
+
   return (
     <div className="FulfillFavour">
       <NavBar />
@@ -16,7 +51,7 @@ const FulfillFavour = () => {
         <br></br>
         <br></br>
         <br></br>
-        <h1>Fulfill a Favour</h1>
+        <h1>Fulfill {favour.creator.fullName}'s Favour</h1>
       </div>
 
       <br></br>
@@ -25,24 +60,16 @@ const FulfillFavour = () => {
         <div className="greybox">
           <form>
             <label>
-              Title
-              <br></br>
-              <select>
-                <option value="" disabled selected hidden>
-                  Choose one of your accepted favours
-                </option>
-                <option value="option1">option1</option>
-                <option value="option2">option2</option>
-              </select>
+              Title of Favour: <span style={{fontWeight: 'normal'}}>{favour.title}</span>
             </label>
 
             <br></br>
 
             <br></br>
             <label>
-              Description
+              Submission
               <br></br>
-              <input type="text" />
+              <input type="text" placeholder="Write about your submission here" value={submission} onChange={(e) => setSubmission(e.target.value)}/>
             </label>
 
             <br></br>
@@ -51,7 +78,7 @@ const FulfillFavour = () => {
             <label>
               Attach Image
               <br></br>
-              <input type="file" />
+              <input type="file" accept="image/png, image/jpeg" onChange={(e) => setImage(e.target.value)}/>
             </label>
 
             <br></br>

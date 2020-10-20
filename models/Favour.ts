@@ -22,6 +22,11 @@ const favourSchema = new Schema(
       default: '',
     },
 
+    creator: {
+      type: Schema.Types.ObjectId,
+      ref: 'users',
+    },
+    
     assignee: {
       type: Schema.Types.ObjectId,
       ref: 'users',
@@ -36,8 +41,8 @@ const favourSchema = new Schema(
     points: {
       type: Number,
       required: true,
-      default: 0,
-      minlength: 0,
+      default: 1,
+      minlength: 1,
       maxlength: 250,
     },
 

@@ -7,10 +7,20 @@ import NavBar from '../common/Navbar/Navbar';
 import AvatarCard from '../common/AvatarCard/AvatarCard';
 import SkeletonCard from '../common/SkeletonLoad/Skeleton';
 import FavourCard from '../common/FavourCard/FavourCard';
+import { getAllFavours } from '../../APIFetchers';
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
+  const [publicFavours, setPublicFavours] = useState([]);
+
+  const getFavours = async () => {
+    let favs = await getAllFavours();
+    favs = favs.map(favour => <FavourCard key={favour._id} creatorId={favour.creator._id} avatar={favour.creator.avatar} name={favour.creator.fullName} category={favour.category} title={favour.title} description={favour.description} xp={favour.points} id={favour._id}/>)
+    setPublicFavours(favs);
+  }
+
   useEffect(() => {
+    getFavours();
     setLoading(false);
     const timer = setTimeout(() => {
       setLoading(true);
@@ -50,11 +60,7 @@ const Home = () => {
 
         {loading &&
           <div>
-            <FavourCard />
-            <FavourCard />
-            <FavourCard />
-            <FavourCard />
-            <FavourCard />
+            {publicFavours}
           </div>
         }
       </div>

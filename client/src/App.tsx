@@ -73,7 +73,7 @@ const App = () => {
             //atLeave={{ opacity: 0 }}
             //atActive={{ opacity: 1 }}
             //timeout={500}
-            path='/FulfillFavour'
+            path='/FulfillFavour/:id'
             exact
           >
             {localStorage.getItem('user') ? <FulfillFavour /> : <Redirect to="/SignIn" />}
@@ -120,15 +120,17 @@ const App = () => {
             {localStorage.getItem('user') ? <Account /> : <Redirect to="/SignIn" />}
           </Route>
         
-          <AnimatedRoute
-            atEnter={{ opacity: 0 }}
-            atLeave={{ opacity: 0 }}
-            atActive={{ opacity: 1 }}
-            timeout={500}
+          <Route
+            //atEnter={{ opacity: 0 }}
+            //atLeave={{ opacity: 0 }}
+            //atActive={{ opacity: 1 }}
+            //timeout={500}
             path='/FriendsList'
             exact
             component={FriendsList}
-          />
+          >
+            {localStorage.getItem('user') ? <FriendsList /> : <Redirect to="/SignIn" />}
+          </Route>
     
           <Route
             //atEnter={{ opacity: 0 }}

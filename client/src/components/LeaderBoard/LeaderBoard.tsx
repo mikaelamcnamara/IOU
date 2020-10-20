@@ -18,7 +18,7 @@ const LeaderBoard = () => {
   const populateLeaderboard = async () => {
     setLoading(true);
     let leaders = await leaderboard();
-    leaders = leaders.map(leader => <LeaderCard key={leader.fullName} avatar={leader.avatar} name={leader.fullName} xp={leader.experiencePoints} />);
+    leaders = leaders.map((leader, i) => <LeaderCard key={leader.fullName} avatar={leader.avatar} name={leader.fullName} xp={leader.experiencePoints} place={i}/>);
     setTopUsers(leaders);
     console.log(topUsers);
     setLoading(false);

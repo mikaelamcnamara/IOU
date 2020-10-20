@@ -1,18 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { logout } from "../../../APIFetchers";
+import { logout, getAvatar } from "../../../APIFetchers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Heart from "../../../assets/heart.svg";
 import "./Navbar.css";
-
-
+import Avatars from "../../common/Avatars/Avatars";
 
 const Navbar = () => {
   const history = useHistory();
   const [search, setSearch] = useState("");
   const [loggedIn] = useState(localStorage.getItem("user") ? true : false);
+  const [avatar, setAvatar] = useState(0);
 
+  const getProfilePic = async () => {
+    const result = await getAvatar();
+    setAvatar(result.avatar);
+  };
+
+  useEffect(() => {
+    localStorage.getItem("user") && getProfilePic();
+  });
 
   const handleLogout = async () => {
     await logout();
@@ -23,18 +31,16 @@ const Navbar = () => {
   const handleSearch = (e) => {
     const data = e.target.value;
     setSearch(data);
-  }
+  };
 
   // Functionality which passses the search term or value from the input field to the SearchPage route
   const handleOnSubmit = (e) => {
     e.preventDefault();
     history.push({
-      pathname: '/SearchPage',
-      search
+      pathname: "/SearchPage",
+      search,
     });
   };
-
-
 
   return (
     <>
@@ -61,17 +67,15 @@ const Navbar = () => {
                   value={search}
                 />
                 {/* <Link style={{ textDecoration: 'none' }} to='/SearchPage'> */}
-                <button className='search-btn ' type="submit">
+                <button className="search-btn " type="submit">
                   <FontAwesomeIcon
-                    className='search-icon'
+                    className="search-icon"
                     icon={faSearch}
-                    color='#8A2980'
-
+                    color="#8A2980"
                   />
                 </button>
                 {/* </Link> */}
               </form>
-
             </div>
             <div className="nav-right">
               <Link style={{ textDecoration: "none" }} to="/Leaderboard">
@@ -104,7 +108,7 @@ const Navbar = () => {
               >
                 <p className="leaderboard-txt">Profile</p>
               </Link>
-             
+
               <Link
                 to="/"
                 style={{
@@ -127,7 +131,8 @@ const Navbar = () => {
             </div>
             <div>
               <img
-                src="https://i.pinimg.com/originals/1c/54/f7/1c54f7b06d7723c21afc5035bf88a5ef.png"
+                src={Avatars[avatar].avatar}
+                alt="Account avatar"
                 className="profile-pic"
                 style={{
                   textDecoration: "none",

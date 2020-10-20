@@ -19,7 +19,6 @@ const login = async (email: String, password: String) => {
   }
 };
 
-
 const update = async (email: String, fullName: String) => {
   const body = {
     email: email,
@@ -40,8 +39,6 @@ const update = async (email: String, fullName: String) => {
   } finally {
   }
 };
-
-
 
 const register = async (
   fullName: String,
@@ -182,7 +179,7 @@ const removeFriend = async (friend: String) => {
   const body = {
     friend: friend,
   };
-
+  
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -215,6 +212,111 @@ const leaderboard = async () => {
   }
 };
 
+const getFriendNames = async () => {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+
+  try {
+    let resp = await fetch("/api/getFriendNames", requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
+const removeFavour = async (favourId: String) => {
+  const body = {
+    favourId: favourId,
+  };
+
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  };
+
+  try {
+    let resp = await fetch("/api/removeFavour", requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+}
+
+const getMyFavours = async () => {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+
+  try {
+    let resp = await fetch("/api/getMyFavours", requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
+const getAvatar = async () => {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+
+  try {
+    let resp = await fetch("/api/getAvatar", requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
+const getMyDebts = async () => {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+
+  try {
+    let resp = await fetch("/api/getMyDebts", requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
+const getAFavour = async (id: string) => {
+  const body = {
+    id: id
+  }
+  const requestOptions = {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body)
+  };
+
+  try {
+    let resp = await fetch("/api/favour", requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
 export {
   login,
   register,
@@ -227,4 +329,10 @@ export {
   getAllFavours,
   leaderboard,
   createFavour,
+  getFriendNames,
+  getAvatar,
+  removeFavour,
+  getMyFavours,
+  getMyDebts,
+  getAFavour,
 };

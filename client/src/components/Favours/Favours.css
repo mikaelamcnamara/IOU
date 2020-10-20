@@ -57,3 +57,10 @@
   padding-right: 50px;
   height: 60px;
 }
+
+.favours-placeholder-text {
+  font-size: 30px;
+  color: #3b3b3b;
+  font-weight: bold;
+  padding: 50px;
+}
