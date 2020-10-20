@@ -53,6 +53,7 @@ module.exports = (app) => {
     const favour = new Favour();
     favour.title = title;
     favour.description = description;
+    favour.creator = req.session.passport.user;
     favour.assignee = assignee;
     favour.category = category;
     favour.points = points;
@@ -130,12 +131,12 @@ module.exports = (app) => {
         res.send(result);
       });
   });
-
+  //Integrate pagination for this back-end call
   app.get('/api/allFavours', (req: any, res: any) => {
-    Favour.find({}, function (err, favours) {
+    Favour.find({}).populate("creator", "_id avatar fullName").exec(function (err, favours) {
       if (err) return res.send(err);
       res.send(favours);
-    })
+    });
   })
 
   app.get('/api/allUsers', (req: any, res: any) => {
@@ -151,4 +152,43 @@ module.exports = (app) => {
         res.send(result.friends);
       })
   });
+
+  app.post("/api/removeFavour", async (req: any, res: any) => {
+    User.findByIdAndUpdate(
+      req.session.passport.user,
+      { $pull: { myFavours: req.body.favourId } },
+      { safe: true, upsert: true, new: true },
+      function (err) {
+        if (err) return res.send({
+          success: false,
+          message: err,
+        });
+        res.send({
+          success: true,
+          message: "Remove successful!",
+        });
+      }
+    );
+
+    await Favour.findByIdAndDelete(req.body.favourId, function (err, favour) {
+      if (err) console.log(err);
+      User.findByIdAndUpdate(favour.assignee, { $pull: { myDebts: req.body.favourId } }, { safe: true, upsert: true, new: true }, function (err) {
+        if (err) console.log(err);
+      })
+    });
+  });
+
+  app.get('/api/getMyFavours', (req: any, res: any) => {
+    User.findById(req.session.passport.user, "myFavours fullName avatar").populate("myFavours").exec(function (err, favours) {
+      if (err) return res.send(err);
+      else res.send(favours);
+    })
+  });
+
+  app.get('/api/getMyDebts', (req: any, res: any) => {
+    User.findById(req.session.passport.user, "myDebts fullName").populate({path: "myDebts", populate: {path: "creator", model: 'users', select: {'_id': 1, 'avatar': 1, 'fullName': 1}}}).exec(function (err, favours) {
+      if (err) return res.send(err);
+      res.send(favours)
+    })
+  })
 };
