@@ -60,7 +60,7 @@ const SearchPage = props => {
   const renderCards = () => {
     return (<div className="search-bg">
       {currentPosts.map((favours, index) => {
-        return <AvatarCard key={index} {...favours} />
+        return <AvatarCard key={index} title={favours.title} description={favours.description} points={favours.points} category={favours.category} {...favours} />
       })}
       <Pagination postsPerPage={postsPerPage} totalAvatarCards={filteredFavours.length} paginate={paginate} />
     </div>)
