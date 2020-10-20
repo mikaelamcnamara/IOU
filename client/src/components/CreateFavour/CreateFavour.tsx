@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../common/Navbar/Navbar";
-import { createFavour, getFriends } from '../../APIFetchers';
-import { useHistory } from 'react-router-dom';
-import Swal from 'sweetalert2'
+import { createFavour, getFriendNames } from "../../APIFetchers";
+import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 import Filter from "bad-words";
+
 import "../../App.css";
 import "./CreateFavour.css";
 
@@ -16,31 +17,33 @@ const CreateFavour = () => {
   const [date, setDate] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [assignee, setAssignee] = useState('');
+  const [friends, setFriends] = useState([{fullName: "", _id: ""}]);
   const history = useHistory();
   var filter = new Filter();
 
 
   //const [assignee, setAssignee] = useState([]);
-
   const showAssignee = async () => {
-    let friends = await getFriends();
-    console.log(friends);
-    friends = friends.map(friend => <option key={friend} value={friend}/>);
-    setSuggestions(friends);
+    const friendNames = await getFriendNames();
+    setFriends(friendNames);
+    const options = friendNames.map((friend, i) => <option key={i} value={friend.fullName}/>);
+    setSuggestions(options);
   }
-  console.log(assignee);
+
   useEffect(() => {
     showAssignee();
   }, []);
 
   const submit = async (event) => {
     event.preventDefault();
+    const found = friends.find(i => i.fullName == assignee);
+    const assignee_id = found ? found._id : "";
 
     const result = await createFavour(
       title,
       description,
-      assignee,
-      category,
+      assignee_id,
+      category == "" ? "Other" : category,
       points,
       date
     );
@@ -87,6 +90,7 @@ const CreateFavour = () => {
                 onChange={(e) => setTitle(filter.clean(e.target.value))}
                 placeholder="Create a name for this favour"
                 type="text"
+                required
               />
             </label>
 
@@ -101,6 +105,7 @@ const CreateFavour = () => {
                 onChange={(e) => setDescription(filter.clean(e.target.value))}
                 placeholder="Describe the favour"
                 type="text"
+                required
               />
             </label>
 
@@ -109,7 +114,7 @@ const CreateFavour = () => {
             <br></br>
             <label>Assignee</label>
             <br></br>
-            <input list="assignee-favours" value={assignee} onChange={(e) => setAssignee(e.target.value)}/>
+            <input list="assignee-favours" value={assignee} required onChange={(e) => setAssignee(e.target.value)}/>
             <datalist id="assignee-favours">
               {suggestions}
             </datalist>
@@ -119,12 +124,15 @@ const CreateFavour = () => {
             <br></br>
             <label>Category</label>
             <br></br>
-            <select>
+            <select onChange={(e) => setCategory(e.target.value)}>
               <option value="" disabled selected hidden>
                 Choose a category
               </option>
-              <option value="option1">option1</option>
-              <option value="option2">option2</option>
+              <option value="Food">Food</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Gaming">Gaming</option>
+              <option value="Social">Social</option>
+              <option value="Other">Other</option>
             </select>
 
             <br></br>
@@ -139,7 +147,8 @@ const CreateFavour = () => {
               type="number"
               id=""
               min="1"
-              max=""
+              max="250"
+              required
             ></input>
 
             <br></br>
@@ -152,6 +161,7 @@ const CreateFavour = () => {
               onChange={(e) => setDate(e.target.value)}
               type="date"
               id=""
+              required
             ></input>
 
             <br></br>

@@ -192,6 +192,7 @@ const removeFriend = async (friend: String) => {
   try {
     let resp = await fetch("/api/removeFriend", requestOptions);
     let result = await resp.json();
+    console.log(result);
     return result;
   } catch (e) {
     return e;
@@ -215,16 +216,15 @@ const leaderboard = async () => {
   }
 };
 
-const getFriends = async () => {
+const getFriendNames = async () => {
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   };
 
   try {
-    let resp = await fetch("/api/getFriends", requestOptions);
+    let resp = await fetch("/api/getFriendNames", requestOptions);
     let result = await resp.json();
-    console.log(result);
     return result;
   } catch (e) {
     return e;
@@ -244,5 +244,5 @@ export {
   getAllFavours,
   leaderboard,
   createFavour,
-  getFriends,
+  getFriendNames,
 };
