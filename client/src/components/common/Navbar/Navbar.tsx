@@ -19,7 +19,7 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    localStorage.getItem('user') && getProfilePic();
+    getProfilePic();
   });
 
   const handleLogout = async () => {
@@ -130,17 +130,15 @@ const Navbar = () => {
               </Link>
             </div>
             <div>
-              <button id="close-image">
-                <img
-                  src={Avatars[avatar].avatar}
-                  alt="Account avatar"
-                  className="profile-pic"
-                  style={{
-                    textDecoration: "none",
-                    display: loggedIn ? "inline-block" : "none",
-                  }}
-                ></img>
-              </button>
+              <img
+                src={Avatars[avatar].avatar}
+                alt="Account avatar"
+                className="profile-pic"
+                style={{
+                  textDecoration: "none",
+                  display: loggedIn ? "inline-block" : "none",
+                }}
+              ></img>
             </div>
           </div>
         </header>
