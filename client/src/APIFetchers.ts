@@ -192,6 +192,23 @@ const leaderboard = async () => {
   }
 };
 
+const getFriends = async () => {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+
+  try {
+    let resp = await fetch("/api/getFriends", requestOptions);
+    let result = await resp.json();
+    console.log(result);
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
 export {
   login,
   register,
@@ -202,4 +219,5 @@ export {
   removeFriend,
   leaderboard,
   createFavour,
+  getFriends,
 };
