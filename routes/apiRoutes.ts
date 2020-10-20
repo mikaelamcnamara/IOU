@@ -151,4 +151,12 @@ module.exports = (app) => {
         res.send(result.friends);
       })
   });
+
+  app.get("/api/getAvatar", (req: any, res: any) => {
+    User.findById(req.session.passport.user, "avatar")
+      .exec(function (err, result) {
+        if (err) return res.send(err);
+        res.send(result);
+      });
+  });
 };
