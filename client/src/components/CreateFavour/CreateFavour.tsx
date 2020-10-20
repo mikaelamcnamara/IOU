@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../common/Navbar/Navbar";
-import { createFavour } from '../../APIFetchers';
+import { createFavour, getFriends } from '../../APIFetchers';
 import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import Filter from "bad-words";
@@ -8,25 +8,56 @@ import "../../App.css";
 import "./CreateFavour.css";
 
 const CreateFavour = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [assignee, setAssignee] = useState(localStorage.getItem('user') || 'person1');
-  const [category, setCategory] = useState('food');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  //const [assignee, setAssignee] = useState('');
+  const [category, setCategory] = useState("");
   const [points, setPoints] = useState(0);
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [assignee, setAssignee] = useState('');
   const history = useHistory();
   var filter = new Filter();
+
+
+  //const [assignee, setAssignee] = useState([]);
+
+  const showAssignee = async () => {
+    let friends = await getFriends();
+    console.log(friends);
+    friends = friends.map(friend => <option key={friend} value={friend}/>);
+    setSuggestions(friends);
+  }
+  console.log(assignee);
+  useEffect(() => {
+    showAssignee();
+  }, []);
 
   const submit = async (event) => {
     event.preventDefault();
 
-    const result = await createFavour(title, description, assignee, category, points, date);
+    const result = await createFavour(
+      title,
+      description,
+      assignee,
+      category,
+      points,
+      date
+    );
     if (result.success) {
-      await Swal.fire("Favour Created!", "You created has been successfully created.", "success");
-      history.push('/Favours');
+      await Swal.fire(
+        "Favour Created!",
+        "You created has been successfully created.",
+        "success"
+      );
+      history.push("/Favours");
       window.location.reload();
-    }
-    else Swal.fire("Error Creating Favour", "Your favour has not been created due to an error.", "error");
+    } else
+      Swal.fire(
+        "Error Creating Favour",
+        "Your favour has not been created due to an error.",
+        "error"
+      );
   };
 
   return (
@@ -78,13 +109,10 @@ const CreateFavour = () => {
             <br></br>
             <label>Assignee</label>
             <br></br>
-            <select>
-              <option value="" disabled selected hidden>
-                Assign a friend to this favour
-              </option>
-              <option value="person1">person1</option>
-              <option value="person2">person2</option>
-            </select>
+            <input list="assignee-favours" value={assignee} onChange={(e) => setAssignee(e.target.value)}/>
+            <datalist id="assignee-favours">
+              {suggestions}
+            </datalist>
 
             <br></br>
 
