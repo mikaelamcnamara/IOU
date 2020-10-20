@@ -15,9 +15,7 @@ const FriendsList = (props) => {
 
   const [loading, setLoading] = useState(false);
   const [search, setSearchFriend] = useState('');
-  const [favours, setFavours] = useState([]);
   const [friendsList, setFriendsList] = useState([]);
-  const [friendID, setFriendID] = useState('');
   const [filteredFriends, setFilteredFriends] = useState([]);
 
   const populateFriendsList = async () => {
