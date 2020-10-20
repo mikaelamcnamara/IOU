@@ -1,4 +1,4 @@
-export { }; //trick TS into accepting below imports
+export {}; //trick TS into accepting below imports
 const mongoose = require("mongoose");
 const Favour = mongoose.model("favours");
 const User = mongoose.model("users");
@@ -9,28 +9,34 @@ module.exports = (app) => {
     res.send(req.session.passport.user);
   });
 
-  app.get('/api/current_user', (req: any, res: any) => {
-    User.findById(req.session.passport.user).select('avatar email fullName experiencePoints completedFavours').exec(function (err, user) {
-      if (err) return res.send(err);
-      res.send(user);
-    });
+  app.get("/api/current_user", (req: any, res: any) => {
+    User.findById(req.session.passport.user)
+      .select("avatar email fullName experiencePoints completedFavours")
+      .exec(function (err, user) {
+        if (err) return res.send(err);
+        res.send(user);
+      });
   });
 
-  app.put('/api/current_user', (req: any, res: any) => {
-    User.findByIdAndUpdate(req.session.passport.user, { email: req.body.email, fullName: req.body.fullName }, { upsert: true }, function (err) {
-      if (err) {
-        res.send(err)
-      }
-      else {
-        console.log(req.body.fullName);
-        return res.send({
-          success: true,
-          message: 'Successfully updated!',
+  app.put("/api/current_user", (req: any, res: any) => {
+    User.findByIdAndUpdate(
+      req.session.passport.user,
+      { email: req.body.email, fullName: req.body.fullName },
+      { upsert: true },
+      function (err) {
+        if (err) {
+          console.log("Error");
+          res.send(err);
+        } else {
+          console.log(req.body.fullName);
+          return res.send({
+            success: true,
+            message: "Successfully updated!",
+          });
         }
-        )
       }
-    })
-  })
+    );
+  });
   app.get("/api/current_user", (req: any, res: any) => {
     res.send(req.session.passport.user);
   });
@@ -62,6 +68,14 @@ module.exports = (app) => {
         User.findByIdAndUpdate(
           req.session.passport.user,
           { $push: { myFavours: favour._id } },
+          { safe: true, new: true, upsert: true },
+          function (err) {
+            console.log(err);
+          }
+        );
+        User.findByIdAndUpdate(
+          assignee,
+          { $push: { myDebts: favour._id } },
           { safe: true, new: true, upsert: true },
           function (err) {
             console.log(err);
@@ -131,5 +145,10 @@ module.exports = (app) => {
     });
   });
 
+  app.get("/api/getFriendNames", (req: any, res: any) => {
+    User.findById(req.session.passport.user).populate("friends", 'fullName').exec(function (err, result) {
+        if (err) return res.send(err);
+        res.send(result.friends);
+      })
+  });
 };
-
