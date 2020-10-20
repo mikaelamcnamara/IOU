@@ -14,6 +14,7 @@ import { getAllUsers, addAFriend } from '../../APIFetchers';
 const FriendsList = (props) => {
 
   const [loading, setLoading] = useState(false);
+  const [added, setAdded] = useState(false);
   const [search, setSearchFriend] = useState('');
   const [friendsList, setFriendsList] = useState([]);
   const [filteredFriends, setFilteredFriends] = useState([]);
@@ -34,6 +35,7 @@ const FriendsList = (props) => {
 
   const addFriends = async (key) => {
     let addFriend = await addAFriend(key);
+    console.log(addFriend);
     window.alert('Friend Added');
   }
 
@@ -46,9 +48,6 @@ const FriendsList = (props) => {
   };
 
 
-  const showAllUsers = () => {
-    alert('show users');
-  };
 
   const showFriends = () => {
     alert('show users');
@@ -82,16 +81,13 @@ const FriendsList = (props) => {
               <input
                 type='text'
                 className='search-input'
-                placeholder='Search for favours....'
+                placeholder='Search for friends....'
                 onChange={(e) => setSearchFriend(e.target.value)}
                 value={search}
               />
             </form>
           </div>
-          <button className='button-all' onClick={showAllUsers} >
-            Add Friends
-          </button>
-          <button className='button-all' onClick={showFriends}>
+          {/* <button className='button-all' onClick={showFriends}>
             Your Friends
           </button>
           <button className='button-all ' onClick={showRequests}>
@@ -100,7 +96,7 @@ const FriendsList = (props) => {
           </button>
           <button className='button-all' onClick={showPendingRequests}>
             Pending Requests
-          </button>
+          </button> */}
           <div className='friend-bg'>
 
         {loading &&

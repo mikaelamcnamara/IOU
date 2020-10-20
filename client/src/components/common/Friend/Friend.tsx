@@ -13,6 +13,18 @@ interface IProps {
 }
 
 const Friend = ({avatar, name, xp, id, addFriend} : IProps) => {
+  const [active, setActive] = useState(false);
+
+  if (active === true) {
+
+  }
+
+
+  const onclick = () => {
+    addFriend(id);
+    setActive(true);
+    console.log(active);
+  }
 
   return (
     <>
@@ -23,7 +35,7 @@ const Friend = ({avatar, name, xp, id, addFriend} : IProps) => {
         <div className='right-details'>
           <h4 className='friend-title-txt'>{name}</h4>
           <p className='friend-points-text'>{`${xp}XP`}</p>
-          <button className='do-friend-btn' onClick={() => addFriend(id)} >+ Add Friend</button>
+          <button className='do-friend-btn' onClick={() => onclick()}  >+ Add Friend</button>
         </div>
        
       </div>
