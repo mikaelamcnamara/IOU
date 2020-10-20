@@ -55,7 +55,7 @@
   display: inline;
   transition-duration: 0.3s;
   font-family: 'Montserrat', sans-serif;
-  background: #fe8e51;
+  background: #fe8e51 !important;
   border-radius: 5px;
   width: 150px;
   border: none;
@@ -127,21 +127,6 @@
   text-align: left;
   margin-left: 20px;
   font-weight: bolder;
-}
-
-.do-favour-btn {
-  display: inline;
-  transition-duration: 0.3s;
-  font-family: 'Montserrat', sans-serif;
-  background: #fe8e51;
-  border-radius: 5px;
-  width: 100px !important;
-  border: none;
-  margin-right: 40px;
-  height: 40px;
-  font-weight: 600;
-  color: white;
-  cursor: pointer;
 }
 
 }

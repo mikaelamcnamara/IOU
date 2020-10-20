@@ -20,7 +20,6 @@ const login = async (email: String, password: String) => {
 };
 
 
-
 const update = async (email: String, fullName: String) => {
   const body = {
     email: email,
@@ -85,6 +84,19 @@ const getCurrentUser = async () => {
   }
 };
 
+const getAllUsers = async () => {
+  try {
+    const resp = await fetch("/api/allUsers");
+    const result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+
+  }
+};
+
+
 const logout = async () => {
   const requestOptions = {
     method: "POST",
@@ -134,7 +146,7 @@ const createFavour = async (
   }
 };
 
-const addFriend = async (friend: String) => {
+const addAFriend = async (friend: String) => {
   const body = {
     friend: friend,
   };
@@ -196,9 +208,10 @@ export {
   login,
   register,
   getCurrentUser,
+  getAllUsers,
   logout,
   update,
-  addFriend,
+  addAFriend,
   removeFriend,
   leaderboard,
   createFavour,

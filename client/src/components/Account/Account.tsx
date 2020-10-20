@@ -21,7 +21,7 @@ const Account = () => {
 
   const getUserDetails = async () => {
     const result = await getCurrentUser();
-    setName(result.fullname);
+    setName(result.fullName);
     setAvatar(result.avatar);
     setExperiencePoints(result.experiencePoints);
     setNumCompletedFavours(result.completedFavours.length);
@@ -68,10 +68,10 @@ const Account = () => {
       </div>
       <h1 className='account-header2'>Recently Added Friends</h1>
       <div className='friend-grid'>
+        {/* <Friend />
         <Friend />
         <Friend />
-        <Friend />
-        <Friend />
+        <Friend /> */}
       </div>
       <div className='account-bg'>
         <img src={AccountBackground} alt='Account background' />

@@ -3,6 +3,7 @@ import Avatars from '../../common/Avatars/Avatars';
 import burgerIcon from '../../../assets/burger-icon.svg';
 import gold from '../../../assets/gold.svg';
 import './LeaderCard.css';
+import rankone from '../../../assets/rankone.svg';
 
 interface IProps {
   avatar: number;
@@ -10,10 +11,13 @@ interface IProps {
   xp: number;
 }
 
+
 const LeaderCard = ({avatar, name, xp} : IProps) => {
+
   return (
     <>
       <div className='leader-card'>
+      <img className='rank' src={rankone}></img>
         <div className='leader-card-square-bg' style={{backgroundColor: Avatars[avatar].color}}>
           <img className='avatar' src={Avatars[avatar].avatar} alt='avatar' />
         </div>

@@ -1,5 +1,5 @@
 .leader-card {
-  width: 700px;
+  width: 65%;
   height: 100px;
   margin: 50px auto;
   border-radius: 10px;
@@ -61,21 +61,7 @@
   font-size: 20px;
 }
 
-.do-favour-btn {
-  float: right;
-  display: inline;
-  transition-duration: 0.3s;
-  font-family: 'Montserrat', sans-serif;
-  background: #fe8e51;
-  border-radius: 5px;
-  width: 150px;
-  border: none;
-  margin-right: 40px;
-  height: 40px;
-  font-weight: 600;
-  color: white;
-  cursor: pointer;
-}
+
 
 .tag {
   color: #4d6bff;
@@ -88,3 +74,29 @@
   height: 25px;
   background-color: #afd2ff;
 }
+
+.leader-content {
+  width: 90%;
+}
+
+.rank {
+  float: left;
+  height: 100%;
+  background-color: #4d6bff;
+}
+
+.do-favour-btn-leader {
+  margin-top: -60px;
+  transition-duration: 0.3s;
+  font-family: 'Montserrat', sans-serif;
+  background: #01C48A !important;
+  border-radius: 5px;
+  width: 150px;
+  border: none;
+  margin-right: 40px;
+  height: 40px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+}
+

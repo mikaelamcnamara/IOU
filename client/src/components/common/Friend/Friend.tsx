@@ -1,20 +1,33 @@
-import React from 'react';
-import ManAvatar from '../../../assets/first-man-avatar.svg';
+import React, { useState, useEffect } from 'react';
+import Avatars from '../../common/Avatars/Avatars';
 import './Friend.css';
 
-const Friend = () => {
+
+
+interface IProps {
+  avatar: number;
+  name: String;
+  xp: number;
+  id: number;
+  addFriend: (id: number) => void;
+}
+
+const Friend = ({avatar, name, xp, id, addFriend} : IProps) => {
+
   return (
-    <div className='friend'>
-      <div>
-        <img src={ManAvatar} alt='avatar' />
-      </div>
-      <div className='friend-desc'>
-        <p>James</p>
-        <div className='view-profile'>
-          <p>View Profile</p>
+    <>
+      <div className='friend-card'>
+        <div className='friend-card-square-bg' style={{backgroundColor: Avatars[avatar].color}}>
+          <img className='avatar' src={Avatars[avatar].avatar} alt='avatar' />
         </div>
+        <div className='right-details'>
+          <h4 className='friend-title-txt'>{name}</h4>
+          <p className='friend-points-text'>{`${xp}XP`}</p>
+          <button className='do-friend-btn' onClick={() => addFriend(id)} >+ Add Friend</button>
+        </div>
+       
       </div>
-    </div>
+    </>
   );
 };
 

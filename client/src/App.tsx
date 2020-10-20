@@ -12,6 +12,7 @@ import ReviewFavour from './components/ReviewFavour/ReviewFavour';
 import PersonalDetails from './components/PersonalDetails/PersonalDetails';
 import Favours from './components/Favours/Favours';
 import Account from './components/Account/Account';
+import FriendsList from './components/FriendsList/FriendsList';
 import SearchPage from './components/SearchPage/SearchPage';
 
 const App = () => {
@@ -114,9 +115,21 @@ const App = () => {
             //timeout={500}
             path='/Account'
             exact
-          >
+            component={Account}
+            >
             {localStorage.getItem('user') ? <Account /> : <Redirect to="/SignIn" />}
           </Route>
+        
+          <AnimatedRoute
+            atEnter={{ opacity: 0 }}
+            atLeave={{ opacity: 0 }}
+            atActive={{ opacity: 1 }}
+            timeout={500}
+            path='/FriendsList'
+            exact
+            component={FriendsList}
+          />
+    
           <Route
             //atEnter={{ opacity: 0 }}
             //atLeave={{ opacity: 0 }}
