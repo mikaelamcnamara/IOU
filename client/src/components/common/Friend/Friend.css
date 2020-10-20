@@ -3,6 +3,17 @@
   grid-template-columns: 135px 250px;
 }
 
+.leader-card {
+  width: 65%;
+  height: 100px;
+  margin: 50px auto;
+  border-radius: 10px;
+  border: 2px solid #dbdbdb;
+  -webkit-box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+  -moz-box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+  box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+}
+
 .friend * {
   align-content: center;
 }
@@ -54,3 +65,20 @@
   margin-top: 7px;
   font-size: 10px;
 }
+
+.do-favour-btn {
+  float: right;
+
+  transition-duration: 0.3s;
+  font-family: 'Montserrat', sans-serif;
+  background: #01C48A !important;
+  border-radius: 5px;
+  width: 150px;
+  border: none;
+  margin-right: 40px;
+  height: 40px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+}
+

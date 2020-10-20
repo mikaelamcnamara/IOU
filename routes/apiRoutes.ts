@@ -16,7 +16,6 @@ module.exports = (app) => {
     });
   });
 
-
   app.put('/api/current_user', (req: any, res: any) => {
     User.findByIdAndUpdate(req.session.passport.user, { email: req.body.email, fullName: req.body.fullName }, { upsert: true }, function (err) {
       if (err) {
@@ -112,5 +111,13 @@ module.exports = (app) => {
         res.send(result);
       });
   });
+
+  app.get('/api/allUsers', (req: any, res: any) => {
+    User.find({}, function(err, users) {
+      if (err) return res.send(err);
+      res.send(users);
+   });
+  });
+
 };
 
