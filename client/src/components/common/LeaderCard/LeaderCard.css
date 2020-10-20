@@ -61,21 +61,7 @@
   font-size: 20px;
 }
 
-.do-favour-btn {
-  float: right;
-  display: inline;
-  transition-duration: 0.3s;
-  font-family: 'Montserrat', sans-serif;
-  background: #fe8e51;
-  border-radius: 5px;
-  width: 150px;
-  border: none;
-  margin-right: 40px;
-  height: 40px;
-  font-weight: 600;
-  color: white;
-  cursor: pointer;
-}
+
 
 .tag {
   color: #4d6bff;
@@ -99,7 +85,7 @@
   background-color: #4d6bff;
 }
 
-.do-favour-btn {
+.do-favour-btn-leader {
   margin-top: -60px;
   transition-duration: 0.3s;
   font-family: 'Montserrat', sans-serif;

@@ -17,20 +17,10 @@
   width: 101%;
 }
 
-.leader-content {
-  text-align: center !important;
-  margin-top: 80px;
-  position: absolute !important;
-  left: 50%;
-  transform: translate(-50%, 0%);
-  z-index: 50;
-}
-
-/* #my-canvas {
-  z-index: -1;
-  float: left;
-  width: 100%;
-} */
+.friend-title {
+    color: #5C5A5A;
+    font-size: 45px;
+} 
 
 .leader-subtitle {
   display: inline-block;

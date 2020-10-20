@@ -34,7 +34,7 @@ const FriendsList = (props) => {
 
   const addFriends = async (key) => {
     let addFriend = await addAFriend(key);
-    console.log(addFriend);
+    window.alert('Friend Added');
   }
 
  
@@ -75,7 +75,7 @@ const FriendsList = (props) => {
         <div className='content'>
           <NavBar />
           <img className='friend-img' src={FriendBG} alt='friend-img'></img>
-          <h1 className='leader-title'>Friends List</h1>
+          <h1 className='friend-title'>Friends List</h1>
           <br></br>
           <div className='nav-middle'>
             <form className='search-form' onSubmit={handleSearch}>
