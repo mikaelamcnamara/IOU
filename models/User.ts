@@ -68,11 +68,6 @@ const userSchema = new Schema(
     //favours the user has completed
     completedFavours: [{ type: Schema.Types.ObjectId, ref: 'favours' }],
 
-    //friends
-    myFriends: [{ type: Schema.Types.ObjectId, ref: 'users' }],
-
-    //friends
-    myFriend: [{ type: Schema.Types.ObjectId, ref: 'users' }],
   },
   {
     timestamps: true, //Adds last modified and user creation time to MongoDB collection

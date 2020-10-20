@@ -146,7 +146,7 @@ const createFavour = async (
   }
 };
 
-const addFriend = async (friend: String) => {
+const addAFriend = async (friend: String) => {
   const body = {
     friend: friend,
   };
@@ -211,7 +211,7 @@ export {
   getAllUsers,
   logout,
   update,
-  addFriend,
+  addAFriend,
   removeFriend,
   leaderboard,
   createFavour,
