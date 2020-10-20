@@ -1,5 +1,6 @@
 import React from 'react';
 import Avatars from '../Avatars/Avatars';
+import {Link} from 'react-router-dom';
 import burgerIcon from '../../../assets/burger-icon.svg';
 import './FavourCard.css';
 
@@ -28,7 +29,7 @@ const FavourCard = ({avatar, name, category, title, description, xp, creatorId, 
               <img src={burgerIcon} alt='' /> {category}
             </span>
           </div>
-          {creatorId !== localStorage.getItem('user') && <button className='do-favour-btn'> Do Favour</button>}
+          {creatorId !== localStorage.getItem('user') && <Link to={`/FulfillFavour/${id}`}><button className='do-favour-btn'>Do Favour</button></Link>}
           <p className='card-text'>
             {description}
           </p>

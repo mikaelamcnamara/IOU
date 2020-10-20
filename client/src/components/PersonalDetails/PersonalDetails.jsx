@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from 'react-router-dom'
 import NavBar from "../common/Navbar/Navbar";
+import Swal from "sweetalert2";
 
 import "../../App.css";
 import "./PersonalDetails.css";
@@ -8,7 +10,7 @@ import { getCurrentUser, update } from "../../APIFetchers";
 const PersonalDetails = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-
+  const history = useHistory();
 
   useEffect(() => {
     async function fetchData() {
@@ -24,6 +26,15 @@ const PersonalDetails = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     const res = await update(email, name);
+    if (!res.success) {
+      Swal.fire(
+        "Error",
+        "Something went wrong, please try again",
+        "error"
+      );
+    } else {
+      history.push('/Account');
+    }
   }
 
 

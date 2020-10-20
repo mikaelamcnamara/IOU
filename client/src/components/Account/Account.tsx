@@ -26,7 +26,7 @@ const Account = () => {
     setExperiencePoints(result.experiencePoints);
     setNumCompletedFavours(result.completedFavours.length);
     setLevel(Math.floor(experiencePoints/1000));
-    setProgress(((level + 1) * 1000 - experiencePoints)/1000 * 100);
+    setProgress((experiencePoints%1000)/1000 * 100);
   }
 
   useEffect(() => {
@@ -60,18 +60,11 @@ const Account = () => {
           </div>
         </div>
       </div>
-      <h1 className='account-header2'>Your Most Recent Favours</h1>
+      <h1 className='account-header2'>Your Completed Favours</h1>
       <div className='recent-favours'>
         <CompletedCard />
         <CompletedCard />
         <CompletedCard />
-      </div>
-      <h1 className='account-header2'>Recently Added Friends</h1>
-      <div className='friend-grid'>
-        {/* <Friend />
-        <Friend />
-        <Friend />
-        <Friend /> */}
       </div>
       <div className='account-bg'>
         <img src={AccountBackground} alt='Account background' />
