@@ -137,10 +137,15 @@ const CreateFavour = () => {
                 Choose a category
               </option>
               <option value="Food">Food</option>
+              <option value="Drinks">Drinks</option>
               <option value="Entertainment">Entertainment</option>
               <option value="Gaming">Gaming</option>
               <option value="Social">Social</option>
-              <option value="Other">Other</option>
+              <option value="Labour">Labour</option>
+              <option value="Pickup">Pickup</option>
+              <option value="Delivery">Delivery</option>
+              <option value="Support">Support</option>
+              <option value="Borrow">Borrow</option>
             </select>
 
             <br></br>
