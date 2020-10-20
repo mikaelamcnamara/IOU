@@ -25,7 +25,7 @@ const SignUp = () => {
 
     if (res.success) {
       const user = await getCurrentUser();
-      localStorage.setItem('user', user);
+      localStorage.setItem('user', user._id);
       history.push('/');
       window.location.reload();
     }

@@ -19,7 +19,6 @@ const login = async (email: String, password: String) => {
   }
 };
 
-
 const update = async (email: String, fullName: String) => {
   const body = {
     email: email,
@@ -40,8 +39,6 @@ const update = async (email: String, fullName: String) => {
   } finally {
   }
 };
-
-
 
 const register = async (
   fullName: String,
@@ -192,7 +189,6 @@ const removeFriend = async (friend: String) => {
   try {
     let resp = await fetch("/api/removeFriend", requestOptions);
     let result = await resp.json();
-    console.log(result);
     return result;
   } catch (e) {
     return e;
@@ -232,6 +228,43 @@ const getFriendNames = async () => {
   }
 };
 
+const removeFavour = async (favourId: String) => {
+  const body = {
+    favourId: favourId,
+  };
+
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  };
+
+  try {
+    let resp = await fetch("/api/removeFavour", requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+}
+
+const getMyFavours = async () => {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+
+  try {
+    let resp = await fetch("/api/getMyFavours", requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
 const getAvatar = async () => {
   const requestOptions = {
     method: "GET",
@@ -240,6 +273,22 @@ const getAvatar = async () => {
 
   try {
     let resp = await fetch("/api/getAvatar", requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
+const getMyDebts = async () => {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+
+  try {
+    let resp = await fetch("/api/getMyDebts", requestOptions);
     let result = await resp.json();
     return result;
   } catch (e) {
@@ -262,4 +311,7 @@ export {
   createFavour,
   getFriendNames,
   getAvatar,
+  removeFavour,
+  getMyFavours,
+  getMyDebts,
 };
