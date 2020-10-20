@@ -5,69 +5,112 @@ import FriendBG from '../../assets/friendlist.svg';
 import NavBar from '../common/Navbar/Navbar';
 import FriendCard from '../common/Friend/Friend';
 import SkeletonCard from '../common/SkeletonLoad/Skeleton';
+import Pagination from '../common/Pagination/Pagination';
 import ConfettiGenerator from 'confetti-js';
+import Swal from "sweetalert2";
 
 
-import { getAllUsers, addAFriend } from '../../APIFetchers';
+import { getAllUsers, getFriendNames, addAFriend, removeFriend } from '../../APIFetchers';
+import Friend from '../common/Friend/Friend';
 
 
 const FriendsList = (props) => {
-
   const [loading, setLoading] = useState(false);
-  const [search, setSearchFriend] = useState('');
   const [friendsList, setFriendsList] = useState([]);
-  const [filteredFriends, setFilteredFriends] = useState([]);
+  const [yourFriends, setYourFriends] = useState([]);
+  const [filter, setFilter] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(10);
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
 
   const populateFriendsList = async () => {
     //API call
     setLoading(true);
+    let mates = await getFriendNames();
+    setYourFriends(mates);
     let users = await getAllUsers();
- 
     users = users.map((user) => {
+      const match = mates.find(i => i._id == user._id) !== undefined;
       return <div key={user._id}>
-        <FriendCard avatar={user.avatar} name={user.fullName} xp={user.experiencePoints} id={user._id} addFriend={addFriends}/>
+        {user.fullName.toLowerCase().includes(filter.toLowerCase()) && 
+        <FriendCard avatar={user.avatar} name={user.fullName} xp={user.experiencePoints} id={user._id} addFriend={addFriends} removeFriend={removeFriends} isFriend={match}/>}
       </div>
      });
     setFriendsList(users);
-    setLoading(false);
+  }
+
+  const populateYourFriends = async () => {
+    setLoading(true);
+    let users = yourFriends.map(user => <div key={user._id}>
+      {user.fullName.toLowerCase().includes(filter.toLowerCase()) && 
+      <FriendCard avatar={user.avatar} name={user.fullName} xp={user.experiencePoints} id={user._id} addFriend={addFriends} removeFriend={removeFriends} isFriend={true}/>}
+    </div>)
+    setFriendsList(users);
   }
 
   const addFriends = async (key) => {
     let addFriend = await addAFriend(key);
-    window.alert('Friend Added');
+
+    if (addFriend.success) {
+      Swal.fire(
+        "Friend added",
+        "Hit them up with a favour!",
+        "success"
+      );
+      populateFriendsList();
+    } else {
+      Swal.fire(
+        "Something went wrong...",
+        addFriend.message,
+        "error"
+      );
+    }
   }
 
- 
+  const removeFriends = async (key) => {
+    let remFriend = await removeFriend(key);
 
-  //handle search results
-  const handleSearch = (e) => {
-    e.preventDefault();
-    console.log(search);
-  };
+    if (remFriend.success) {
+      Swal.fire(
+        "Success",
+        "Friend removed",
+        "success"
+      );
+      populateFriendsList();
+    } else {
+      Swal.fire(
+        "Something went wrong...",
+        remFriend.message,
+        "error"
+      );
+    }
+  }
 
+  const handleFilter = (e) => {
+    setFilter(e.target.value);
+  }
 
   const showAllUsers = () => {
-    alert('show users');
+    populateFriendsList();
   };
 
   const showFriends = () => {
-    alert('show users');
-
+    populateYourFriends();
   };
 
-  const showPendingRequests = () => {
-    alert('show users');
- 
-  };
+  const paginate = pageNumbers => setCurrentPage(pageNumbers);
 
-  const showRequests = () => {
-    alert('show users');
-  };
-
+  //update on launch and when filter changes
   useEffect(() => {
     populateFriendsList();
-    return () => console.log('hi');
-  }, []);
+  }, [filter]);
+
+  //set loading to false AFTER friends list is updated
+  useEffect(() => {
+    setLoading(false);
+  }, [friendsList]);
 
   return (
     <>
@@ -78,13 +121,12 @@ const FriendsList = (props) => {
           <h1 className='friend-title'>Friends List</h1>
           <br></br>
           <div className='nav-middle'>
-            <form className='search-form' onSubmit={handleSearch}>
+            <form className='search-form'>
               <input
                 type='text'
                 className='search-input'
-                placeholder='Search for favours....'
-                onChange={(e) => setSearchFriend(e.target.value)}
-                value={search}
+                placeholder='Search for friends....'
+                onChange={(e) => handleFilter(e)}
               />
             </form>
           </div>
@@ -93,13 +135,6 @@ const FriendsList = (props) => {
           </button>
           <button className='button-all' onClick={showFriends}>
             Your Friends
-          </button>
-          <button className='button-all ' onClick={showRequests}>
-            {' '}
-            Your Friend Requests
-          </button>
-          <button className='button-all' onClick={showPendingRequests}>
-            Pending Requests
           </button>
           <div className='friend-bg'>
 
@@ -110,9 +145,11 @@ const FriendsList = (props) => {
         }
         {!loading &&
           <div>
-            {friendsList}
+            {friendsList.length !== 0 ? <>
+            {friendsList.slice(indexOfFirstPost, indexOfLastPost)} 
+            <Pagination postsPerPage={postsPerPage} totalAvatarCards={friendsList.length} paginate={paginate}/> 
+            </> : <h2 className="friends-placeholder-text">Go add some friends!</h2>}
           </div>
-          
         }
           </div>
         </div>

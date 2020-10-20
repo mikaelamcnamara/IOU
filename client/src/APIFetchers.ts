@@ -179,7 +179,7 @@ const removeFriend = async (friend: String) => {
   const body = {
     friend: friend,
   };
-
+  
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -297,6 +297,26 @@ const getMyDebts = async () => {
   }
 };
 
+const getAFavour = async (id: string) => {
+  const body = {
+    id: id
+  }
+  const requestOptions = {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body)
+  };
+
+  try {
+    let resp = await fetch("/api/favour", requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
 export {
   login,
   register,
@@ -314,4 +334,5 @@ export {
   removeFavour,
   getMyFavours,
   getMyDebts,
+  getAFavour,
 };

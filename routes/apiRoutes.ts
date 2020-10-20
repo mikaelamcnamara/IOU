@@ -28,7 +28,6 @@ module.exports = (app) => {
           console.log("Error");
           res.send(err);
         } else {
-          console.log(req.body.fullName);
           return res.send({
             success: true,
             message: "Successfully updated!",
@@ -90,34 +89,43 @@ module.exports = (app) => {
     });
   });
 
-  app.post("/api/addFriend", (req: any, res: any) => {
+  app.post("/api/addFriend", async (req: any, res: any) => {
     const friendId = req.body.friend;
-    User.findByIdAndUpdate(
-      req.session.passport.user,
-      { $push: { friends: friendId } },
-      { safe: true, upsert: true, new: true },
-      function (err) {
-        if (err) return res.send({
-          success: false,
-          message: 'Server error'
-        });
-        res.send({
-          success: true,
-          message: "Added friend!"
-        });
-      }
-    );
+
+    User.findById(req.session.passport.user, "friends").exec((err, list) => {
+      if (err || list.friends.find(friend => friend == friendId) !== undefined) return res.send({
+        success: false,
+        message: "Friend already added!",
+      });
+      User.findByIdAndUpdate(
+        req.session.passport.user,
+        { $push: { friends: friendId } },
+        { safe: true, upsert: true, new: true },
+        function (err) {
+          if (err) return res.send({
+            success: false,
+            message: 'Server error'
+          });
+          res.send({
+            success: true,
+            message: "Added friend!"
+          });
+        }
+      );
+    });
   });
 
   app.post("/api/removeFriend", (req: any, res: any) => {
-    const friendId = req.friend;
+    const friendId = req.body.friend;
     User.findByIdAndUpdate(
       req.session.passport.user,
       { $pull: { friends: friendId } },
       { safe: true, upsert: true, new: true },
-      function (err, model) {
+      function (err) {
         if (err) return res.send(err);
-        res.send("Added friend!");
+        res.send({
+          success: true,
+          message: "Removed friend"});
       }
     );
   });
@@ -147,7 +155,7 @@ module.exports = (app) => {
   });
 
   app.get("/api/getFriendNames", (req: any, res: any) => {
-    User.findById(req.session.passport.user).populate("friends", 'fullName').exec(function (err, result) {
+    User.findById(req.session.passport.user).populate("friends", 'fullName _id avatar experiencePoints').exec(function (err, result) {
         if (err) return res.send(err);
         res.send(result.friends);
       })
@@ -189,7 +197,7 @@ module.exports = (app) => {
   app.get('/api/getMyFavours', (req: any, res: any) => {
     User.findById(req.session.passport.user, "myFavours fullName avatar").populate("myFavours").exec(function (err, favours) {
       if (err) return res.send(err);
-      else res.send(favours);
+      res.send(favours);
     })
   });
 
@@ -197,6 +205,13 @@ module.exports = (app) => {
     User.findById(req.session.passport.user, "myDebts fullName").populate({path: "myDebts", populate: {path: "creator", model: 'users', select: {'_id': 1, 'avatar': 1, 'fullName': 1}}}).exec(function (err, favours) {
       if (err) return res.send(err);
       res.send(favours)
+    })
+  })
+
+  app.put('/api/favour', (req: any, res: any) => {
+    Favour.findById(req.body.id).populate("creator", "_id avatar fullName").exec(function (err, favour) {
+      if (err) return res.send(err);
+      res.send(favour);
     })
   })
 };

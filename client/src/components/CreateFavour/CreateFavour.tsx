@@ -22,6 +22,12 @@ const CreateFavour = () => {
 
   const showAssignee = async () => {
     const friendNames = await getFriendNames();
+    if (friendNames.length == 0) {
+      Swal.fire(
+        "It looks like you haven't added any friends yet",
+        "Add a friend via the friends page. You won't be able to create a favour until you do so.",
+      );
+    }
     setFriends(friendNames);
     const options = friendNames.map((friend, i) => (
       <option key={i} value={friend.fullName} />
@@ -86,7 +92,7 @@ const CreateFavour = () => {
         <div className="greybox">
           <form onSubmit={() => submit}>
             <label>
-              Title
+              Title*
               <br></br>
               <input
                 value={title}
@@ -101,7 +107,7 @@ const CreateFavour = () => {
 
             <br></br>
             <label>
-              Description
+              Description*
               <br></br>
               <input
                 value={description}
@@ -115,7 +121,7 @@ const CreateFavour = () => {
             <br></br>
 
             <br></br>
-            <label>Assignee</label>
+            <label>Assignee*</label>
             <br></br>
             <input
               placeholder="Assign a friend to this favour"
@@ -130,7 +136,7 @@ const CreateFavour = () => {
             <br></br>
 
             <br></br>
-            <label>Category</label>
+            <label>Category*</label>
             <br></br>
             <select onChange={(e) => setCategory(e.target.value)}>
               <option value="" disabled selected hidden>
@@ -146,7 +152,7 @@ const CreateFavour = () => {
             <br></br>
 
             <br></br>
-            <label>XP Points Earned</label>
+            <label>XP Points Earned*</label>
             <br></br>
             <input
               value={points}
@@ -161,7 +167,7 @@ const CreateFavour = () => {
             <br></br>
 
             <br></br>
-            <label>Due date</label>
+            <label>Due date*</label>
             <br></br>
             <input
               value={date}
