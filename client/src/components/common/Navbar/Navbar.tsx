@@ -19,7 +19,7 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    getProfilePic();
+    localStorage.getItem("user") && getProfilePic();
   });
 
   const handleLogout = async () => {
