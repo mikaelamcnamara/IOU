@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AvatarCard from '../common/AvatarCard/AvatarCard';
+import FavourCard from '../common/FavourCard/FavourCard';
 import RequestCard from '../common/RequestCard/RequestCard';
 import FavoursBackground from '../../assets/FavoursBackground.svg';
 import RequestPlus from '../../assets/RequestPlus.svg';
@@ -15,16 +15,16 @@ const Favours = () => {
       >
         Favours you owe
       </h1>
-      <AvatarCard />
-      <AvatarCard />
-      <AvatarCard />
-      <AvatarCard />
+      <FavourCard />
+      <FavourCard />
+      <FavourCard />
+      <FavourCard />
 
       <a href="/CreateFavour">
-      <div className='create-request'>
-        <img src={RequestPlus} alt='request plus' />
-        <h1 className='create-request-header'>Create a request</h1>
-      </div>
+        <div className='create-request'>
+          <img src={RequestPlus} alt='request plus' />
+          <h1 className='create-request-header'>Create a request</h1>
+        </div>
       </a>
       <h1 className='favours-header' style={{ color: '#464646' }}>
         Your Active Requests

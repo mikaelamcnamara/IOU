@@ -1,18 +1,9 @@
 import React from 'react';
 import manAvatar from '../../../assets/first-man-avatar.svg';
 import burgerIcon from '../../../assets/burger-icon.svg';
-import './AvatarCard.css';
+import './FavourCard.css';
 
-interface IProps {
-  title: string,
-  description: string,
-  points: number,
-  category: string,
-}
-
-
-
-const AvatarCard = ({ title, description, points, category }) => {
+const FavourCard = () => {
   return (
     <>
       <div className='favours-card'>
@@ -20,21 +11,22 @@ const AvatarCard = ({ title, description, points, category }) => {
           <img className='avatar' src={manAvatar} alt='avatar' />
         </div>
         <div className='right-details'>
-          <h4 className='title-txt'>{title}</h4>
+          <h4 className='title-txt'>Damien</h4>
           <div className='tag-content'>
             <span className='tag'>
-              <img src={burgerIcon} alt='' /> {category}
+              <img src={burgerIcon} alt='' /> Food
             </span>
           </div>
           <button className='do-favour-btn'> Do Favour</button>
           <p className='card-text'>
-            {description}
+            Can someone buy me coffee? So I can turn that coffee into code.
+            Cheers!
           </p>
-          <p className='points-text'>{`+EARN ${points} XP`}</p>
+          <p className='points-text'>+ EARN 100XP</p>
         </div>
       </div>
     </>
   );
 };
 
-export default AvatarCard;
+export default FavourCard;

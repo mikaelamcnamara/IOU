@@ -6,6 +6,7 @@ import ChattyMessage from '../../assets/chatting_isometric.svg';
 import NavBar from '../common/Navbar/Navbar';
 import AvatarCard from '../common/AvatarCard/AvatarCard';
 import SkeletonCard from '../common/SkeletonLoad/Skeleton';
+import FavourCard from '../common/FavourCard/FavourCard';
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
@@ -34,7 +35,7 @@ const Home = () => {
         <p className='content-txt-below'>
           Our platform is intuitive and entertaining to use.
         </p>
-        <Link to='/Register' style={{display: localStorage.getItem('user') ? 'none' : 'inline-block'}}>
+        <Link to='/Register' style={{ display: localStorage.getItem('user') ? 'none' : 'inline-block' }}>
           <button className='register-btn'>Register Now</button>
         </Link>
 
@@ -49,11 +50,11 @@ const Home = () => {
 
         {loading &&
           <div>
-            <AvatarCard />
-            <AvatarCard />
-            <AvatarCard />
-            <AvatarCard />
-            <AvatarCard />
+            <FavourCard />
+            <FavourCard />
+            <FavourCard />
+            <FavourCard />
+            <FavourCard />
           </div>
         }
       </div>
