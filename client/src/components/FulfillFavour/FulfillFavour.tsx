@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom';
 import NavBar from "../common/Navbar/Navbar";
 import { getAFavour } from '../../APIFetchers';
 import Swal from "sweetalert2";
+import Filter from "bad-words";
+
+import { upload } from '../../APIFetchers';
 
 import "../../App.css";
 import "./FulfillFavour.css";
@@ -21,9 +24,11 @@ const FulfillFavour = () => {
   const { id } = useParams();
   const [previewUrl, setPreviewUrl] = useState();
   const [isValid, setIsValid] = useState(false);
-
+  const [uploadImage, setUploadImage] = useState();
   const [submission, setSubmission] = useState('');
   const [image, setImage] = useState();
+  var filter = new Filter();
+
   const [favour, setFavour] = useState<Favour>({
     title: '',
     creator: {
@@ -70,14 +75,17 @@ const FulfillFavour = () => {
     }
   }
 
-  const uploadForm = (e) => {
+  const uploadForm = async (e) => {
     e.preventDefault();
+    let result = await upload();
+    console.log(result);
     if (isValid == true) {
       Swal.fire(
         "Favour Fulfilled!",
         "Your form has been successfully sent for review.",
         "success"
       );
+
     }
     else {
       Swal.fire(
@@ -86,6 +94,7 @@ const FulfillFavour = () => {
         "error"
       );
     }
+
 
   }
 
@@ -118,7 +127,7 @@ const FulfillFavour = () => {
             <label>
               Submission
               <br></br>
-              <input type="text" placeholder="Write about your submission here" value={submission} onChange={(e) => setSubmission(e.target.value)} />
+              <input type="text" placeholder="Write about your submission here" value={submission} onChange={(e) => setSubmission(filter.clean(e.target.value))} />
             </label>
 
             <br></br>
@@ -132,9 +141,8 @@ const FulfillFavour = () => {
                   {previewUrl && <img src={previewUrl} alt="Preview" />}
                 </div>
               </div>
-              {/* <input type="file" accept=".png, .jpeg, .jpg" onChange={(e) => setImage(e.target.value)} /> */}
 
-              <input type="file" ref={imagePicker} accept=".png, .jpeg, .jpg" onChange={imagePickHandler} />
+              <input type="file" id="file" name="file" ref={imagePicker} accept=".png, .jpeg, .jpg" onChange={imagePickHandler} />
             </label>
             <div>
 

@@ -19,6 +19,17 @@ const login = async (email: String, password: String) => {
   }
 };
 
+const upload = async () => {
+  try {
+    let resp = await fetch('/api/uploadimage');
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+}
+
 const update = async (email: String, fullName: String) => {
   const body = {
     email: email,
@@ -179,7 +190,7 @@ const removeFriend = async (friend: String) => {
   const body = {
     friend: friend,
   };
-  
+
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -325,6 +336,7 @@ export {
   logout,
   update,
   addAFriend,
+  upload,
   removeFriend,
   getAllFavours,
   leaderboard,

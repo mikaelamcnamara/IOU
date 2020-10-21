@@ -51,7 +51,13 @@ const favourSchema = new Schema(
       ref: 'date',
     },
 
-    applicants: { type: Schema.Types.ObjectId, ref: 'users' },
+
+
+    applicants: {
+      user: { type: Schema.Types.ObjectId, ref: 'users' },
+      image: Buffer,
+      description: String,
+    },
   },
   {
     timestamps: true, //Adds last modified and user creation time to MongoDB collection

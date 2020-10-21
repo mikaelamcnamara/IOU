@@ -1,13 +1,90 @@
-export {}; //trick TS into accepting below imports
+export { }; //trick TS into accepting below imports
 const mongoose = require("mongoose");
 const Favour = mongoose.model("favours");
 const User = mongoose.model("users");
+
+
+const path = require('path');
+const hash = require('crypto');
+const multer = require('multer');
+const GridFsStorage = require('multer');
+const Grid = require('gridfs-stream');
+
+
+//Grid fs set up and configuration
+
+let gfs;
+
+//Mongo URI
+//const mongoURI = '';
+
+//Create mongo connection 
+//const connect = mongoose.createConnection(mongoURI);
+
+const connection = mongoose.connection;
+
+//Open connection and write file 
+connection.once('open', () => {
+  // Init stream
+  gfs = Grid(connection.db, mongoose.mongo);
+  //Collection name
+  gfs.collection('uploads');
+});
+
+
+//Creates a storage engine
+const storage = new GridFsStorage({
+  url: connection,
+  file: (req, file) => {
+    return new Promise((resolve, reject) => {
+      //Hash the file names
+      hash.randomBytes(16, (err, buf) => {
+        if (err) {
+          return reject(err);
+        }
+        const filename = buf.toString('hex') + path.extname(file.originalname);
+        const fileInfo = {
+          filename: filename,
+          bucketName: 'uploads'
+        };
+        resolve(fileInfo);
+      });
+    });
+  }
+});
+
+
+// Upload files directly to MongoDB through the multer middleware
+const upload = multer({ storage });
+
+
 
 module.exports = (app) => {
   app.post("/api/logout", (req: any, res: any) => {
     req.logout(); //kills cookie
     res.send(req.session.passport.user);
   });
+
+  // Upload image 
+  app.post("/api/uploadimage", upload.single('file'), (req: any, res: any) => {
+    res.json({ file: req.file });
+  })
+
+
+  //Get image based on file name from the url
+  app.get('/files/:filename', (req, res) => {
+    gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+      if (file.contentType === "image/jpeg" || file.contentType === 'img/png') {
+        const readstream = gfs.createReadStream(file.filename);
+        readstream.pipe(res);
+      }
+      else {
+        res.status(404).json({
+          err: 'Not an image'
+        });
+      }
+    })
+  })
 
   app.get("/api/current_user", (req: any, res: any) => {
     User.findById(req.session.passport.user)
@@ -17,6 +94,7 @@ module.exports = (app) => {
         res.send(user);
       });
   });
+
 
   app.put("/api/current_user", (req: any, res: any) => {
     User.findByIdAndUpdate(
@@ -125,7 +203,8 @@ module.exports = (app) => {
         if (err) return res.send(err);
         res.send({
           success: true,
-          message: "Removed friend"});
+          message: "Removed friend"
+        });
       }
     );
   });
@@ -156,9 +235,9 @@ module.exports = (app) => {
 
   app.get("/api/getFriendNames", (req: any, res: any) => {
     User.findById(req.session.passport.user).populate("friends", 'fullName _id avatar experiencePoints').exec(function (err, result) {
-        if (err) return res.send(err);
-        res.send(result.friends);
-      })
+      if (err) return res.send(err);
+      res.send(result.friends);
+    })
   });
 
   app.get("/api/getAvatar", (req: any, res: any) => {
@@ -168,7 +247,7 @@ module.exports = (app) => {
         res.send(result);
       });
   });
-  
+
   app.post("/api/removeFavour", async (req: any, res: any) => {
     User.findByIdAndUpdate(
       req.session.passport.user,
@@ -202,7 +281,7 @@ module.exports = (app) => {
   });
 
   app.get('/api/getMyDebts', (req: any, res: any) => {
-    User.findById(req.session.passport.user, "myDebts fullName").populate({path: "myDebts", populate: {path: "creator", model: 'users', select: {'_id': 1, 'avatar': 1, 'fullName': 1}}}).exec(function (err, favours) {
+    User.findById(req.session.passport.user, "myDebts fullName").populate({ path: "myDebts", populate: { path: "creator", model: 'users', select: { '_id': 1, 'avatar': 1, 'fullName': 1 } } }).exec(function (err, favours) {
       if (err) return res.send(err);
       res.send(favours)
     })

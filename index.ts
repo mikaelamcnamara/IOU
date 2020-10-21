@@ -4,6 +4,9 @@ const cors = require('cors');
 const keys = require('./config/keys');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
+const methodOverride = require('method-override');
+
+
 require('./models/User');
 require('./models/Favour');
 require('./services/passport');
@@ -18,10 +21,6 @@ mongoose.connect(keys.mongoURI, {
 const app = express();
 
 //Confirm connection
-const connection = mongoose.connection;
-connection.once('open', () => {
-  console.log('MongoDB database connection established!');
-});
 
 app.use(
   cookieSession({
@@ -35,10 +34,16 @@ app.use(cors()); //Node.js middleware package used for providing express with ab
 app.use(express.json()); //Express is better at parsing json and bodyParser is included by default to retrieve form data
 app.use(passport.initialize()); //initialise passport authentication strategy
 app.use(passport.session()); //initialise session
+app.use(methodOverride('_method'));
+
+
 
 require('./routes/apiRoutes')(app);
 require('./routes/authRoutes')(app);
 
+
 const PORT = process.env.PORT || 5001;
 //May need to change above depending on deployment strategy
 app.listen(PORT);
+
+
