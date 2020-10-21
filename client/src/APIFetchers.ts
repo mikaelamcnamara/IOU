@@ -317,6 +317,22 @@ const getAFavour = async (id: string) => {
   }
 };
 
+const getParties = async () => {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+
+  try {
+    let resp = await fetch("/api/partyFinder", requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
 export {
   login,
   register,
@@ -335,4 +351,5 @@ export {
   getMyFavours,
   getMyDebts,
   getAFavour,
+  getParties,
 };

@@ -1,3 +1,5 @@
+import { createUnionOrIntersectionTypeNode } from 'typescript';
+
 export {}; //trick TS into accepting below imports
 const mongoose = require("mongoose");
 const Favour = mongoose.model("favours");
@@ -186,12 +188,13 @@ module.exports = (app) => {
       }
     );
 
-    await Favour.findByIdAndDelete(req.body.favourId, function (err, favour) {
-      if (err) console.log(err);
-      User.findByIdAndUpdate(favour.assignee, { $pull: { myDebts: req.body.favourId } }, { safe: true, upsert: true, new: true }, function (err) {
-        if (err) console.log(err);
-      })
-    });
+    Favour.findById(req.body.favourId, function (err, favour) {
+      Favour.findByIdAndDelete(req.body.favourId, function (err) {
+        User.findByIdAndUpdate(favour.assignee, { $pull: { myDebts: req.body.favourId } }, { safe: true, upsert: true, new: true }, function (err) {
+          if (err) return res.send(err);
+        })
+      });
+    })
   });
 
   app.get('/api/getMyFavours', (req: any, res: any) => {
@@ -214,4 +217,74 @@ module.exports = (app) => {
       res.send(favour);
     })
   })
+
+  //detect parties of 3-5 people in size;
+  const traversal = (data) => {
+    let cycles = [];
+    let arr = [];
+    let visited = new Set();
+    let namesMap = new Map();
+    arr.push(data._id);
+    
+    for (let iter1 of JSON.parse(JSON.stringify(data.myDebts))) {
+      if (visited.has(iter1.creator._id)) continue;
+      arr.push(iter1.creator._id);
+      namesMap.set(iter1.creator._id, {name: iter1.creator.fullName, avatar: iter1.creator.avatar});
+      for (let iter2 of JSON.parse(JSON.stringify(iter1.creator.myDebts))) {
+        if (visited.has(iter2.creator._id)) continue;
+        if (arr.includes(iter2.creator._id)) cycles.push(Array.from(arr));
+        arr.push(iter2.creator._id);
+        namesMap.set(iter2.creator._id, {name: iter2.creator.fullName, avatar: iter2.creator.avatar});
+        for (let iter3 of JSON.parse(JSON.stringify(iter2.creator.myDebts))) {
+          if (visited.has(iter3.creator._id)) continue;
+          if (arr.includes(iter3.creator._id)) cycles.push(Array.from(arr));
+          arr.push(iter3.creator._id);
+          namesMap.set(iter3.creator._id, {name: iter3.creator.fullName, avatar: iter3.creator.avatar});
+          for (let iter4 of JSON.parse(JSON.stringify(iter3.creator.myDebts))) {
+            if (visited.has(iter4.creator._id)) continue;
+            if (arr.includes(iter4.creator._id)) cycles.push(Array.from(arr));
+            namesMap.set(iter4.creator._id, {name: iter4.creator.fullName, avatar: iter4.creator.avatar});
+          }
+          arr.pop();
+          visited.add(iter3.creator._id);
+        }
+        arr.pop();
+        visited.add(iter2.creator._id);
+      }
+      arr.pop();
+      visited.add(iter1.creator._id);
+    }
+    let final_cycles = [];
+    for (let item of JSON.parse(JSON.stringify(cycles))) {
+      let dist = new Set(item);
+      if (dist.size >= 3) final_cycles.push(Array.from(dist));
+    }
+
+    final_cycles = final_cycles.map(i => JSON.stringify(i)).reverse().filter(function (e, i, a) {
+      return a.indexOf(e, i+1) === -1;
+    }).reverse().map(i => JSON.parse(i));
+
+    let final_names = [];
+    for (let item of final_cycles) {
+      let arr = [];
+      item.forEach(i => arr.push(namesMap.get(i)))
+      final_names.push(arr);
+    }
+
+    //if the current user is null, then there isn't a cycle (i.e. the user has not sent out any favours)
+    if (final_names[0][0] == null) return [];
+    return final_names;
+  }
+
+  app.get('/api/partyFinder', (req: any, res: any) => {
+    User.findById(req.session.passport.user, "myDebts").populate({path: "myDebts", select: {'creator': 1}, populate: 
+      {path: "creator", model: 'users', select: {'_id': 1, 'avatar': 1, 'fullName': 1, 'myDebts': 1}, populate: 
+      {path: "myDebts", select: {'creator': 1}, populate: {path: "creator", model: 'users', select: {'_id': 1, 'avatar': 1, 'fullName': 1, 'myDebts': 1}, populate: 
+      {path: "myDebts", select: {'creator': 1}, populate: {path: "creator", model: 'users', select: {'_id': 1, 'avatar': 1, 'fullName': 1, 'myDebts': 1}, populate: 
+      {path: "myDebts", select: {'creator': 1}, populate: {path: "creator", model: 'users', select: {'_id': 1, 'avatar': 1, 'fullName': 1, 'myDebts': 1}}}}}}}}}).exec(function (err, debts) {
+        return res.send(traversal(debts));
+      })
+        
+  });
+    
 };
