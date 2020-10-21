@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import NavBar from "../common/Navbar/Navbar";
 import { getAFavour } from '../../APIFetchers';
 import Swal from "sweetalert2";
@@ -21,7 +21,6 @@ const FulfillFavour = () => {
   const { id } = useParams();
   const [previewUrl, setPreviewUrl] = useState();
   const [isValid, setIsValid] = useState(false);
-
   const [submission, setSubmission] = useState('');
   const [image, setImage] = useState();
   const [favour, setFavour] = useState<Favour>({
@@ -34,6 +33,7 @@ const FulfillFavour = () => {
     description: '',
   })
 
+  const history = useHistory();
 
   const imagePicker = useRef<HTMLInputElement>(null);
 
@@ -70,7 +70,8 @@ const FulfillFavour = () => {
     }
   }
 
-  const uploadForm = (e) => {
+  const uploadForm = async (e) => {
+    history.push(`/FulfillFavour/${id}`);
     e.preventDefault();
     if (isValid == true) {
       Swal.fire(
@@ -86,7 +87,6 @@ const FulfillFavour = () => {
         "error"
       );
     }
-
   }
 
   return (
@@ -107,7 +107,7 @@ const FulfillFavour = () => {
 
       <div id="form-content" className="greybox-centre">
         <div className="greybox">
-          <form>
+          <form action="/api/photo" method="post" encType="multipart/form-data">
             <label>
               Title of Favour: <span style={{ fontWeight: 'normal' }}>{favour.title}</span>
             </label>
@@ -118,7 +118,7 @@ const FulfillFavour = () => {
             <label>
               Submission
               <br></br>
-              <input type="text" placeholder="Write about your submission here" value={submission} onChange={(e) => setSubmission(e.target.value)} />
+              <input type="text" name="submission" placeholder="Write about your submission here" value={submission} onChange={(e) => setSubmission(e.target.value)} />
             </label>
 
             <br></br>
@@ -134,7 +134,7 @@ const FulfillFavour = () => {
               </div>
               {/* <input type="file" accept=".png, .jpeg, .jpg" onChange={(e) => setImage(e.target.value)} /> */}
 
-              <input type="file" ref={imagePicker} accept=".png, .jpeg, .jpg" onChange={imagePickHandler} />
+              <input type="file" name="image_file" ref={imagePicker} accept=".png, .jpeg, .jpg" onChange={imagePickHandler} />
             </label>
             <div>
 
@@ -142,10 +142,10 @@ const FulfillFavour = () => {
 
             <br></br>
             <br></br>
-
+            <input style={{display: 'none'}} type="text" name="favour_id" value={id}/>
             <div className="form-submit">
               <br></br>
-              <input onClick={uploadForm} type="submit" value="Send!" />
+              <input type="submit" value="Send!"/>
             </div>
           </form>
         </div>

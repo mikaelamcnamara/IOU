@@ -1,11 +1,15 @@
+export{};
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const keys = require('./config/keys');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
+const multer = require('multer');
+
 require('./models/User');
 require('./models/Favour');
+require('./models/Image');
 require('./services/passport');
 
 mongoose.connect(keys.mongoURI, {
@@ -35,6 +39,9 @@ app.use(cors()); //Node.js middleware package used for providing express with ab
 app.use(express.json()); //Express is better at parsing json and bodyParser is included by default to retrieve form data
 app.use(passport.initialize()); //initialise passport authentication strategy
 app.use(passport.session()); //initialise session
+//app.use(multer({ dest: './uploads/', rename: function (fieldname, filename) {
+//  return filename;
+//},}).single('photo')); //image storage
 
 require('./routes/apiRoutes')(app);
 require('./routes/authRoutes')(app);

@@ -1,11 +1,33 @@
-import { createUnionOrIntersectionTypeNode } from 'typescript';
-
 export {}; //trick TS into accepting below imports
 const mongoose = require("mongoose");
 const Favour = mongoose.model("favours");
 const User = mongoose.model("users");
+const Image = mongoose.model("images");
+const fs = require('fs');
+const multer = require('multer');
+const upload = multer({dest: './uploads/'});
 
 module.exports = (app) => {
+  app.post("/api/photo", upload.single('image_file'), function (req, res) {
+    const image = new Image();
+    image.data = fs.readFileSync(req.file.path);
+    image.contentType = req.file.mimetype;
+    image.save(function (err, image) {
+      Favour.findByIdAndUpdate(req.body.favour_id, {
+        applicant_user: req.session.passport.user,
+        applicant_description: req.body.submission,
+        applicant_image: image,
+      }, { upsert: true }, function (err) {
+        if (err) {
+          console.log("Error");
+          res.send(err);
+        } else {
+          return res.redirect('/Favours');
+        }
+      })
+    });
+  })
+  
   app.post("/api/logout", (req: any, res: any) => {
     req.logout(); //kills cookie
     res.send(req.session.passport.user);
@@ -272,6 +294,7 @@ module.exports = (app) => {
     }
 
     //if the current user is null, then there isn't a cycle (i.e. the user has not sent out any favours)
+    if (final_names[0] == undefined) return [];
     if (final_names[0][0] == null) return [];
     return final_names;
   }
