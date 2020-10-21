@@ -12,11 +12,12 @@ interface IProps {
   category: string,
   creatorId: string,
   id: string,
+  isPending: Boolean,
 }
 
 
 
-const AvatarCard = ({ avatar, name, creatorId, title, description, points, category, id }: IProps) => {
+const AvatarCard = ({ avatar, name, creatorId, title, description, points, category, id, isPending}: IProps) => {
   return (
     <>
       <div className='favours-card'>
@@ -30,7 +31,8 @@ const AvatarCard = ({ avatar, name, creatorId, title, description, points, categ
               <img src={burgerIcon} alt='' /> {category}
             </span>
           </div>
-          {creatorId !== localStorage.getItem('user') && <button className='do-favour-btn'> Do Favour</button>}
+          {!isPending && creatorId !== localStorage.getItem('user') && <button className='do-favour-btn'> Do Favour</button>}
+          {isPending && <button className='do-favour-btn'>Pending Approval</button>}
           <p className='card-text'>
             {description}
           </p>
