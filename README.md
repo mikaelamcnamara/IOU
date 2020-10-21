@@ -23,5 +23,5 @@ Note: This app does not allow monetary transactions.
 4. cd ..
 5. npm run dev 
 
-Front-end launches on localhost:3000, back-end on localhost:5001
+Client launches on localhost:3000, Server on localhost:5001
 ```
