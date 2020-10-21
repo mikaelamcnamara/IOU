@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import NavBar from "../common/Navbar/Navbar";
 import { getAFavour } from '../../APIFetchers';
+import Swal from "sweetalert2";
 
 import "../../App.css";
 import "./FulfillFavour.css";
@@ -18,8 +19,11 @@ type Favour = {
 
 const FulfillFavour = () => {
   const { id } = useParams();
+  const [previewUrl, setPreviewUrl] = useState();
+  const [isValid, setIsValid] = useState(false);
+
   const [submission, setSubmission] = useState('');
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState();
   const [favour, setFavour] = useState<Favour>({
     title: '',
     creator: {
@@ -29,16 +33,61 @@ const FulfillFavour = () => {
     },
     description: '',
   })
-  console.log(image);
+
+
+  const imagePicker = useRef<HTMLInputElement>(null);
+
   const getFavourDetails = async () => {
     const fav = await getAFavour(id);
-    console.log(fav);
+    // console.log(fav);
     setFavour(fav);
   }
 
   useEffect(() => {
     getFavourDetails();
-  },[])
+    if (!image) {
+      return;
+    }
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      setPreviewUrl(fileReader.result);
+    };
+    fileReader.readAsDataURL(image);
+  }, [image]);
+
+
+
+  const imagePickHandler = (e) => {
+    imagePicker?.current?.click();
+    let pickedFile;
+    let fileIsValid = isValid;
+    if (e.target.files && e.target.files.length === 1) {
+      pickedFile = e.target.files[0];
+      setImage(pickedFile);
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+  }
+
+  const uploadForm = (e) => {
+    e.preventDefault();
+    if (isValid == true) {
+      Swal.fire(
+        "Favour Fulfilled!",
+        "Your form has been successfully sent for review.",
+        "success"
+      );
+    }
+    else {
+      Swal.fire(
+        "Please upload an image",
+        "Please upload an image of jpg, png or jpeg format.",
+        "error"
+      );
+    }
+
+  }
 
   return (
     <div className="FulfillFavour">
@@ -60,7 +109,7 @@ const FulfillFavour = () => {
         <div className="greybox">
           <form>
             <label>
-              Title of Favour: <span style={{fontWeight: 'normal'}}>{favour.title}</span>
+              Title of Favour: <span style={{ fontWeight: 'normal' }}>{favour.title}</span>
             </label>
 
             <br></br>
@@ -69,7 +118,7 @@ const FulfillFavour = () => {
             <label>
               Submission
               <br></br>
-              <input type="text" placeholder="Write about your submission here" value={submission} onChange={(e) => setSubmission(e.target.value)}/>
+              <input type="text" placeholder="Write about your submission here" value={submission} onChange={(e) => setSubmission(e.target.value)} />
             </label>
 
             <br></br>
@@ -78,15 +127,25 @@ const FulfillFavour = () => {
             <label>
               Attach Image
               <br></br>
-              <input type="file" accept="image/png, image/jpeg" onChange={(e) => setImage(e.target.value)}/>
+              <div className="image-container">
+                <div className="image-upload-preview">
+                  {previewUrl && <img src={previewUrl} alt="Preview" />}
+                </div>
+              </div>
+              {/* <input type="file" accept=".png, .jpeg, .jpg" onChange={(e) => setImage(e.target.value)} /> */}
+
+              <input type="file" ref={imagePicker} accept=".png, .jpeg, .jpg" onChange={imagePickHandler} />
             </label>
+            <div>
+
+            </div>
 
             <br></br>
             <br></br>
 
             <div className="form-submit">
               <br></br>
-              <input type="submit" value="Send!" />
+              <input onClick={uploadForm} type="submit" value="Send!" />
             </div>
           </form>
         </div>

@@ -116,10 +116,10 @@ const App = () => {
             path='/Account'
             exact
             component={Account}
-            >
+          >
             {localStorage.getItem('user') ? <Account /> : <Redirect to="/SignIn" />}
           </Route>
-        
+
           <Route
             //atEnter={{ opacity: 0 }}
             //atLeave={{ opacity: 0 }}
@@ -131,7 +131,7 @@ const App = () => {
           >
             {localStorage.getItem('user') ? <FriendsList /> : <Redirect to="/SignIn" />}
           </Route>
-    
+
           <Route
             //atEnter={{ opacity: 0 }}
             //atLeave={{ opacity: 0 }}
