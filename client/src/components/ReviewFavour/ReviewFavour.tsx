@@ -1,14 +1,83 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useParams, useHistory } from "react-router-dom";
+import { favourApplicant, acceptSubmission, declineSubmission } from "../../APIFetchers";
 import NavBar from "../common/Navbar/Navbar";
 import Filter from "bad-words";
 import "../../App.css";
 import "./ReviewFavour.css";
+import Swal from "sweetalert2";
+
+type Favour = {
+  _id: string,
+  title: string,
+  applicant_user: {
+    _id: string,
+    fullName: string,
+  },
+  applicant_description: string,
+  applicant_image: string,
+}
 
 const ReviewFavour = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  var filter = new Filter();
+  const { id } = useParams();
+  const [imageString, setImageString] = useState('');
+  const [favour, setFavour] = useState<Favour>({
+    _id: '',
+    title: '',
+    applicant_user: {
+      _id: '',
+      fullName: '',
+    },
+    applicant_description: '',
+    applicant_image: '',
+  });
+  const history = useHistory();
+
+  const getFavour = async () => {
+    let fav = await favourApplicant(id);
+    if (fav.favour.applicant_user) {
+      console.log(fav.favour.applicant_user);
+      setFavour(fav.favour);
+      const data = Buffer.from(fav.image.applicant_image.data).toString("base64");
+      setImageString(`data:${fav.image.applicant_image.contentType};base64,` + data);
+    }
+  }
+
+  useEffect(() => {
+    getFavour();
+  },[]);
+
+  const accept= async (e) => {
+    e.preventDefault();
+    let res = await acceptSubmission(favour, favour.applicant_user._id);
+    if (res.success) {
+      history.push('/Favours');
+    } else {
+      Swal.fire(
+        "Error",
+        "Something went wrong",
+        "error"
+      );
+    }
+  }
+
+  const decline = async (e) => {
+    e.preventDefault();
+    let res = await declineSubmission(favour._id);
+    if (res.success) {
+      history.push('/Favours');
+    } else {
+      Swal.fire(
+        "Error",
+        "Something went wrong",
+        "error"
+      );
+    }
+  }
+
+
   return (
     <div className="ReviewFavour">
       <NavBar />
@@ -20,7 +89,7 @@ const ReviewFavour = () => {
         <br></br>
         <br></br>
         <br></br>
-        <h1>Review a Favour</h1>
+        <h1>Review {favour.applicant_user && favour.applicant_user.fullName}'s Submission</h1>
       </div>
 
       <br></br>
@@ -29,48 +98,42 @@ const ReviewFavour = () => {
         <div className="greybox">
           <form>
             <label>
-              Title
-              <br></br>
-              <select>
-                <option value="" disabled selected hidden>
-                  Choose a favour that has been recently completed
-                </option>
-                <option value="option1">option1</option>
-                <option value="option2">option2</option>
-              </select>
+              Title: {favour.title}
             </label>
+
+            <br></br>
+            <br></br>
+            <label>
+              Submission Text
+            </label>
+              <br></br>
+              <br></br>
+              <p>{favour.applicant_description}</p>
 
             <br></br>
 
             <br></br>
             <label>
-              Description
-              <br></br>
-              <input type="text"
-                value={description}
-                onChange={(e) => setDescription(filter.clean(e.target.value))} />
+              Image
             </label>
-
             <br></br>
-
-            <br></br>
-            <label>
-              Attach Image
-              <br></br>
-              <input type="file" />
-            </label>
-
+            <div style={{margin: 'auto', textAlign: 'center'}}>
+              <img style={{margin: 'auto'}} src={imageString} alt="image"/>
+            </div>
             <br></br>
             <br></br>
 
             <div className="form-submit">
               <br></br>
-              <input type="submit" value="Accept!" />
+              <input className="accept-button" type="submit" onClick={(e)=> accept(e)} value="Accept" />
+              <br></br>
+              <br></br>
+              <input type="submit" onClick={(e) => decline(e)} value="Decline" />
             </div>
           </form>
 
           <div id="form-content" className="greybox-centre">
-            <Link to="/">
+            <Link to="/Favours">
               <p className="cancel-button">Cancel</p>
             </Link>
           </div>

@@ -1,3 +1,5 @@
+import { resetState } from 'sweetalert/typings/modules/state';
+
 export {}; //trick TS into accepting below imports
 const mongoose = require("mongoose");
 const Favour = mongoose.model("favours");
@@ -94,7 +96,7 @@ module.exports = (app) => {
           { $push: { myFavours: favour._id } },
           { safe: true, new: true, upsert: true },
           function (err) {
-            console.log(err);
+            if (err) res.send(err);
           }
         );
         User.findByIdAndUpdate(
@@ -102,7 +104,7 @@ module.exports = (app) => {
           { $push: { myDebts: favour._id } },
           { safe: true, new: true, upsert: true },
           function (err) {
-            console.log(err);
+            if (err) res.send(err);
           }
         );
         return res.send({
@@ -238,6 +240,49 @@ module.exports = (app) => {
       if (err) return res.send(err);
       res.send(favour);
     })
+  })
+
+  app.get('/api/getMyCompletedFavours', (req: any, res: any) => {
+    User.findById(req.session.passport.user, "completedFavours").populate({path: "completedFavours", populate: { path: "creator", select: {"avatar": 1, "fullName": 1}}})
+      .exec(function (err, favours) {
+        if (err) return res.send(err);
+        res.send(favours);
+      })
+  })
+
+  app.put('/api/favourApplicant', (req: any, res: any) => {
+    Favour.findById(req.body.id).populate("applicant_user applicant_image", "_id avatar fullName").exec(function (err, favour) {
+      if (err) return res.send(err);
+      Favour.findById(req.body.id).populate("applicant_image").exec(function (err, image) {
+        if (err) return res.send(err);
+        res.send({favour, image});
+      })
+    })
+  })
+
+  app.post('/api/declineSubmission', (req: any, res: any) => {
+    Favour.findByIdAndUpdate(req.body.id, {applicant_user: null, applicant_description: null, applicant_image: null}).exec(function (err, favour) {
+      if (err) return res.send(err);
+      res.send({
+        success: true,
+        message: "Submission declined",
+      })
+    })
+  })
+
+  app.post('/api/acceptSubmission', (req: any, res: any) => {
+    const favour = req.body.favour;
+    const applicant_id = req.body.applicant_id;
+    User.findByIdAndUpdate(applicant_id, {$push: {completedFavours: favour._id}, $inc: {experiencePoints: favour.points}}).exec(function (err) {
+      if (err) res.send(err);
+    });
+    Favour.findByIdAndUpdate(favour._id, {complete: true}).exec(function (err, result) {
+      if (err) return res.send(err);
+      res.send({
+        success: true,
+        message: "Submission accepted",
+      })
+    });
   })
 
   //detect parties of 3-5 people in size;
