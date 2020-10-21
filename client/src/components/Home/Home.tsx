@@ -15,7 +15,7 @@ const Home = () => {
 
   const getFavours = async () => {
     let favs = await getAllFavours();
-    favs = favs.map(favour => <FavourCard key={favour._id} creatorId={favour.creator._id} avatar={favour.creator.avatar} name={favour.creator.fullName} category={favour.category} title={favour.title} description={favour.description} xp={favour.points} id={favour._id}/>)
+    favs = favs.filter(favour => !favour.complete).map(favour => <FavourCard key={favour._id} creatorId={favour.creator._id} avatar={favour.creator.avatar} name={favour.creator.fullName} category={favour.category} title={favour.title} description={favour.description} xp={favour.points} id={favour._id} isPending={favour.applicant_user}/>)
     setPublicFavours(favs);
   }
 

@@ -317,6 +317,101 @@ const getAFavour = async (id: string) => {
   }
 };
 
+const favourApplicant = async (id: string) => {
+  const body = {
+    id: id
+  }
+  const requestOptions = {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body)
+  };
+
+  try {
+    let resp = await fetch("/api/favourApplicant", requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
+const getParties = async () => {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+
+  try {
+    let resp = await fetch("/api/partyFinder", requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
+const acceptSubmission = async (favour, id) => {
+  const body = {
+    favour: favour,
+    applicant_id: id,
+  };
+
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  };
+
+  try {
+    let resp = await fetch("/api/acceptSubmission", requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+}
+
+const declineSubmission = async (id) => {
+  const body = {
+    id: id
+  };
+
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  };
+
+  try {
+    let resp = await fetch("/api/declineSubmission", requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
+const getMyCompletedFavours = async () => {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+
+  try {
+    let resp = await fetch("/api/getMyCompletedFavours", requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
 export {
   login,
   register,
@@ -335,4 +430,9 @@ export {
   getMyFavours,
   getMyDebts,
   getAFavour,
+  favourApplicant,
+  getParties,
+  acceptSubmission,
+  declineSubmission,
+  getMyCompletedFavours,
 };

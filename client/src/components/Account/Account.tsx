@@ -7,7 +7,8 @@ import manAvatar from '../../assets/first-man-avatar.svg';
 import EditIcon from '../../assets/EditIcon.svg';
 import Gold from '../../assets/gold.svg';
 import ProgressBar from '../common/ProgressBar/ProgressBar';
-import { getCurrentUser} from '../../APIFetchers';
+import PartyCard from '../common/PartyCard/PartyCard';
+import { getCurrentUser, getParties, getMyCompletedFavours } from '../../APIFetchers';
 import './Account.css';
 import Avatars from '../common/Avatars/Avatars';
 
@@ -15,23 +16,31 @@ const Account = () => {
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState(0);
   const [experiencePoints, setExperiencePoints] = useState(0);
+  const [completedFavours, setCompletedFavours] = useState([]);
   const [numCompletedFavours, setNumCompletedFavours] = useState(0);
   const [level, setLevel] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [parties, setParties] = useState([]);
 
   const getUserDetails = async () => {
     const result = await getCurrentUser();
+    let completed = await getMyCompletedFavours();
+    completed = completed.completedFavours.map((i, num) => <CompletedCard key={num} avatar={i.creator.avatar} name={i.creator.fullName} category={i.category} title={i.title} description={i.description} xp={i.points} />);
+    setCompletedFavours(completed);
     setName(result.fullName);
     setAvatar(result.avatar);
     setExperiencePoints(result.experiencePoints);
     setNumCompletedFavours(result.completedFavours.length);
-    setLevel(Math.floor(experiencePoints/1000));
-    setProgress((experiencePoints%1000)/1000 * 100);
+    setLevel(Math.floor(result.experiencePoints/1000));
+    setProgress((result.experiencePoints%1000)/1000 * 100);
+    let party = await getParties();
+    party = party.map((i, num) => <PartyCard key={num} users={i} number={num+1}/>);
+    setParties(party);
   }
 
   useEffect(() => {
     getUserDetails();
-  });
+  },[]);
 
   return (
     <div className='account'>
@@ -62,9 +71,12 @@ const Account = () => {
       </div>
       <h1 className='account-header2'>Your Completed Favours</h1>
       <div className='recent-favours'>
-        <CompletedCard />
-        <CompletedCard />
-        <CompletedCard />
+        {completedFavours.length === 0 ? <p style={{padding: '10px'}}>No completed favours!</p> : completedFavours}
+      </div>
+      <h1 className='account-header2'>Suggested Parties</h1>
+      <p className="account-party-text">Meet up with the following groups to knock out multiple favours in a single hit!</p>
+      <div className='recent-favours'>
+        {parties.length !== 0 ? parties : <p style={{padding: '10px'}}>No parties found!</p>}
       </div>
       <div className='account-bg'>
         <img src={AccountBackground} alt='Account background' />

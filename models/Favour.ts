@@ -1,4 +1,4 @@
-export {}; //trick TS into accepting below imports
+export { }; //trick TS into accepting below imports
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
@@ -26,7 +26,7 @@ const favourSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'users',
     },
-    
+
     assignee: {
       type: Schema.Types.ObjectId,
       ref: 'users',
@@ -51,7 +51,13 @@ const favourSchema = new Schema(
       ref: 'date',
     },
 
-    applicants: [{ type: Schema.Types.ObjectId, ref: 'users' }],
+    complete: {
+      type: Boolean,
+    },
+
+    applicant_user: { type: Schema.Types.ObjectId, ref: 'users' },
+    applicant_description: { type: String },
+    applicant_image: { type: Schema.Types.ObjectId, ref: 'images' },
   },
   {
     timestamps: true, //Adds last modified and user creation time to MongoDB collection

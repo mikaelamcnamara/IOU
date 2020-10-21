@@ -33,6 +33,7 @@ const SearchPage = props => {
 
   const populateFavoursList = async () => {
     let favours = await getAllFavours();
+    favours = favours.filter(favour => !favour.complete);
     setFavoursList(favours);
   }
 
@@ -40,12 +41,15 @@ const SearchPage = props => {
   // The search functionality which receives a searchValue prop from the navbar input and performs function
   useEffect(() => {
     populateFavoursList();
+  }, []);
+
+  useEffect(() => {
     setFilteredFavours(
       favoursList.filter((favours) =>
         favours.title.toLowerCase().includes(searchValue.toLowerCase())
       )
     );
-  }, [searchValue, favours]);
+  }, [searchValue, favours])
 
 
   // Responsible for pagination as the variable names suggest
@@ -60,7 +64,7 @@ const SearchPage = props => {
   const renderCards = () => {
     return (<div className="search-bg">
       {currentPosts.map((favours, index) => {
-        return <AvatarCard key={index} creatorId={favours.creator._id} avatar={favours.creator.avatar} name={favours.creator.fullName} title={favours.title} description={favours.description} points={favours.points} category={favours.category} id={favours._id} />
+        return <AvatarCard key={index} creatorId={favours.creator._id} avatar={favours.creator.avatar} name={favours.creator.fullName} title={favours.title} description={favours.description} points={favours.points} category={favours.category} id={favours._id} isPending={favours.applicant_user}/>
       })}
       <Pagination postsPerPage={postsPerPage} totalAvatarCards={filteredFavours.length} paginate={paginate} />
     </div>)

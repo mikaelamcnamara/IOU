@@ -6,6 +6,7 @@ import RequestPlus from '../../assets/RequestPlus.svg';
 import NavBar from '../common/Navbar/Navbar';
 import { getMyFavours, getMyDebts } from '../../APIFetchers';
 import './Favours.css';
+import { faVolumeMute } from '@fortawesome/free-solid-svg-icons';
 
 
 const Favours = () => {
@@ -14,12 +15,12 @@ const Favours = () => {
 
   const getFavoursAndDebts = async () => {
     let result = await getMyFavours();
-    const favs = result.myFavours.map(favour => <RequestCard key={favour._id} avatar={result.avatar} name={result.fullName} category={favour.category} title={favour.title} description={favour.description} xp={favour.points} id={favour._id} />)
+    const favs = result.myFavours.filter(favour => !favour.complete).map(favour => <RequestCard key={favour._id} avatar={result.avatar} name={result.fullName} category={favour.category} title={favour.title} description={favour.description} xp={favour.points} id={favour._id} isPending={favour.applicant_user}/>)
     setMyFavours(favs);
 
     result = await getMyDebts();
     console.log(result);
-    const debts = result.myDebts.map(debt => <FavourCard key={debt._id} creatorId={debt.creator._id} avatar={debt.creator.avatar} name={debt.creator.fullName} category={debt.category} title={debt.title} description={debt.description} xp={debt.points} id={debt._id}/>)
+    const debts = result.myDebts.filter(debt => !debt.complete).map(debt => <FavourCard key={debt._id} creatorId={debt.creator._id} avatar={debt.creator.avatar} name={debt.creator.fullName} category={debt.category} title={debt.title} description={debt.description} xp={debt.points} id={debt._id} isPending={debt.applicant_user}/>)
     setMyDebts(debts);
   }
 

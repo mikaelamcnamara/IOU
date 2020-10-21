@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import manAvatar from '../../../assets/first-man-avatar.svg';
 import burgerIcon from '../../../assets/burger-icon.svg';
 import trashIcon from '../../../assets/trash-icon.svg';
@@ -14,9 +15,10 @@ interface IProps {
   description: String,
   xp: Number,
   id: String,
+  isPending: Boolean,
 }
 
-const RequestCard = ({avatar, name, category, title, description, xp, id}: IProps) => {
+const RequestCard = ({avatar, name, category, title, description, xp, id, isPending}: IProps) => {
 
   const handleRemove = async () => {
     await removeFavour(id);
@@ -40,6 +42,7 @@ const RequestCard = ({avatar, name, category, title, description, xp, id}: IProp
           </p>
           <p className='points-text'>+ EARN {xp}XP</p>
         </div>
+        {isPending && <Link to={`/ReviewFavour/${id}`}><button className='do-favour-btn-2'>Review Favour</button></Link>}
         <img className='trash' src={trashIcon} alt='trash' onClick={() => handleRemove()}/>
       </div>
     </>
