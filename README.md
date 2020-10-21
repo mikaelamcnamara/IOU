@@ -1,5 +1,5 @@
 ## IOU APPLICATION
-The purpose of this application is to keep track of small favours (IOU'S) among friends and groups. 
+The purpose of this application is to keep track of small favours among friends and groups. 
 
 ### Functionality
 Users are able to:
