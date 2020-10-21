@@ -33,6 +33,7 @@ const SearchPage = props => {
 
   const populateFavoursList = async () => {
     let favours = await getAllFavours();
+    favours = favours.filter(favour => !favour.complete);
     setFavoursList(favours);
   }
 
@@ -40,12 +41,15 @@ const SearchPage = props => {
   // The search functionality which receives a searchValue prop from the navbar input and performs function
   useEffect(() => {
     populateFavoursList();
+  }, []);
+
+  useEffect(() => {
     setFilteredFavours(
       favoursList.filter((favours) =>
         favours.title.toLowerCase().includes(searchValue.toLowerCase())
       )
     );
-  }, [searchValue, favours]);
+  }, [searchValue, favours])
 
 
   // Responsible for pagination as the variable names suggest

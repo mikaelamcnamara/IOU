@@ -83,7 +83,7 @@ const App = () => {
             //atLeave={{ opacity: 0 }}
             //atActive={{ opacity: 1 }}
             //timeout={500}
-            path='/ReviewFavour'
+            path='/ReviewFavour/:id'
             exact
           >
             {localStorage.getItem('user') ? <ReviewFavour /> : <Redirect to="/SignIn" />}

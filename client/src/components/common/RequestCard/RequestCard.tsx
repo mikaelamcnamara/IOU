@@ -42,7 +42,7 @@ const RequestCard = ({avatar, name, category, title, description, xp, id, isPend
           </p>
           <p className='points-text'>+ EARN {xp}XP</p>
         </div>
-        {isPending && <Link to={`/FulfillFavour/${id}`}><button className='do-favour-btn-2'>Review Favour</button></Link>}
+        {isPending && <Link to={`/ReviewFavour/${id}`}><button className='do-favour-btn-2'>Review Favour</button></Link>}
         <img className='trash' src={trashIcon} alt='trash' onClick={() => handleRemove()}/>
       </div>
     </>
