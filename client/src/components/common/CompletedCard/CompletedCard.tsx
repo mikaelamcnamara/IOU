@@ -1,28 +1,36 @@
 import React from 'react';
-import manAvatar from '../../../assets/first-man-avatar.svg';
+import Avatars from '../Avatars/Avatars';
 import burgerIcon from '../../../assets/burger-icon.svg';
 import './CompletedCard.css';
 
-const CompletedCard = () => {
+interface IProps {
+  avatar: number,
+  name: String,
+  category: String,
+  title: String,
+  description: String, 
+  xp: Number,
+}
+
+const CompletedCard = ({avatar, name, category, title, description, xp}: IProps) => {
   return (
     <>
       <div className='favours-card'>
-        <div className='favours-card-square-bg'>
-          <img className='avatar' src={manAvatar} alt='avatar' />
+        <div className='favours-card-square-bg' style={{backgroundColor: Avatars[avatar].color}}>
+          <img className='avatar' src={Avatars[avatar].avatar} alt='avatar' />
         </div>
         <div className='right-details'>
-          <h4 className='title-txt'>Damien</h4>
+          <h4 className='title-txt'>{name}</h4>
           <div className='tag-content'>
             <span className='tag'>
-              <img src={burgerIcon} alt='' /> Food
+              <img src={burgerIcon} alt='' /> {category}
             </span>
           </div>
           <button className='complete-btn'>Completed</button>
           <p className='card-text'>
-            Can someone buy me coffee? So I can turn that coffee into code.
-            Cheers!
+            {description}
           </p>
-          <p className='points-text'>+ EARN 100XP</p>
+          <p className='points-text'>+ EARN {xp}XP</p>
         </div>
       </div>
     </>

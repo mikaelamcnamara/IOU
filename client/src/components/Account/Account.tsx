@@ -8,7 +8,7 @@ import EditIcon from '../../assets/EditIcon.svg';
 import Gold from '../../assets/gold.svg';
 import ProgressBar from '../common/ProgressBar/ProgressBar';
 import PartyCard from '../common/PartyCard/PartyCard';
-import { getCurrentUser, getParties } from '../../APIFetchers';
+import { getCurrentUser, getParties, getMyCompletedFavours } from '../../APIFetchers';
 import './Account.css';
 import Avatars from '../common/Avatars/Avatars';
 
@@ -16,6 +16,7 @@ const Account = () => {
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState(0);
   const [experiencePoints, setExperiencePoints] = useState(0);
+  const [completedFavours, setCompletedFavours] = useState([]);
   const [numCompletedFavours, setNumCompletedFavours] = useState(0);
   const [level, setLevel] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -23,6 +24,9 @@ const Account = () => {
 
   const getUserDetails = async () => {
     const result = await getCurrentUser();
+    let completed = await getMyCompletedFavours();
+    completed = completed.completedFavours.map((i, num) => <CompletedCard key={num} avatar={i.creator.avatar} name={i.creator.fullName} category={i.category} title={i.title} description={i.description} xp={i.points} />);
+    setCompletedFavours(completed);
     setName(result.fullName);
     setAvatar(result.avatar);
     setExperiencePoints(result.experiencePoints);
@@ -67,9 +71,7 @@ const Account = () => {
       </div>
       <h1 className='account-header2'>Your Completed Favours</h1>
       <div className='recent-favours'>
-        <CompletedCard />
-        <CompletedCard />
-        <CompletedCard />
+        {completedFavours.length === 0 ? <p style={{padding: '10px'}}>No completed favours!</p> : completedFavours}
       </div>
       <h1 className='account-header2'>Suggested Parties</h1>
       <p className="account-party-text">Meet up with the following groups to knock out multiple favours in a single hit!</p>

@@ -51,7 +51,10 @@ const favourSchema = new Schema(
       ref: 'date',
     },
 
-   
+    complete: {
+      type: Boolean,
+    },
+
     applicant_user: { type: Schema.Types.ObjectId, ref: 'users' },
     applicant_description: { type: String },
     applicant_image: { type: Schema.Types.ObjectId, ref: 'images' },
