@@ -15,6 +15,7 @@ import { getAllFavours } from '../../APIFetchers';
 const SearchPage = props => {
   // Configuring all the states and hooks
   const searchValue = queryString.extract(props.location.search);
+  console.log(searchValue);
   const [filteredFavours, setFilteredFavours] = useState([]);
   const [favoursList, setFavoursList] = useState([]);
   const [favours, setFavours] = useState([]);
@@ -42,7 +43,7 @@ const SearchPage = props => {
     populateFavoursList();
     setFilteredFavours(
       favoursList.filter((favours) =>
-        favours.title.toLowerCase().includes(searchValue.toLowerCase())
+        favours.title.toLowerCase().trim().includes(searchValue.toLowerCase().trim())
       )
     );
   }, [searchValue, favours]);
@@ -60,7 +61,7 @@ const SearchPage = props => {
   const renderCards = () => {
     return (<div className="search-bg">
       {currentPosts.map((favours, index) => {
-        return <AvatarCard key={index} creatorId={favours.creator._id} avatar={favours.creator.avatar} name={favours.creator.fullName} title={favours.title} description={favours.description} points={favours.points} category={favours.category} id={favours._id} isPending={favours.applicant_user}/>
+        return <AvatarCard key={favours._id} creatorId={favours.creator._id} avatar={favours.creator.avatar} name={favours.creator.fullName} title={favours.title} description={favours.description} points={favours.points} category={favours.category} id={favours._id} isPending={favours.applicant_user} />
       })}
       <Pagination postsPerPage={postsPerPage} totalAvatarCards={filteredFavours.length} paginate={paginate} />
     </div>)

@@ -18,7 +18,7 @@ interface IProps {
   isPending: Boolean,
 }
 
-const RequestCard = ({avatar, name, category, title, description, xp, id, isPending}: IProps) => {
+const RequestCard = ({ avatar, name, category, title, description, xp, id, isPending }: IProps) => {
 
   const handleRemove = async () => {
     await removeFavour(id);
@@ -27,7 +27,7 @@ const RequestCard = ({avatar, name, category, title, description, xp, id, isPend
   return (
     <>
       <div className='favours-card'>
-        <div className='favours-card-square-bg' style={{backgroundColor: Avatars[avatar].color}}>
+        <div className='favours-card-square-bg' style={{ backgroundColor: Avatars[avatar].color }}>
           <img className='avatar' src={Avatars[avatar].avatar} alt='avatar' />
         </div>
         <div className='right-details'>
@@ -42,8 +42,9 @@ const RequestCard = ({avatar, name, category, title, description, xp, id, isPend
           </p>
           <p className='points-text'>+ EARN {xp}XP</p>
         </div>
+        <img className='trash' src={trashIcon} alt='trash' onClick={() => handleRemove()} />
         {isPending && <Link to={`/FulfillFavour/${id}`}><button className='do-favour-btn-2'>Review Favour</button></Link>}
-        <img className='trash' src={trashIcon} alt='trash' onClick={() => handleRemove()}/>
+
       </div>
     </>
   );
