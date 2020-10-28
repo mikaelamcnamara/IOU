@@ -40,13 +40,13 @@ const LeaderBoard = () => {
         src={LeaderBoardHeader}
         alt='leaderboard-background'
       ></img>
+     
       <canvas id='my-canvas'></canvas>
       <div className='leader-content'>
         <h1 className='leader-title'>LeaderBoard</h1>
         <h4 className='leader-subtitle'>
           These users have earned the most experience points! 
         </h4>
-
         {loading &&
           <div className="loading-card">
             <SkeletonCard />

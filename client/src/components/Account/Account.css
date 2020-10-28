@@ -14,20 +14,20 @@
 }
 
 .account-header {
-  margin-top: 100px;
+  margin-top: 150px;
   color: white;
-  font-size: 50px;
+  font-size: 40px;
 }
 
 .account-subtext {
-  margin-top: 30px;
+  margin-top: 15px;
   color: white;
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .account-display {
   margin: 50px auto;
-  width: 1250px;
+  width: 70%;
   background-color: white;
   border-radius: 5px;
   -webkit-box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
@@ -58,7 +58,8 @@
 
 .edit-icon {
   float: right;
-  margin-right: 20px;
+  margin-top: 20px;
+  margin-right: 30px;
   cursor: pointer;
 }
 
@@ -78,14 +79,15 @@
 
 .account-display h2 {
   margin-top: 30px;
-  font-size: 40px;
+  font-size: 25px;
   color: #15b987;
 }
 
 .progress-card {
-  margin: 60px auto;
+  margin-top: 30px;
+  margin-bottom: 50px;
   border-radius: 5px;
-  width: 960px;
+  width: 80%;
   -webkit-box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
   -moz-box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
   box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
@@ -105,7 +107,7 @@
 
 .progress-bar {
   margin-top: -20px;
-  width: 700px;
+  width: 70%;
   text-align: left;
 }
 
@@ -137,7 +139,7 @@
 
 .recent-favours {
   margin: 50px auto;
-  width: 1700px;
+  width: 80%;
   background-color: #eceaea;
   -webkit-box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
   -moz-box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
@@ -146,7 +148,7 @@
 
 .friend-grid {
   margin: 50px auto;
-  width: 1600px;
+  width: 80%;
   display: grid;
   grid-template-columns: auto auto auto;
   column-gap: 40px;
@@ -164,4 +166,22 @@
 .account-party-text {
   text-align: left;
   margin-left: 100px;
+}
+
+.account-name {
+  font-size: 50px !important;
+  padding-bottom: 20px !important;
+}
+
+.no-favours {
+  padding:50px;
+  margin: 50px auto;
+  width: 70%;
+  background-color: white;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+  -moz-box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+  box-shadow: 0px 9px 20px 3px rgba(26, 26, 26, 0.16);
+  color: #596773;
+  font-weight: bold;
 }

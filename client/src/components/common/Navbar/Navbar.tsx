@@ -66,7 +66,6 @@ const Navbar = () => {
                   onChange={handleSearch}
                   value={search}
                 />
-                {/* <Link style={{ textDecoration: 'none' }} to='/SearchPage'> */}
                 <button className="search-btn " type="submit">
                   <FontAwesomeIcon
                     className="search-icon"
@@ -74,11 +73,18 @@ const Navbar = () => {
                     color="#8A2980"
                   />
                 </button>
-                {/* </Link> */}
+
               </form>
             </div>
             <div className="nav-right">
-              <Link style={{ textDecoration: "none" }} to="/Leaderboard">
+              <Link
+                to="/Leaderboard"
+                style={{
+                  marginTop: '-0.2%',
+                  textDecoration: "none",
+               
+                }}
+              >
                 <p className="leaderboard-txt">LeaderBoard</p>
               </Link>
               <Link
@@ -88,7 +94,7 @@ const Navbar = () => {
                   display: loggedIn ? "inline-block" : "none",
                 }}
               >
-                <p className="leaderboard-txt">Your Favours</p>
+                <p className="leaderboard-txt">Favours</p>
               </Link>
               <Link
                 to="/FriendsList"
