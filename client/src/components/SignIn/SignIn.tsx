@@ -58,6 +58,7 @@ const SignUp = () => {
         </div>
       </div>
       <div className='slide-up'>
+      <a href="/" className="close"></a>
         <img className='signin-title' src={SignInTitle} alt='Sign In to IOU' />
         <br />
         <div className='animation-login'>

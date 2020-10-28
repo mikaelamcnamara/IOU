@@ -47,6 +47,7 @@ const Register = () => {
         </div>
         <div className="slide-right">
           <h1 className='home-register-title'>Create an account</h1>
+          <a href="/" className="close"></a>
           <img
             className='home-profile-icon'
             src={HomeProfileIcon}
