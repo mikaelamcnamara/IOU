@@ -1,6 +1,6 @@
 #iou-logo-txt {
   color: #464646 !important;
-  font-size: 40px !important;
+  font-size: 35px !important;
 }
 
 .navbar-top {
@@ -54,12 +54,13 @@
 }
 
 .leaderboard-txt {
-  margin-top: 1%;
+  margin-top: 4%;
   color: #464646;
+  font-size: 15px;
   border-bottom: 3px solid #ffffff;
   cursor: pointer;
   text-decoration: none !important;
-  padding-left: 10px;
+
   padding-right: 10px;
 }
 
@@ -121,10 +122,11 @@
   background-color: #d1341f;
 }
 .nav-logo {
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
   margin-left: 50px;
   margin-right: 20px;
+  margin-top: 8px;
 }
 .top-right {
   vertical-align: middle;
@@ -174,7 +176,7 @@
 .search-input {
   background: #f2f2f2;
   width: 550px;
-  height: 35px;
+  height: 30px;
   border: 2px solid #f2f2f2;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
@@ -182,7 +184,7 @@
   border-bottom-right-radius: 30px;
   padding: 10px;
   padding-left: 15px;
-  font-size: 14px;
+  font-size: 10px !important;
   box-shadow: none !important;
   transition-duration: 0.7s;
   caret-color: #8a2980;
@@ -216,7 +218,7 @@
 
 .search-btn {
   transition-duration: 0.7s;
-  height: 35px;
+  height: 30px !important;
   background-color: #ffffff;
   border: 2px solid #8a2980;
   padding: 0 15px;
@@ -248,8 +250,9 @@
 }
 
 .profile-pic {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
+  margin-top: 8px;
   border-radius: 50%;
 }
 @media screen and (max-width:1280px) {
@@ -267,7 +270,8 @@
 #leaderboard-txt {
   margin-top: 1%;
   color: #464646;
-  margin-right:10px;
+  font-size: 12px !important;
+  margin-right: -auto;
   border-bottom: 3px solid #ffffff;
   cursor: pointer;
   text-decoration: none !important;
@@ -285,4 +289,7 @@
   color: white;
   cursor: pointer;
 }
+}
+.search-input::placeholder { /* Chrome/Opera/Safari */
+  font-size: 14px;
 }
