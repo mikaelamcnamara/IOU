@@ -25,7 +25,7 @@
   left: 0px;
   z-index: 1;
   width: 100%;
-  height: 90%;
+  height: 100%;
 }
 
 .home-grid {
@@ -82,7 +82,7 @@
   position: absolute;
   z-index: -1;
   width: 872px;
-  height: 120%;
+  height: 100%;
   bottom: -1500px;
   -webkit-animation: slide 0.5s forwards;
   -webkit-animation-delay: 0.5s;
@@ -93,12 +93,12 @@
 
 @-webkit-keyframes slidedown {
   100% { 
-    bottom:-100px;}
+    bottom:0px;}
 }
 
 @keyframes slidedown {
   100% { 
-    bottom:-100px; }
+    bottom:0px; }
 }
 
 .slide-right {
