@@ -58,10 +58,11 @@ const SignUp = () => {
         </div>
       </div>
       <div className='slide-up'>
+      <a href="/" className="close"></a>
         <img className='signin-title' src={SignInTitle} alt='Sign In to IOU' />
         <br />
         <div className='animation-login'>
-          <Lottie options={defaultOptions} height={400} width={400} />
+          <Lottie options={defaultOptions} height={300} width={300} />
         </div>
         <TextField
           icon={EmailIcon}
@@ -82,9 +83,9 @@ const SignUp = () => {
         </p>
         <br />
 
-        <Link to='/'>
+        {/* <Link to='/'>
           <p className='cancel-button'>Cancel</p>
-        </Link>
+        </Link> */}
         <p className='signin-account-text'>
           Don't have an account?{' '}
           <Link className='link' to='/Register'>

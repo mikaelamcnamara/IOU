@@ -124,7 +124,7 @@ const FriendsList = (props) => {
             <form className='search-form'>
               <input
                 type='text'
-                className='search-input'
+                className='search-input-friend'
                 placeholder='Search for friends....'
                 onChange={(e) => handleFilter(e)}
               />

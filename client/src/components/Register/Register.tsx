@@ -47,6 +47,7 @@ const Register = () => {
         </div>
         <div className="slide-right">
           <h1 className='home-register-title'>Create an account</h1>
+          <a href="/" className="close"></a>
           <img
             className='home-profile-icon'
             src={HomeProfileIcon}
@@ -85,15 +86,15 @@ const Register = () => {
           </p>
           <br />
 
-          <Link to='/'>
-            <p className='cancel-button'>Cancel</p>
-          </Link>
           <p className='home-account-text'>
             Already have an account?{' '}
             <Link className='link' to='/SignIn'>
               Login
             </Link>
           </p>
+          {/* <Link to='/'>
+            <p className='cancel-button'>Cancel</p>
+          </Link> */}
         </div>
       </div>
     </>

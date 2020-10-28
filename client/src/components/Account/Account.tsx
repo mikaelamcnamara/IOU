@@ -54,7 +54,7 @@ const Account = () => {
         <div className='account-avatar' style={{backgroundColor: Avatars[avatar].color}}>
           <img src={Avatars[avatar].avatar} alt='Account avatar' />
         </div>
-        <h1>{name}</h1>
+        <h1 className='account-name'>{name}</h1>
         <div className='ranking-stat'>
           <p>#12 Most Favours</p>
         </div>
@@ -71,12 +71,12 @@ const Account = () => {
       </div>
       <h1 className='account-header2'>Your Completed Favours</h1>
       <div className='recent-favours'>
-        {completedFavours.length === 0 ? <p style={{padding: '10px'}}>No completed favours!</p> : completedFavours}
+        {completedFavours.length === 0 ? <p className='no-favours'>No completed favours!</p> : completedFavours}
       </div>
       <h1 className='account-header2'>Suggested Parties</h1>
       <p className="account-party-text">Meet up with the following groups to knock out multiple favours in a single hit!</p>
       <div className='recent-favours'>
-        {parties.length !== 0 ? parties : <p style={{padding: '10px'}}>No parties found!</p>}
+        {parties.length !== 0 ? parties : <p className='no-favours'>No parties found!</p>}
       </div>
       <div className='account-bg'>
         <img src={AccountBackground} alt='Account background' />

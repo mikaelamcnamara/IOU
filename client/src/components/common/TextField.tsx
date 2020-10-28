@@ -4,7 +4,7 @@ const TextField = ({ icon, label, type, value, setValue }) => {
   return (
     <div className='textfield'>
       <img className='textfield-icon' src={icon} alt='icon' />
-      <p className='textfield-label'>{label}</p>
+      <p className='textfield-label' style={{fontSize:'15px'}}>{label}</p>
       <br />
       <input
         className='text-entry'
