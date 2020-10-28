@@ -15,7 +15,7 @@
   left: 0px;
   margin: auto;
   width: 1920px;
-  height: 1900px;
+  height: 100%;
   overflow: hidden;
   z-index: -1;
 }
@@ -23,6 +23,7 @@
 .favours-bg img {
   margin: 0 0 0 -250px;
   z-index: -1;
+  height: fit-content;
 }
 
 .create-request {
