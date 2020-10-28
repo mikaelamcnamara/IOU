@@ -82,7 +82,7 @@ const Navbar = () => {
                 style={{
                   marginTop: '-0.2%',
                   textDecoration: "none",
-                  display: loggedIn ? "inline-block" : "none",
+               
                 }}
               >
                 <p className="leaderboard-txt">LeaderBoard</p>
