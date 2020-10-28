@@ -19,11 +19,8 @@
   width: 550px;
 }
 
-
-
 .animation-login{
   margin-top:-50px;
-  
 }
 
 .signin-grid {
@@ -35,9 +32,10 @@
   position: absolute;
   top: 0px;
   left: 0px;
+  bottom: 0px;
   z-index: -1;
   width: 872px;
-  height: 1073px;
+  height: auto;
 }
 
 .signin-title {
@@ -47,10 +45,10 @@
 .signin-button {
   display: inline-block;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 15px;
   color: white;
   padding: 10px 0px;
-  width: 452px;
+  width: 200px;
   background-color: #01c48a;
   border-radius: 15px;
   cursor: pointer;
@@ -72,7 +70,7 @@
 
 .signin-account-text {
   margin-top: 0px;
-  font-size: 20px;
+  font-size: 15px;
   cursor: pointer;
 }
 
@@ -81,9 +79,10 @@
   position: absolute;
   top: 0px;
   left: -1000px;
+  bottom:0px;
   z-index: -1;
   width: 872px;
-  height: 1073px;
+  height: auto;
   -webkit-animation: slide 0.5s forwards;
   -webkit-animation-delay: 0.5s;
   animation: slide 0.5s forwards;
