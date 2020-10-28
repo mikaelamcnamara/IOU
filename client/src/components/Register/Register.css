@@ -30,7 +30,7 @@
 
 .home-grid {
   display: grid;
-  grid-template-columns: 872px auto;
+  grid-template-columns: 800px auto;
 }
 
 .home-img-text {
@@ -81,7 +81,7 @@
 .slide-bottom {
   position: absolute;
   z-index: -1;
-  width: 872px;
+  width: 800px;
   height: 100%;
   bottom: -1500px;
   -webkit-animation: slide 0.5s forwards;
