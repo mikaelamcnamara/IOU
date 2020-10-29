@@ -7,7 +7,9 @@
     "start": "node index.ts",
     "server": "nodemon index.ts",
     "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run server \" \"npm run client\""
+    "dev": "concurrently \"npm run server \" \"npm run client\"",
+    "startdock": "node index.js",
+    "devdock": "concurrently \"npm run startdock \" \"npm run client\""
   },
   "dependencies": {
     "axios": "^0.20.0",
