@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { favourApplicant, acceptSubmission, declineSubmission } from "../../APIFetchers";
 import NavBar from "../common/Navbar/Navbar";
-import Filter from "bad-words";
 import "../../App.css";
 import "./ReviewFavour.css";
 import Swal from "sweetalert2";
@@ -38,7 +37,6 @@ const ReviewFavour = () => {
   const getFavour = async () => {
     let fav = await favourApplicant(id);
     if (fav.favour.applicant_user) {
-      console.log(fav.favour.applicant_user);
       setFavour(fav.favour);
       const data = Buffer.from(fav.image.applicant_image.data).toString("base64");
       setImageString(`data:${fav.image.applicant_image.contentType};base64,` + data);

@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import NavBar from "../common/Navbar/Navbar";
 import { getAFavour } from '../../APIFetchers';
 import Swal from "sweetalert2";
+import Filter from "bad-words";
 
 import "../../App.css";
 import "./FulfillFavour.css";
@@ -35,7 +36,7 @@ const FulfillFavour = () => {
   })
 
   // Initialises the variables to access the elements
-  const history = useHistory();
+  const filter = new Filter();
 
   const imagePicker = useRef<HTMLInputElement>(null);
 
@@ -101,7 +102,7 @@ const FulfillFavour = () => {
             <label>
               Submission
               <br></br>
-              <input type="text" name="submission" placeholder="Write about your submission here" value={submission} onChange={(e) => setSubmission(e.target.value)} />
+              <input type="text" name="submission" placeholder="Write about your submission here" value={submission} onChange={(e) => setSubmission(filter.clean(e.target.value))} />
             </label>
 
             <br></br>
@@ -124,7 +125,7 @@ const FulfillFavour = () => {
 
             <br></br>
             <br></br>
-            <input style={{ display: 'none' }} type="text" name="favour_id" value={id} />
+            <input style={{ display: 'none' }} type="text" name="favour_id" value={id} onChange={imagePickHandler} />
             <div className="form-submit">
               <br></br>
               <input type="submit" value="Send!" />

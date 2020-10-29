@@ -138,3 +138,8 @@
 .friends-placeholder-text {
   color: #5c5a5a;
 }
+
+.friends-form {
+  margin: auto;
+  width: 450px;
+}

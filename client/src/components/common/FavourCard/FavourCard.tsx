@@ -32,7 +32,7 @@ const FavourCard = ({ avatar, name, category, title, description, xp, creatorId,
               <img src={burgerIcon} alt='' /> {category}
             </span>
           </div>
-          {!isPending && creatorId !== localStorage.getItem('user') && <Link to={`/FulfillFavour/${id}`}><button className='do-favour-btn'>Do Favour</button></Link>}
+          {!isPending && creatorId !== localStorage.getItem('user') && localStorage.getItem('user') != undefined && <Link to={`/FulfillFavour/${id}`}><button className='do-favour-btn'>Do Favour</button></Link>}
           {isPending && <button className='do-favour-btn'>Pending Approval</button>}
           <p className='card-text'>
             {description}

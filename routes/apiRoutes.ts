@@ -1,15 +1,20 @@
-import { resetState } from 'sweetalert/typings/modules/state';
-
-export { }; //trick TS into accepting below imports
+export {}; //trick TS into accepting below imports
 const mongoose = require("mongoose");
 const Favour = mongoose.model("favours");
 const User = mongoose.model("users");
 const Image = mongoose.model("images");
 const fs = require('fs');
 const multer = require('multer');
-const upload = multer({ dest: './uploads/' });
+const upload = multer({dest: './uploads/', limits: {
+  fileSize: 1000000,
+}});
 
 module.exports = (app) => {
+
+  const removeLocalImage = (path, res) => {
+    fs.unlinkSync(path);
+    return res.redirect('/Favours');
+  }
   app.post("/api/photo", upload.single('image_file'), function (req, res) {
     const image = new Image();
     image.data = fs.readFileSync(req.file.path);
@@ -23,7 +28,7 @@ module.exports = (app) => {
         if (err) {
           res.send(err);
         } else {
-          return res.redirect('/Favours');
+          return removeLocalImage(req.file.path, res);
         }
       })
     });
@@ -166,25 +171,56 @@ module.exports = (app) => {
   });
   //Integrate pagination for this back-end call
   app.get('/api/allFavours', (req: any, res: any) => {
-    Favour.find({}).populate("creator", "_id avatar fullName").exec(function (err, favours) {
+    const page = req.query.page - 1;
+    const description = req.query.description;
+    Favour.find({"complete": null, "description": {"$regex": description, "$options": "i"}}).sort({"_id": 1}).skip(page*10).limit(10).populate("creator", "_id avatar fullName").exec(function (err, favs) {
       if (err) return res.send(err);
-      res.send(favours);
+      Favour.countDocuments({"complete": null, "description": {"$regex": description, "$options": "i"}}).exec(function (err, count) {
+        if (err) return res.send(err);
+        res.send({
+          favours: favs,
+          count: count
+        })
+      })
     });
   })
 
   app.get('/api/allUsers', (req: any, res: any) => {
-    User.find({}, function (err, users) {
+    const page = req.query.page - 1;
+    const name = req.query.name;
+    User.find({"fullName": {"$regex": name, "$options": "i"}}).sort({"_id": 1}).skip(page*10).limit(10).exec(function (err, users) {
       if (err) return res.send(err);
-      res.send(users);
+      User.countDocuments({"fullName": {"$regex": name, "$options": "i"}}).exec(function (err, count) {
+        if (err) return res.send(err);
+        res.send({
+          users: users,
+          count: count,
+        })
+      });
     });
   });
 
   app.get("/api/getFriendNames", (req: any, res: any) => {
-    User.findById(req.session.passport.user).populate("friends", 'fullName _id avatar experiencePoints').exec(function (err, result) {
-      if (err) return res.send(err);
-      res.send(result.friends);
-    })
+    const page = req.query.page - 1;
+    const name = req.query.name;
+    User.findById(req.session.passport.user).populate({ path: "friends", select: {'fullName': 1, '_id': 1, 'avatar': 1, 'experiencePoints': 1}, match: {"fullName": {"$regex": name, "$options": "i"}}, options: {
+      sort: {"_id": 1},
+    }}).exec(function (err, result) {
+        if (err) return res.send(err);
+        res.send({
+          users: result.friends,
+          count: result.friends.length,
+        })
+    });
   });
+
+  app.get("/api/getAllFriendNames", (req: any, res: any) => {
+    User.findById(req.session.passport.user).populate({ path: "friends", select: {'fullName': 1, "_id": 1}}).exec(function (err, result) {
+        if (err) return res.send(err);
+        res.send(result.friends);
+    });
+  });
+
 
   app.get("/api/getAvatar", (req: any, res: any) => {
     User.findById(req.session.passport.user, "avatar")
@@ -242,7 +278,10 @@ module.exports = (app) => {
   })
 
   app.get('/api/getMyCompletedFavours', (req: any, res: any) => {
-    User.findById(req.session.passport.user, "completedFavours").populate({ path: "completedFavours", populate: { path: "creator", select: { "avatar": 1, "fullName": 1 } } })
+    User.findById(req.session.passport.user, "completedFavours").populate({path: "completedFavours", populate: { path: "creator", select: {"avatar": 1, "fullName": 1}}, options: {
+      limit: 10,
+      sort: {"_id": 1},
+    }})
       .exec(function (err, favours) {
         if (err) return res.send(err);
         res.send(favours);
@@ -262,10 +301,13 @@ module.exports = (app) => {
   app.post('/api/declineSubmission', (req: any, res: any) => {
     Favour.findByIdAndUpdate(req.body.id, { applicant_user: null, applicant_description: null, applicant_image: null }).exec(function (err, favour) {
       if (err) return res.send(err);
-      res.send({
-        success: true,
-        message: "Submission declined",
-      })
+      Image.findByIdAndDelete(favour.applicant_image).exec(function (err) {
+        if (err) return res.send(err);
+        res.send({
+          success: true,
+          message: "Submission declined",
+        })
+      });
     })
   })
 
@@ -275,12 +317,15 @@ module.exports = (app) => {
     User.findByIdAndUpdate(applicant_id, { $push: { completedFavours: favour._id }, $inc: { experiencePoints: favour.points } }).exec(function (err) {
       if (err) res.send(err);
     });
-    Favour.findByIdAndUpdate(favour._id, { complete: true }).exec(function (err, result) {
+    Favour.findByIdAndUpdate(favour._id, {complete: true}).exec(function (err, favour) {
       if (err) return res.send(err);
-      res.send({
-        success: true,
-        message: "Submission accepted",
-      })
+      Image.findByIdAndDelete(favour.applicant_image).exec(function (err) {
+        if (err) return res.send(err);
+        res.send({
+          success: true,
+          message: "Submission accepted",
+        })
+      });
     });
   })
 
