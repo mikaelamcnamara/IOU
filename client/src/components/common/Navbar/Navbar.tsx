@@ -13,6 +13,7 @@ const Navbar = () => {
   const [loggedIn] = useState(localStorage.getItem("user") ? true : false);
   const [avatar, setAvatar] = useState(0);
 
+  // Retrieves user profile which was assigned to them randomly
   const getProfilePic = async () => {
     const result = await getAvatar();
     setAvatar(result.avatar);
@@ -22,6 +23,7 @@ const Navbar = () => {
     localStorage.getItem("user") && getProfilePic();
   });
 
+  // Able to log the user out of the app
   const handleLogout = async () => {
     await logout();
     window.location.reload();

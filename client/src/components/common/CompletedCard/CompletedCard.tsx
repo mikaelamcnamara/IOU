@@ -8,15 +8,16 @@ interface IProps {
   name: String,
   category: String,
   title: String,
-  description: String, 
+  description: String,
   xp: Number,
 }
 
-const CompletedCard = ({avatar, name, category, title, description, xp}: IProps) => {
+// Completed cards which dynamically displays on a users profile of any favours they have completed
+const CompletedCard = ({ avatar, name, category, title, description, xp }: IProps) => {
   return (
     <>
       <div className='favours-card'>
-        <div className='favours-card-square-bg' style={{backgroundColor: Avatars[avatar].color}}>
+        <div className='favours-card-square-bg' style={{ backgroundColor: Avatars[avatar].color }}>
           <img className='avatar' src={Avatars[avatar].avatar} alt='avatar' />
         </div>
         <div className='right-details'>

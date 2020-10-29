@@ -17,6 +17,7 @@ interface IProps {
   isPending: Boolean,
 }
 
+// Automatically generates when a user tries to request for reviewing the favour they have completed
 const RequestCard = ({ avatar, name, category, title, description, xp, id, isPending }: IProps) => {
 
   const handleRemove = async () => {

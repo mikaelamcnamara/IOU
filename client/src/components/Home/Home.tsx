@@ -8,6 +8,7 @@ import SkeletonCard from '../common/SkeletonLoad/Skeleton';
 import FavourCard from '../common/FavourCard/FavourCard';
 import { getAllFavours } from '../../APIFetchers';
 
+// Dynamically load the favour cards and also use skeleton loading
 const Home = () => {
   const [loading, setLoading] = useState(false);
   const [publicFavours, setPublicFavours] = useState([]);

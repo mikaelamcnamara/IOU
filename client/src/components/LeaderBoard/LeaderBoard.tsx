@@ -10,6 +10,7 @@ import LeaderCard from '../common/LeaderCard/LeaderCard';
 import SkeletonCard from '../common/SkeletonLoad/Skeleton';
 import ConfettiGenerator from 'confetti-js';
 
+// Canvas element used to render confetti animation
 const LeaderBoard = () => {
   const [loading, setLoading] = useState(false);
   const [topUsers, setTopUsers] = useState([]);
@@ -19,10 +20,10 @@ const LeaderBoard = () => {
     let leaders = await leaderboard();
     leaders = leaders.map((leader, i) => <LeaderCard key={leader.fullName} avatar={leader.avatar} name={leader.fullName} xp={leader.experiencePoints} place={i} />);
     setTopUsers(leaders);
-    console.log(topUsers);
     setLoading(false);
   }
 
+  // Configuration of confetti element
   useEffect(() => {
     populateLeaderboard();
     const confettiSettings = { target: 'my-canvas' };
@@ -39,6 +40,7 @@ const LeaderBoard = () => {
         src={LeaderBoardHeader}
         alt='leaderboard-background'
       ></img>
+
 
       <canvas id='my-canvas'></canvas>
       <div className='leader-content'>

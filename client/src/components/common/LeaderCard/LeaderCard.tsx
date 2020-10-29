@@ -12,6 +12,7 @@ interface IProps {
   place: number,
 }
 
+// Dynamically loads and displays the leadercards and assigns different trophies depending on ranking
 const LeaderCard = ({ avatar, name, xp, place }: IProps) => {
 
   const colors = ['#01C48A', '#A051FB', '#FF995A'];

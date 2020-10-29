@@ -8,6 +8,8 @@ import Filter from "bad-words";
 import "../../App.css";
 import "./CreateFavour.css";
 
+// Create favours and assign it to the a user which is handled through
+// react hooks and API calls to the back end database
 const CreateFavour = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");

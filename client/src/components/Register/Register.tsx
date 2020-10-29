@@ -13,6 +13,8 @@ import Swal from 'sweetalert2'
 import '../../App.css';
 import './Register.css';
 
+// Registration which checks for valid names, emails and passwords
+// Displays error message if incorrect values are entered
 const Register = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');

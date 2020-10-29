@@ -13,8 +13,8 @@ import Swal from 'sweetalert2'
 import '../../App.css';
 import './SignIn.css';
 
-//TODO: Add Forgot Password link to page!
-
+// Signup which checks for authenticated user credentials by
+// retrieiving details of that user through API calls and then comparing it 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -58,7 +58,7 @@ const SignUp = () => {
         </div>
       </div>
       <div className='slide-up'>
-      <a href="/" className="close"></a>
+        <a href="/" className="close"></a>
         <img className='signin-title' src={SignInTitle} alt='Sign In to IOU' />
         <br />
         <div className='animation-login'>

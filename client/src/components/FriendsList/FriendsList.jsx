@@ -11,7 +11,8 @@ import Swal from "sweetalert2";
 import { getAllUsers, getFriendNames, addAFriend, removeFriend } from '../../APIFetchers';
 
 
-
+// Loads friends and has three different categories
+// Also utilises pagination to display 10 friends per page
 const FriendsList = (props) => {
   const [loading, setLoading] = useState(false);
   const [friendsList, setFriendsList] = useState([]);

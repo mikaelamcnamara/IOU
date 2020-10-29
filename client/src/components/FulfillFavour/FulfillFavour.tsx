@@ -17,6 +17,7 @@ type Favour = {
   description: string,
 }
 
+// Initialises the states
 const FulfillFavour = () => {
   const { id } = useParams();
   const [previewUrl, setPreviewUrl] = useState();
@@ -33,6 +34,7 @@ const FulfillFavour = () => {
     description: '',
   })
 
+  // Initialises the variables to access the elements
   const history = useHistory();
 
   const imagePicker = useRef<HTMLInputElement>(null);
@@ -41,6 +43,7 @@ const FulfillFavour = () => {
     const fav = await getAFavour(id);
     setFavour(fav);
   }
+
 
   useEffect(() => {
     getFavourDetails();
@@ -55,7 +58,7 @@ const FulfillFavour = () => {
   }, [image]);
 
 
-
+  // Handle image picker and then display it to the user for preview
   const imagePickHandler = (e) => {
     imagePicker?.current?.click();
     let pickedFile;
@@ -66,25 +69,6 @@ const FulfillFavour = () => {
       setIsValid(true);
     } else {
       setIsValid(false);
-    }
-  }
-
-  const uploadForm = async (e) => {
-    history.push(`/FulfillFavour/${id}`);
-    e.preventDefault();
-    if (isValid == true) {
-      Swal.fire(
-        "Favour Fulfilled!",
-        "Your form has been successfully sent for review.",
-        "success"
-      );
-    }
-    else {
-      Swal.fire(
-        "Please upload an image",
-        "Please upload an image of jpg, png or jpeg format.",
-        "error"
-      );
     }
   }
 
