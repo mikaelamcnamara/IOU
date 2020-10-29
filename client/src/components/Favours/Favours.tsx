@@ -19,7 +19,6 @@ const Favours = () => {
     setMyFavours(favs);
 
     result = await getMyDebts();
-    console.log(result);
     const debts = result.myDebts.filter(debt => !debt.complete).map(debt => <FavourCard key={debt._id} creatorId={debt.creator._id} avatar={debt.creator.avatar} name={debt.creator.fullName} category={debt.category} title={debt.title} description={debt.description} xp={debt.points} id={debt._id} isPending={debt.applicant_user}/>)
     setMyDebts(debts);
   }

@@ -81,9 +81,9 @@ const getCurrentUser = async () => {
   }
 };
 
-const getAllUsers = async () => {
+const getAllUsers = async (page, name) => {
   try {
-    const resp = await fetch("/api/allUsers");
+    const resp = await fetch(`/api/allUsers?page=${page}&name=${name}`);
     const result = await resp.json();
     return result;
   } catch (e) {
@@ -93,9 +93,9 @@ const getAllUsers = async () => {
   }
 };
 
-const getAllFavours = async () => {
+const getAllFavours = async (page, description) => {
   try {
-    const resp = await fetch("/api/allFavours");
+    const resp = await fetch(`/api/allFavours?page=${page}&description=${description}`);
     const result = await resp.json();
     return result;
   } catch (e) {
@@ -212,14 +212,14 @@ const leaderboard = async () => {
   }
 };
 
-const getFriendNames = async () => {
+const getFriendNames = async (page, name) => {
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   };
 
   try {
-    let resp = await fetch("/api/getFriendNames", requestOptions);
+    let resp = await fetch(`/api/getFriendNames?page=${page}&name=${name}`, requestOptions);
     let result = await resp.json();
     return result;
   } catch (e) {
@@ -412,6 +412,22 @@ const getMyCompletedFavours = async () => {
   }
 };
 
+const getAllFriendNames = async () => {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+
+  try {
+    let resp = await fetch("/api/getAllFriendNames", requestOptions);
+    let result = await resp.json();
+    return result;
+  } catch (e) {
+    return e;
+  } finally {
+  }
+};
+
 export {
   login,
   register,
@@ -435,4 +451,5 @@ export {
   acceptSubmission,
   declineSubmission,
   getMyCompletedFavours,
+  getAllFriendNames,
 };

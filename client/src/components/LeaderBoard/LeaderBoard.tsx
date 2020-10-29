@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { leaderboard } from '../../APIFetchers';
 import LeaderBoardHeader from '../../assets/leaderboard.svg';
 
@@ -20,7 +19,6 @@ const LeaderBoard = () => {
     let leaders = await leaderboard();
     leaders = leaders.map((leader, i) => <LeaderCard key={leader.fullName} avatar={leader.avatar} name={leader.fullName} xp={leader.experiencePoints} place={i}/>);
     setTopUsers(leaders);
-    console.log(topUsers);
     setLoading(false);
   }
 

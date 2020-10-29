@@ -38,7 +38,6 @@ const ReviewFavour = () => {
   const getFavour = async () => {
     let fav = await favourApplicant(id);
     if (fav.favour.applicant_user) {
-      console.log(fav.favour.applicant_user);
       setFavour(fav.favour);
       const data = Buffer.from(fav.image.applicant_image.data).toString("base64");
       setImageString(`data:${fav.image.applicant_image.contentType};base64,` + data);
