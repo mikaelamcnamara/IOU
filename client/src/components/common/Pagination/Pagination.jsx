@@ -2,7 +2,6 @@ import React from 'react';
 import './Pagination.css'
 
 // Section handles pagination where it creates a page per 10 items on the page
-
 const Pagination = ({ postsPerPage, totalAvatarCards, paginate }) => {
   const pageNumbers = [];
 
