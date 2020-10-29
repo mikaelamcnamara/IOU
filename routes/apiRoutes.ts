@@ -1,4 +1,4 @@
-export { }; //trick TS into accepting below imports
+export {}; //trick TS into accepting below imports
 const mongoose = require("mongoose");
 const Favour = mongoose.model("favours");
 const User = mongoose.model("users");
