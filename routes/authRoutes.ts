@@ -65,7 +65,7 @@ module.exports = (app: any) => {
       if (/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}/.test(email)) {
         //saving new user in DB
         const newUser = new User();
-        newUser.avatar = Math.floor((Math.random() *5) + 1);
+        newUser.avatar = Math.floor((Math.random() * 5) + 1);
         newUser.fullName = inputName;
         newUser.email = email.toLowerCase();
         newUser.userType = 'Student';

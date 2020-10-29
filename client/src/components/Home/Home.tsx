@@ -4,18 +4,18 @@ import './Home.css';
 import BackgroundNew from '../../assets/bg-new.svg';
 import ChattyMessage from '../../assets/chatting_isometric.svg';
 import NavBar from '../common/Navbar/Navbar';
-import AvatarCard from '../common/AvatarCard/AvatarCard';
 import SkeletonCard from '../common/SkeletonLoad/Skeleton';
 import FavourCard from '../common/FavourCard/FavourCard';
 import { getAllFavours } from '../../APIFetchers';
 
+// Dynamically load the favour cards and also use skeleton loading
 const Home = () => {
   const [loading, setLoading] = useState(false);
   const [publicFavours, setPublicFavours] = useState([]);
 
   const getFavours = async () => {
     let favs = await getAllFavours();
-    favs = favs.filter(favour => !favour.complete).map(favour => <FavourCard key={favour._id} creatorId={favour.creator._id} avatar={favour.creator.avatar} name={favour.creator.fullName} category={favour.category} title={favour.title} description={favour.description} xp={favour.points} id={favour._id} isPending={favour.applicant_user}/>)
+    favs = favs.filter(favour => !favour.complete).map(favour => <FavourCard key={favour._id} creatorId={favour.creator._id} avatar={favour.creator.avatar} name={favour.creator.fullName} category={favour.category} title={favour.title} description={favour.description} xp={favour.points} id={favour._id} isPending={favour.applicant_user} />)
     setPublicFavours(favs);
   }
 

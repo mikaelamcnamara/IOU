@@ -15,6 +15,9 @@ import Account from './components/Account/Account';
 import FriendsList from './components/FriendsList/FriendsList';
 import SearchPage from './components/SearchPage/SearchPage';
 
+// Contains routes for all pages on the application
+// Also handles protected routes which checks if user is logged in else
+// it would prevent them from accessing that route
 const App = () => {
   return (
     <div className='App'>
@@ -30,20 +33,12 @@ const App = () => {
             component={Home}
           />
           <Route
-            //atEnter={{ opacity: 0 }}
-            //atLeave={{ opacity: 0 }}
-            //atActive={{ opacity: 1 }}
-            //timeout={500}
             path='/Register'
             exact
           >
             {localStorage.getItem('user') ? <Redirect to="/" /> : <Register />}
           </Route>
           <Route
-            //atEnter={{ opacity: 0 }}
-            //atLeave={{ opacity: 0 }}
-            //atActive={{ opacity: 1 }}
-            //timeout={500}
             path='/SignIn'
             exact
           >
@@ -59,60 +54,36 @@ const App = () => {
             component={LeaderBoard}
           />
           <Route
-            //atEnter={{ opacity: 0 }}
-            //atLeave={{ opacity: 0 }}
-            //atActive={{ opacity: 1 }}
-            //timeout={500}
             path='/CreateFavour'
             exact
           >
             {localStorage.getItem('user') ? <CreateFavour /> : <Redirect to="/SignIn" />}
           </Route>
           <Route
-            //atEnter={{ opacity: 0 }}
-            //atLeave={{ opacity: 0 }}
-            //atActive={{ opacity: 1 }}
-            //timeout={500}
             path='/FulfillFavour/:id'
             exact
           >
             {localStorage.getItem('user') ? <FulfillFavour /> : <Redirect to="/SignIn" />}
           </Route>
           <Route
-            //atEnter={{ opacity: 0 }}
-            //atLeave={{ opacity: 0 }}
-            //atActive={{ opacity: 1 }}
-            //timeout={500}
             path='/ReviewFavour/:id'
             exact
           >
             {localStorage.getItem('user') ? <ReviewFavour /> : <Redirect to="/SignIn" />}
           </Route>
           <Route
-            //atEnter={{ opacity: 0 }}
-            //atLeave={{ opacity: 0 }}
-            //atActive={{ opacity: 1 }}
-            //timeout={500}
             path='/PersonalDetails'
             exact
           >
             {localStorage.getItem('user') ? <PersonalDetails /> : <Redirect to="/SignIn" />}
           </Route>
           <Route
-            //atEnter={{ opacity: 0 }}
-            //atLeave={{ opacity: 0 }}
-            //atActive={{ opacity: 1 }}
-            //timeout={500}
             path='/Favours'
             exact
           >
             {localStorage.getItem('user') ? <Favours /> : <Redirect to="/SignIn" />}
           </Route>
           <Route
-            //atEnter={{ opacity: 0 }}
-            //atLeave={{ opacity: 0 }}
-            //atActive={{ opacity: 1 }}
-            //timeout={500}
             path='/Account'
             exact
             component={Account}
@@ -121,10 +92,6 @@ const App = () => {
           </Route>
 
           <Route
-            //atEnter={{ opacity: 0 }}
-            //atLeave={{ opacity: 0 }}
-            //atActive={{ opacity: 1 }}
-            //timeout={500}
             path='/FriendsList'
             exact
             component={FriendsList}
@@ -133,10 +100,6 @@ const App = () => {
           </Route>
 
           <Route
-            //atEnter={{ opacity: 0 }}
-            //atLeave={{ opacity: 0 }}
-            //atActive={{ opacity: 1 }}
-            //timeout={500}
             path='/SearchPage'
             component={SearchPage}
           >

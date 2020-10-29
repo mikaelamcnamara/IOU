@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
 import './FriendsList.css';
 import FriendBG from '../../assets/friendlist.svg';
 import NavBar from '../common/Navbar/Navbar';
 import FriendCard from '../common/Friend/Friend';
 import SkeletonCard from '../common/SkeletonLoad/Skeleton';
 import Pagination from '../common/Pagination/Pagination';
-import ConfettiGenerator from 'confetti-js';
 import Swal from "sweetalert2";
 
 
 import { getAllUsers, getFriendNames, addAFriend, removeFriend } from '../../APIFetchers';
-import Friend from '../common/Friend/Friend';
 
 
+// Loads friends and has three different categories
+// Also utilises pagination to display 10 friends per page
 const FriendsList = (props) => {
   const [loading, setLoading] = useState(false);
   const [friendsList, setFriendsList] = useState([]);
@@ -34,18 +33,18 @@ const FriendsList = (props) => {
     users = users.map((user) => {
       const match = mates.find(i => i._id == user._id) !== undefined;
       return <div key={user._id}>
-        {user.fullName.toLowerCase().includes(filter.toLowerCase()) && 
-        <FriendCard avatar={user.avatar} name={user.fullName} xp={user.experiencePoints} id={user._id} addFriend={addFriends} removeFriend={removeFriends} isFriend={match}/>}
+        {user.fullName.toLowerCase().includes(filter.toLowerCase()) &&
+          <FriendCard avatar={user.avatar} name={user.fullName} xp={user.experiencePoints} id={user._id} addFriend={addFriends} removeFriend={removeFriends} isFriend={match} />}
       </div>
-     });
+    });
     setFriendsList(users);
   }
 
   const populateYourFriends = async () => {
     setLoading(true);
     let users = yourFriends.map(user => <div key={user._id}>
-      {user.fullName.toLowerCase().includes(filter.toLowerCase()) && 
-      <FriendCard avatar={user.avatar} name={user.fullName} xp={user.experiencePoints} id={user._id} addFriend={addFriends} removeFriend={removeFriends} isFriend={true}/>}
+      {user.fullName.toLowerCase().includes(filter.toLowerCase()) &&
+        <FriendCard avatar={user.avatar} name={user.fullName} xp={user.experiencePoints} id={user._id} addFriend={addFriends} removeFriend={removeFriends} isFriend={true} />}
     </div>)
     setFriendsList(users);
   }
@@ -138,19 +137,19 @@ const FriendsList = (props) => {
           </button>
           <div className='friend-bg'>
 
-        {loading &&
-          <div className="loading-card">
-            <SkeletonCard />
-          </div>
-        }
-        {!loading &&
-          <div>
-            {friendsList.length !== 0 ? <>
-            {friendsList.slice(indexOfFirstPost, indexOfLastPost)} 
-            <Pagination postsPerPage={postsPerPage} totalAvatarCards={friendsList.length} paginate={paginate}/> 
-            </> : <h2 className="friends-placeholder-text">Go add some friends!</h2>}
-          </div>
-        }
+            {loading &&
+              <div className="loading-card">
+                <SkeletonCard />
+              </div>
+            }
+            {!loading &&
+              <div>
+                {friendsList.length !== 0 ? <>
+                  {friendsList.slice(indexOfFirstPost, indexOfLastPost)}
+                  <Pagination postsPerPage={postsPerPage} totalAvatarCards={friendsList.length} paginate={paginate} />
+                </> : <h2 className="friends-placeholder-text">Go add some friends!</h2>}
+              </div>
+            }
           </div>
         </div>
       </div>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import manAvatar from '../../../assets/first-man-avatar.svg';
 import burgerIcon from '../../../assets/burger-icon.svg';
 import trashIcon from '../../../assets/trash-icon.svg';
 import './RequestCard.css';
@@ -18,7 +17,8 @@ interface IProps {
   isPending: Boolean,
 }
 
-const RequestCard = ({avatar, name, category, title, description, xp, id, isPending}: IProps) => {
+// Automatically generates when a user tries to request for reviewing the favour they have completed
+const RequestCard = ({ avatar, name, category, title, description, xp, id, isPending }: IProps) => {
 
   const handleRemove = async () => {
     await removeFavour(id);
@@ -27,7 +27,7 @@ const RequestCard = ({avatar, name, category, title, description, xp, id, isPend
   return (
     <>
       <div className='favours-card'>
-        <div className='favours-card-square-bg' style={{backgroundColor: Avatars[avatar].color}}>
+        <div className='favours-card-square-bg' style={{ backgroundColor: Avatars[avatar].color }}>
           <img className='avatar' src={Avatars[avatar].avatar} alt='avatar' />
         </div>
         <div className='right-details'>
@@ -43,7 +43,7 @@ const RequestCard = ({avatar, name, category, title, description, xp, id, isPend
           <p className='points-text'>+ EARN {xp}XP</p>
         </div>
         {isPending && <Link to={`/ReviewFavour/${id}`}><button className='do-favour-btn-2'>Review Favour</button></Link>}
-        <img className='trash' src={trashIcon} alt='trash' onClick={() => handleRemove()}/>
+        <img className='trash' src={trashIcon} alt='trash' onClick={() => handleRemove()} />
       </div>
     </>
   );

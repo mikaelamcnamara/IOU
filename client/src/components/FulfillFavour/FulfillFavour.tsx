@@ -17,6 +17,7 @@ type Favour = {
   description: string,
 }
 
+// Initialises the states
 const FulfillFavour = () => {
   const { id } = useParams();
   const [previewUrl, setPreviewUrl] = useState();
@@ -33,15 +34,16 @@ const FulfillFavour = () => {
     description: '',
   })
 
+  // Initialises the variables to access the elements
   const history = useHistory();
 
   const imagePicker = useRef<HTMLInputElement>(null);
 
   const getFavourDetails = async () => {
     const fav = await getAFavour(id);
-    // console.log(fav);
     setFavour(fav);
   }
+
 
   useEffect(() => {
     getFavourDetails();
@@ -56,7 +58,7 @@ const FulfillFavour = () => {
   }, [image]);
 
 
-
+  // Handle image picker and then display it to the user for preview
   const imagePickHandler = (e) => {
     imagePicker?.current?.click();
     let pickedFile;
@@ -67,25 +69,6 @@ const FulfillFavour = () => {
       setIsValid(true);
     } else {
       setIsValid(false);
-    }
-  }
-
-  const uploadForm = async (e) => {
-    history.push(`/FulfillFavour/${id}`);
-    e.preventDefault();
-    if (isValid == true) {
-      Swal.fire(
-        "Favour Fulfilled!",
-        "Your form has been successfully sent for review.",
-        "success"
-      );
-    }
-    else {
-      Swal.fire(
-        "Please upload an image",
-        "Please upload an image of jpg, png or jpeg format.",
-        "error"
-      );
     }
   }
 
@@ -132,7 +115,6 @@ const FulfillFavour = () => {
                   {previewUrl && <img src={previewUrl} alt="Preview" />}
                 </div>
               </div>
-              {/* <input type="file" accept=".png, .jpeg, .jpg" onChange={(e) => setImage(e.target.value)} /> */}
 
               <input type="file" name="image_file" ref={imagePicker} accept=".png, .jpeg, .jpg" onChange={imagePickHandler} />
             </label>
@@ -142,10 +124,10 @@ const FulfillFavour = () => {
 
             <br></br>
             <br></br>
-            <input style={{display: 'none'}} type="text" name="favour_id" value={id}/>
+            <input style={{ display: 'none' }} type="text" name="favour_id" value={id} />
             <div className="form-submit">
               <br></br>
-              <input type="submit" value="Send!"/>
+              <input type="submit" value="Send!" />
             </div>
           </form>
         </div>

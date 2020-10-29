@@ -1,6 +1,7 @@
 import React from 'react';
 import './ProgressBar.css';
 
+// Used for updating and dispalying points (experience points) progression on user profile
 const ProgressBar = (props) => {
   const { bgcolor, completed } = props;
 

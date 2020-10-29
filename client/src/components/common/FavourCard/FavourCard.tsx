@@ -1,6 +1,6 @@
 import React from 'react';
 import Avatars from '../Avatars/Avatars';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import burgerIcon from '../../../assets/burger-icon.svg';
 import './FavourCard.css';
 
@@ -9,18 +9,20 @@ interface IProps {
   name: String,
   category: String,
   title: String,
-  description: String, 
+  description: String,
   xp: Number,
   creatorId: String,
   id: String,
   isPending: Boolean,
 }
 
-const FavourCard = ({avatar, name, category, title, description, xp, creatorId, id, isPending}: IProps) => {
+// Dynamically displays favour cards whcih are created by the user and also has different
+// conditional states such as pending or do favour
+const FavourCard = ({ avatar, name, category, title, description, xp, creatorId, id, isPending }: IProps) => {
   return (
     <>
       <div className='favours-card'>
-        <div className='favours-card-square-bg' style={{backgroundColor: Avatars[avatar].color}}>
+        <div className='favours-card-square-bg' style={{ backgroundColor: Avatars[avatar].color }}>
           <img className='avatar' src={Avatars[avatar].avatar} alt='avatar' />
         </div>
         <div className='right-details'>

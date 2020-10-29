@@ -13,6 +13,7 @@ const Navbar = () => {
   const [loggedIn] = useState(localStorage.getItem("user") ? true : false);
   const [avatar, setAvatar] = useState(0);
 
+  // Retrieves user profile which was assigned to them randomly
   const getProfilePic = async () => {
     const result = await getAvatar();
     setAvatar(result.avatar);
@@ -22,6 +23,7 @@ const Navbar = () => {
     localStorage.getItem("user") && getProfilePic();
   });
 
+  // Able to log the user out of the app
   const handleLogout = async () => {
     await logout();
     window.location.reload();
@@ -58,7 +60,8 @@ const Navbar = () => {
               </div>
             </Link>
             <div className="nav-middle">
-              <form className="search-form" onSubmit={handleOnSubmit}>
+              <form className="search-form" onClick={handleOnSubmit}>
+
                 <input
                   type="text"
                   className="search-input"
@@ -82,7 +85,7 @@ const Navbar = () => {
                 style={{
                   marginTop: '-0.2%',
                   textDecoration: "none",
-               
+
                 }}
               >
                 <p className="leaderboard-txt">LeaderBoard</p>

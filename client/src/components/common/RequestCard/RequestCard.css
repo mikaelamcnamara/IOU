@@ -40,6 +40,7 @@
   display: inline;
   float: left;
   margin-left: 20px;
+ 
 }
 
 .points-text {
@@ -50,6 +51,8 @@
   font-weight: bolder;
 }
 
+<<<<<<< HEAD
+=======
 .do-favour-btn-2 {
   float: right;
   transition-duration: 0.3s;
@@ -65,6 +68,7 @@
   color: white;
   cursor: pointer;
 }
+>>>>>>> 6d076bb069da20cbec32b5f2fb81758934021c71
 
 .tag {
   color: #4d6bff;
@@ -82,5 +86,22 @@
   float: right;
   margin-top: -30px;
   margin-right: 20px;
+  cursor: pointer;
+}
+
+
+.do-favour-btn-2 {
+  float: right;
+  transition-duration: 0.3s;
+  font-family: 'Montserrat', sans-serif;
+  background: #fe8e51;
+  border-radius: 5px;
+  width: 150px;
+  border: none;
+  margin-right: 30px;
+  height: 40px;
+  font-weight: 600;
+  margin-top: -30px;
+  color: white;
   cursor: pointer;
 }

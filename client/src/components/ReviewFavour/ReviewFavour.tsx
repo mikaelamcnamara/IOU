@@ -18,9 +18,9 @@ type Favour = {
   applicant_image: string,
 }
 
+// Hooks initialised for review favour which would be triggered
+// when user has submitted a request to review the fulfilled favour
 const ReviewFavour = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
   const { id } = useParams();
   const [imageString, setImageString] = useState('');
   const [favour, setFavour] = useState<Favour>({
@@ -47,9 +47,9 @@ const ReviewFavour = () => {
 
   useEffect(() => {
     getFavour();
-  },[]);
+  }, []);
 
-  const accept= async (e) => {
+  const accept = async (e) => {
     e.preventDefault();
     let res = await acceptSubmission(favour, favour.applicant_user._id);
     if (res.success) {
@@ -106,9 +106,9 @@ const ReviewFavour = () => {
             <label>
               Submission Text
             </label>
-              <br></br>
-              <br></br>
-              <p>{favour.applicant_description}</p>
+            <br></br>
+            <br></br>
+            <p>{favour.applicant_description}</p>
 
             <br></br>
 
@@ -117,15 +117,15 @@ const ReviewFavour = () => {
               Image
             </label>
             <br></br>
-            <div style={{margin: 'auto', textAlign: 'center'}}>
-              <img style={{margin: 'auto'}} src={imageString} alt="image"/>
+            <div style={{ margin: 'auto', textAlign: 'center' }}>
+              <img style={{ margin: 'auto' }} src={imageString} alt="image" />
             </div>
             <br></br>
             <br></br>
 
             <div className="form-submit">
               <br></br>
-              <input className="accept-button" type="submit" onClick={(e)=> accept(e)} value="Accept" />
+              <input className="accept-button" type="submit" onClick={(e) => accept(e)} value="Accept" />
               <br></br>
               <br></br>
               <input type="submit" onClick={(e) => decline(e)} value="Decline" />

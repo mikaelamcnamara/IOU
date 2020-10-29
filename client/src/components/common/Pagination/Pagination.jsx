@@ -1,6 +1,8 @@
 import React from 'react';
 import './Pagination.css'
 
+// Section handles pagination where it creates a page per 10 items on the page
+
 const Pagination = ({ postsPerPage, totalAvatarCards, paginate }) => {
 
 
@@ -12,15 +14,13 @@ const Pagination = ({ postsPerPage, totalAvatarCards, paginate }) => {
 
   return (
     <ul className="pagination">
-      {/* <li className="avatar-item" >{"<"} </li> */}
       {pageNumbers.map(number => (
         <li key={number} className="avatar-item">
-          <a onClick={() => paginate(number)} href="#" className="page-link">
+          <a href="#" onClick={() => paginate(number)} className="page-link">
             {number}
           </a>
         </li>
       ))}
-      {/* <li className="avatar-item" >{">"} </li> */}
     </ul>
   )
 

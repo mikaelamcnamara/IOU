@@ -83,6 +83,7 @@
   z-index: -1;
   width: 872px;
   height: auto;
+  overflow: hidden;
   -webkit-animation: slide 0.5s forwards;
   -webkit-animation-delay: 0.5s;
   animation: slide 0.5s forwards;

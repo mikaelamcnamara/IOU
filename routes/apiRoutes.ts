@@ -1,13 +1,13 @@
 import { resetState } from 'sweetalert/typings/modules/state';
 
-export {}; //trick TS into accepting below imports
+export { }; //trick TS into accepting below imports
 const mongoose = require("mongoose");
 const Favour = mongoose.model("favours");
 const User = mongoose.model("users");
 const Image = mongoose.model("images");
 const fs = require('fs');
 const multer = require('multer');
-const upload = multer({dest: './uploads/'});
+const upload = multer({ dest: './uploads/' });
 
 module.exports = (app) => {
   app.post("/api/photo", upload.single('image_file'), function (req, res) {
@@ -21,7 +21,6 @@ module.exports = (app) => {
         applicant_image: image,
       }, { upsert: true }, function (err) {
         if (err) {
-          console.log("Error");
           res.send(err);
         } else {
           return res.redirect('/Favours');
@@ -29,7 +28,7 @@ module.exports = (app) => {
       })
     });
   })
-  
+
   app.post("/api/logout", (req: any, res: any) => {
     req.logout(); //kills cookie
     res.send(req.session.passport.user);
@@ -51,7 +50,6 @@ module.exports = (app) => {
       { upsert: true },
       function (err) {
         if (err) {
-          console.log("Error");
           res.send(err);
         } else {
           return res.send({
@@ -151,7 +149,8 @@ module.exports = (app) => {
         if (err) return res.send(err);
         res.send({
           success: true,
-          message: "Removed friend"});
+          message: "Removed friend"
+        });
       }
     );
   });
@@ -182,9 +181,9 @@ module.exports = (app) => {
 
   app.get("/api/getFriendNames", (req: any, res: any) => {
     User.findById(req.session.passport.user).populate("friends", 'fullName _id avatar experiencePoints').exec(function (err, result) {
-        if (err) return res.send(err);
-        res.send(result.friends);
-      })
+      if (err) return res.send(err);
+      res.send(result.friends);
+    })
   });
 
   app.get("/api/getAvatar", (req: any, res: any) => {
@@ -194,7 +193,7 @@ module.exports = (app) => {
         res.send(result);
       });
   });
-  
+
   app.post("/api/removeFavour", async (req: any, res: any) => {
     User.findByIdAndUpdate(
       req.session.passport.user,
@@ -229,7 +228,7 @@ module.exports = (app) => {
   });
 
   app.get('/api/getMyDebts', (req: any, res: any) => {
-    User.findById(req.session.passport.user, "myDebts fullName").populate({path: "myDebts", populate: {path: "creator", model: 'users', select: {'_id': 1, 'avatar': 1, 'fullName': 1}}}).exec(function (err, favours) {
+    User.findById(req.session.passport.user, "myDebts fullName").populate({ path: "myDebts", populate: { path: "creator", model: 'users', select: { '_id': 1, 'avatar': 1, 'fullName': 1 } } }).exec(function (err, favours) {
       if (err) return res.send(err);
       res.send(favours)
     })
@@ -243,7 +242,7 @@ module.exports = (app) => {
   })
 
   app.get('/api/getMyCompletedFavours', (req: any, res: any) => {
-    User.findById(req.session.passport.user, "completedFavours").populate({path: "completedFavours", populate: { path: "creator", select: {"avatar": 1, "fullName": 1}}})
+    User.findById(req.session.passport.user, "completedFavours").populate({ path: "completedFavours", populate: { path: "creator", select: { "avatar": 1, "fullName": 1 } } })
       .exec(function (err, favours) {
         if (err) return res.send(err);
         res.send(favours);
@@ -255,13 +254,13 @@ module.exports = (app) => {
       if (err) return res.send(err);
       Favour.findById(req.body.id).populate("applicant_image").exec(function (err, image) {
         if (err) return res.send(err);
-        res.send({favour, image});
+        res.send({ favour, image });
       })
     })
   })
 
   app.post('/api/declineSubmission', (req: any, res: any) => {
-    Favour.findByIdAndUpdate(req.body.id, {applicant_user: null, applicant_description: null, applicant_image: null}).exec(function (err, favour) {
+    Favour.findByIdAndUpdate(req.body.id, { applicant_user: null, applicant_description: null, applicant_image: null }).exec(function (err, favour) {
       if (err) return res.send(err);
       res.send({
         success: true,
@@ -273,10 +272,10 @@ module.exports = (app) => {
   app.post('/api/acceptSubmission', (req: any, res: any) => {
     const favour = req.body.favour;
     const applicant_id = req.body.applicant_id;
-    User.findByIdAndUpdate(applicant_id, {$push: {completedFavours: favour._id}, $inc: {experiencePoints: favour.points}}).exec(function (err) {
+    User.findByIdAndUpdate(applicant_id, { $push: { completedFavours: favour._id }, $inc: { experiencePoints: favour.points } }).exec(function (err) {
       if (err) res.send(err);
     });
-    Favour.findByIdAndUpdate(favour._id, {complete: true}).exec(function (err, result) {
+    Favour.findByIdAndUpdate(favour._id, { complete: true }).exec(function (err, result) {
       if (err) return res.send(err);
       res.send({
         success: true,
@@ -292,25 +291,25 @@ module.exports = (app) => {
     let visited = new Set();
     let namesMap = new Map();
     arr.push(data._id);
-    
+
     for (let iter1 of JSON.parse(JSON.stringify(data.myDebts))) {
       if (visited.has(iter1.creator._id)) continue;
       arr.push(iter1.creator._id);
-      namesMap.set(iter1.creator._id, {name: iter1.creator.fullName, avatar: iter1.creator.avatar});
+      namesMap.set(iter1.creator._id, { name: iter1.creator.fullName, avatar: iter1.creator.avatar });
       for (let iter2 of JSON.parse(JSON.stringify(iter1.creator.myDebts))) {
         if (visited.has(iter2.creator._id)) continue;
         if (arr.includes(iter2.creator._id)) cycles.push(Array.from(arr));
         arr.push(iter2.creator._id);
-        namesMap.set(iter2.creator._id, {name: iter2.creator.fullName, avatar: iter2.creator.avatar});
+        namesMap.set(iter2.creator._id, { name: iter2.creator.fullName, avatar: iter2.creator.avatar });
         for (let iter3 of JSON.parse(JSON.stringify(iter2.creator.myDebts))) {
           if (visited.has(iter3.creator._id)) continue;
           if (arr.includes(iter3.creator._id)) cycles.push(Array.from(arr));
           arr.push(iter3.creator._id);
-          namesMap.set(iter3.creator._id, {name: iter3.creator.fullName, avatar: iter3.creator.avatar});
+          namesMap.set(iter3.creator._id, { name: iter3.creator.fullName, avatar: iter3.creator.avatar });
           for (let iter4 of JSON.parse(JSON.stringify(iter3.creator.myDebts))) {
             if (visited.has(iter4.creator._id)) continue;
             if (arr.includes(iter4.creator._id)) cycles.push(Array.from(arr));
-            namesMap.set(iter4.creator._id, {name: iter4.creator.fullName, avatar: iter4.creator.avatar});
+            namesMap.set(iter4.creator._id, { name: iter4.creator.fullName, avatar: iter4.creator.avatar });
           }
           arr.pop();
           visited.add(iter3.creator._id);
@@ -328,7 +327,7 @@ module.exports = (app) => {
     }
 
     final_cycles = final_cycles.map(i => JSON.stringify(i)).reverse().filter(function (e, i, a) {
-      return a.indexOf(e, i+1) === -1;
+      return a.indexOf(e, i + 1) === -1;
     }).reverse().map(i => JSON.parse(i));
 
     let final_names = [];
@@ -345,14 +344,26 @@ module.exports = (app) => {
   }
 
   app.get('/api/partyFinder', (req: any, res: any) => {
-    User.findById(req.session.passport.user, "myDebts").populate({path: "myDebts", select: {'creator': 1}, populate: 
-      {path: "creator", model: 'users', select: {'_id': 1, 'avatar': 1, 'fullName': 1, 'myDebts': 1}, populate: 
-      {path: "myDebts", select: {'creator': 1}, populate: {path: "creator", model: 'users', select: {'_id': 1, 'avatar': 1, 'fullName': 1, 'myDebts': 1}, populate: 
-      {path: "myDebts", select: {'creator': 1}, populate: {path: "creator", model: 'users', select: {'_id': 1, 'avatar': 1, 'fullName': 1, 'myDebts': 1}, populate: 
-      {path: "myDebts", select: {'creator': 1}, populate: {path: "creator", model: 'users', select: {'_id': 1, 'avatar': 1, 'fullName': 1, 'myDebts': 1}}}}}}}}}).exec(function (err, debts) {
-        return res.send(traversal(debts));
-      })
-        
+    User.findById(req.session.passport.user, "myDebts").populate({
+      path: "myDebts", select: { 'creator': 1 }, populate:
+      {
+        path: "creator", model: 'users', select: { '_id': 1, 'avatar': 1, 'fullName': 1, 'myDebts': 1 }, populate:
+        {
+          path: "myDebts", select: { 'creator': 1 }, populate: {
+            path: "creator", model: 'users', select: { '_id': 1, 'avatar': 1, 'fullName': 1, 'myDebts': 1 }, populate:
+            {
+              path: "myDebts", select: { 'creator': 1 }, populate: {
+                path: "creator", model: 'users', select: { '_id': 1, 'avatar': 1, 'fullName': 1, 'myDebts': 1 }, populate:
+                  { path: "myDebts", select: { 'creator': 1 }, populate: { path: "creator", model: 'users', select: { '_id': 1, 'avatar': 1, 'fullName': 1, 'myDebts': 1 } } }
+              }
+            }
+          }
+        }
+      }
+    }).exec(function (err, debts) {
+      return res.send(traversal(debts));
+    })
+
   });
-    
+
 };

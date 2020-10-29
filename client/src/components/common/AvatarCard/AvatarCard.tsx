@@ -16,12 +16,12 @@ interface IProps {
 }
 
 
-
-const AvatarCard = ({ avatar, name, creatorId, title, description, points, category, id, isPending}: IProps) => {
+// Dynamically renders the avatar favour cards by passing as props from API call into the component 
+const AvatarCard = ({ avatar, name, creatorId, title, description, points, category, id, isPending }: IProps) => {
   return (
     <>
       <div className='favours-card'>
-        <div className='favours-card-square-bg' style={{backgroundColor: Avatars[avatar].color}}>
+        <div className='favours-card-square-bg' style={{ backgroundColor: Avatars[avatar].color }}>
           <img className='avatar' src={Avatars[avatar].avatar} alt='avatar' />
         </div>
         <div className='right-details'>

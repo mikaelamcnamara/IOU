@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import TextField from '../common/TextField';
 import { register } from '../../APIFetchers';
@@ -8,10 +8,13 @@ import NameIcon from '../../assets/NameIcon.svg';
 import EmailIcon from '../../assets/EmailIcon.svg';
 import PasswordIcon from '../../assets/PasswordIcon.svg';
 import ConfirmPasswordIcon from '../../assets/ConfirmPasswordIcon.svg';
+import Swal from 'sweetalert2'
 
 import '../../App.css';
 import './Register.css';
 
+// Registration which checks for valid names, emails and passwords
+// Displays error message if incorrect values are entered
 const Register = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -21,9 +24,9 @@ const Register = () => {
 
   const handleRegistration = async () => {
     const res = await register(fullName, email, password, confirmPassword);
-    console.log(res);
     if (res.success) history.push('/SignIn');
-    else window.alert(res.message);
+    // else window.alert(res.message);
+    else Swal.fire("Registration Failed", res.message, "error");
   };
 
   return (

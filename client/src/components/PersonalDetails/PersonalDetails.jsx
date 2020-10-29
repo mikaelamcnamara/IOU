@@ -7,6 +7,9 @@ import "../../App.css";
 import "./PersonalDetails.css";
 import { getCurrentUser, update } from "../../APIFetchers";
 
+// Load and fetch user details and then render it on the form
+// Handle user modification and send a post request to update it 
+// on the database
 const PersonalDetails = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

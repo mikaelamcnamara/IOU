@@ -1,12 +1,10 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from '../common/Navbar/Navbar';
 import AvatarCard from '../common/AvatarCard/AvatarCard';
 import './SearchPage.css';
 import Pagination from '../common/Pagination/Pagination';
 import queryString from 'query-string';
-import Cards from '../common/Cards/Cards';
 import Lottie from 'react-lottie';
-// import favoursList from '../common/dummyData.json';
 import searchAnimation from '../../assets/Searching.json';
 
 
@@ -14,7 +12,7 @@ import { getAllFavours } from '../../APIFetchers';
 
 const SearchPage = props => {
   // Configuring all the states and hooks
-  const searchValue = queryString.extract(props.location.search);
+  let searchValue = queryString.extract(props.location.search);
   const [filteredFavours, setFilteredFavours] = useState([]);
   const [favoursList, setFavoursList] = useState([]);
   const [favours, setFavours] = useState([]);
@@ -41,12 +39,12 @@ const SearchPage = props => {
   // The search functionality which receives a searchValue prop from the navbar input and performs function
   useEffect(() => {
     populateFavoursList();
-  }, []);
+  }, [searchValue]);
 
   useEffect(() => {
     setFilteredFavours(
       favoursList.filter((favours) =>
-        favours.title.toLowerCase().includes(searchValue.toLowerCase())
+        favours.description.toLowerCase().trim().includes(searchValue.toLowerCase().trim())
       )
     );
   }, [searchValue, favours])
@@ -64,7 +62,7 @@ const SearchPage = props => {
   const renderCards = () => {
     return (<div className="search-bg">
       {currentPosts.map((favours, index) => {
-        return <AvatarCard key={index} creatorId={favours.creator._id} avatar={favours.creator.avatar} name={favours.creator.fullName} title={favours.title} description={favours.description} points={favours.points} category={favours.category} id={favours._id} isPending={favours.applicant_user}/>
+        return <AvatarCard key={favours._id} creatorId={favours.creator._id} avatar={favours.creator.avatar} name={favours.creator.fullName} title={favours.title} description={favours.description} points={favours.points} category={favours.category} id={favours._id} isPending={favours.applicant_user} />
       })}
       <Pagination postsPerPage={postsPerPage} totalAvatarCards={filteredFavours.length} paginate={paginate} />
     </div>)
@@ -73,7 +71,7 @@ const SearchPage = props => {
   return (
     <>
       <div>
-        <NavBar />
+        <NavBar value={props} />
         <h1 className="search-results" >{(searchValue === "") ? "All of the favours" : `Search Results: ${searchValue}`} </h1>
         <p className="search-number-results"> {(searchValue === "") ? `Showing all ${filteredFavours.length} favours` : `Showing ${filteredFavours.length} results for ${searchValue}`} </p>
         {
@@ -82,7 +80,7 @@ const SearchPage = props => {
               <div className='search-fail-animation'>
                 <Lottie options={defaultOptions} height={700} width={700} />
               </div>
-              <h1 className="failed-search">Oops...we could not find that favour.</h1>
+              <h1 className="failed-search">Oops...we could not find that favour. Try search again?</h1>
             </div> : renderCards()
         }
       </div>
