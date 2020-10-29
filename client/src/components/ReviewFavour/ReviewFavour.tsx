@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { favourApplicant, acceptSubmission, declineSubmission } from "../../APIFetchers";
 import NavBar from "../common/Navbar/Navbar";
-import Filter from "bad-words";
 import "../../App.css";
 import "./ReviewFavour.css";
 import Swal from "sweetalert2";

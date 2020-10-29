@@ -4,7 +4,6 @@ const Favour = mongoose.model("favours");
 const User = mongoose.model("users");
 const Image = mongoose.model("images");
 const fs = require('fs');
-const {promisify} = require('util')
 const multer = require('multer');
 const upload = multer({dest: './uploads/', limits: {
   fileSize: 1000000,

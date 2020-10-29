@@ -5,7 +5,6 @@ const cors = require('cors');
 const keys = require('./config/keys');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
-const multer = require('multer');
 
 require('./models/User');
 require('./models/Favour');

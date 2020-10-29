@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import NavBar from "../common/Navbar/Navbar";
 import { getAFavour } from '../../APIFetchers';
 import Swal from "sweetalert2";
@@ -37,7 +37,6 @@ const FulfillFavour = () => {
 
   // Initialises the variables to access the elements
   const filter = new Filter();
-  const history = useHistory();
 
   const imagePicker = useRef<HTMLInputElement>(null);
 
