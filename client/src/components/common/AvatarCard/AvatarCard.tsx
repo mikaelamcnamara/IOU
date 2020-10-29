@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import Avatars from '../Avatars/Avatars';
 import burgerIcon from '../../../assets/burger-icon.svg';
 import './AvatarCard.css';
@@ -31,7 +32,7 @@ const AvatarCard = ({ avatar, name, creatorId, title, description, points, categ
               <img src={burgerIcon} alt='' /> {category}
             </span>
           </div>
-          {!isPending && creatorId !== localStorage.getItem('user') && <button className='do-favour-btn'> Do Favour</button>}
+          {!isPending && creatorId !== localStorage.getItem('user') && localStorage.getItem('user') != undefined && <Link to={`/FulfillFavour/${id}`}><button className='do-favour-btn'>Do Favour</button></Link>}
           {isPending && <button className='do-favour-btn'>Pending Approval</button>}
           <p className='card-text'>
             {description}

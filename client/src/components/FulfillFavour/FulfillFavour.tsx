@@ -125,7 +125,7 @@ const FulfillFavour = () => {
 
             <br></br>
             <br></br>
-            <input style={{ display: 'none' }} type="text" name="favour_id" value={id} />
+            <input style={{ display: 'none' }} type="text" name="favour_id" value={id} onChange={imagePickHandler} />
             <div className="form-submit">
               <br></br>
               <input type="submit" value="Send!" />
