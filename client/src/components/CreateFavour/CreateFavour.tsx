@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../common/Navbar/Navbar";
-import { createFavour, getFriendNames } from "../../APIFetchers";
+import { createFavour, getAllFriendNames } from "../../APIFetchers";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import Filter from "bad-words";
@@ -23,7 +23,7 @@ const CreateFavour = () => {
   var filter = new Filter();
 
   const showAssignee = async () => {
-    const friendNames = await getFriendNames();
+    const friendNames = await getAllFriendNames();
     if (friendNames.length == 0) {
       Swal.fire(
         "It looks like you haven't added any friends yet",

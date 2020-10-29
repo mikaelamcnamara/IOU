@@ -4,8 +4,6 @@ import './Pagination.css'
 // Section handles pagination where it creates a page per 10 items on the page
 
 const Pagination = ({ postsPerPage, totalAvatarCards, paginate }) => {
-
-
   const pageNumbers = [];
 
   for (let count = 1; count <= Math.ceil(totalAvatarCards / postsPerPage); count++) {
@@ -15,8 +13,8 @@ const Pagination = ({ postsPerPage, totalAvatarCards, paginate }) => {
   return (
     <ul className="pagination">
       {pageNumbers.map(number => (
-        <li key={number} className="avatar-item">
-          <a href="#" onClick={() => paginate(number)} className="page-link">
+        <li onClick={() => paginate(number)} key={number} className="avatar-item">
+          <a className="page-link">
             {number}
           </a>
         </li>
