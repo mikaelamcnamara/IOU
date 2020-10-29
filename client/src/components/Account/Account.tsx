@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../common/Navbar/Navbar';
 import CompletedCard from '../common/CompletedCard/CompletedCard';
-import Friend from '../common/Friend/Friend';
 import AccountBackground from '../../assets/AccountBackground.svg';
-import manAvatar from '../../assets/first-man-avatar.svg';
 import EditIcon from '../../assets/EditIcon.svg';
 import Gold from '../../assets/gold.svg';
 import ProgressBar from '../common/ProgressBar/ProgressBar';
@@ -13,6 +11,7 @@ import './Account.css';
 import Avatars from '../common/Avatars/Avatars';
 
 const Account = () => {
+  //Initialised the states 
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState(0);
   const [experiencePoints, setExperiencePoints] = useState(0);
@@ -22,6 +21,8 @@ const Account = () => {
   const [progress, setProgress] = useState(0);
   const [parties, setParties] = useState([]);
 
+
+  // Retrieve user details through API call and render details on the page
   const getUserDetails = async () => {
     const result = await getCurrentUser();
     let completed = await getMyCompletedFavours();
@@ -31,16 +32,16 @@ const Account = () => {
     setAvatar(result.avatar);
     setExperiencePoints(result.experiencePoints);
     setNumCompletedFavours(result.completedFavours.length);
-    setLevel(Math.floor(result.experiencePoints/1000));
-    setProgress((result.experiencePoints%1000)/1000 * 100);
+    setLevel(Math.floor(result.experiencePoints / 1000));
+    setProgress((result.experiencePoints % 1000) / 1000 * 100);
     let party = await getParties();
-    party = party.map((i, num) => <PartyCard key={num} users={i} number={num+1}/>);
+    party = party.map((i, num) => <PartyCard key={num} users={i} number={num + 1} />);
     setParties(party);
   }
 
   useEffect(() => {
     getUserDetails();
-  },[]);
+  }, []);
 
   return (
     <div className='account'>
@@ -51,7 +52,7 @@ const Account = () => {
       </p>
       <div className='account-display'>
         <a href="/PersonalDetails"><img className='edit-icon' src={EditIcon} alt='edit icon' /></a>
-        <div className='account-avatar' style={{backgroundColor: Avatars[avatar].color}}>
+        <div className='account-avatar' style={{ backgroundColor: Avatars[avatar].color }}>
           <img src={Avatars[avatar].avatar} alt='Account avatar' />
         </div>
         <h1 className='account-name'>{name}</h1>

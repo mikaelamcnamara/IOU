@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { leaderboard } from '../../APIFetchers';
 import LeaderBoardHeader from '../../assets/leaderboard.svg';
 
@@ -18,7 +17,7 @@ const LeaderBoard = () => {
   const populateLeaderboard = async () => {
     setLoading(true);
     let leaders = await leaderboard();
-    leaders = leaders.map((leader, i) => <LeaderCard key={leader.fullName} avatar={leader.avatar} name={leader.fullName} xp={leader.experiencePoints} place={i}/>);
+    leaders = leaders.map((leader, i) => <LeaderCard key={leader.fullName} avatar={leader.avatar} name={leader.fullName} xp={leader.experiencePoints} place={i} />);
     setTopUsers(leaders);
     console.log(topUsers);
     setLoading(false);
@@ -40,12 +39,12 @@ const LeaderBoard = () => {
         src={LeaderBoardHeader}
         alt='leaderboard-background'
       ></img>
-     
+
       <canvas id='my-canvas'></canvas>
       <div className='leader-content'>
         <h1 className='leader-title'>LeaderBoard</h1>
         <h4 className='leader-subtitle'>
-          These users have earned the most experience points! 
+          These users have earned the most experience points!
         </h4>
         {loading &&
           <div className="loading-card">
@@ -60,7 +59,7 @@ const LeaderBoard = () => {
       </div>
     </div>
   );
-        
+
 };
 
 export default LeaderBoard;

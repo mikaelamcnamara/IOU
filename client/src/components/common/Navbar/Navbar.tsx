@@ -58,7 +58,8 @@ const Navbar = () => {
               </div>
             </Link>
             <div className="nav-middle">
-              <form className="search-form" onSubmit={handleOnSubmit}>
+              <form className="search-form" onClick={handleOnSubmit}>
+
                 <input
                   type="text"
                   className="search-input"
@@ -82,7 +83,7 @@ const Navbar = () => {
                 style={{
                   marginTop: '-0.2%',
                   textDecoration: "none",
-               
+
                 }}
               >
                 <p className="leaderboard-txt">LeaderBoard</p>

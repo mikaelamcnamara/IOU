@@ -27,7 +27,7 @@
 }
 
 .create-request {
-  width: 70%;
+  width: 50%;
   height: 120px;
   text-align: center;
   border-radius: 9px;
@@ -39,8 +39,15 @@
 }
 
 .create-request:hover {
+  width: 50%;
+  height: 120px;
+  text-align: center;
+  border-radius: 9px;
+  margin: auto;
   background-color: #acabab;
   color: #e8e8e8;
+  margin-bottom: 50px;
+  cursor: pointer;
 }
 
 .create-request:hover img {
@@ -62,6 +69,13 @@
 .favours-placeholder-text {
   font-size: 30px;
   color: #3b3b3b;
+  font-weight: bold;
+  padding: 50px;
+}
+
+.favours-owe-placeholder-text {
+  font-size: 30px;
+  color: white;
   font-weight: bold;
   padding: 50px;
 }

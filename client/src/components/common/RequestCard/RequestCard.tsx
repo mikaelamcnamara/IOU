@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import manAvatar from '../../../assets/first-man-avatar.svg';
 import burgerIcon from '../../../assets/burger-icon.svg';
 import trashIcon from '../../../assets/trash-icon.svg';
 import './RequestCard.css';

@@ -39,7 +39,6 @@ const FulfillFavour = () => {
 
   const getFavourDetails = async () => {
     const fav = await getAFavour(id);
-    // console.log(fav);
     setFavour(fav);
   }
 
@@ -132,7 +131,6 @@ const FulfillFavour = () => {
                   {previewUrl && <img src={previewUrl} alt="Preview" />}
                 </div>
               </div>
-              {/* <input type="file" accept=".png, .jpeg, .jpg" onChange={(e) => setImage(e.target.value)} /> */}
 
               <input type="file" name="image_file" ref={imagePicker} accept=".png, .jpeg, .jpg" onChange={imagePickHandler} />
             </label>
@@ -142,10 +140,10 @@ const FulfillFavour = () => {
 
             <br></br>
             <br></br>
-            <input style={{display: 'none'}} type="text" name="favour_id" value={id}/>
+            <input style={{ display: 'none' }} type="text" name="favour_id" value={id} />
             <div className="form-submit">
               <br></br>
-              <input type="submit" value="Send!"/>
+              <input type="submit" value="Send!" />
             </div>
           </form>
         </div>
