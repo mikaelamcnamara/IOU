@@ -56,9 +56,6 @@ const Account = () => {
           <img src={Avatars[avatar].avatar} alt='Account avatar' />
         </div>
         <h1 className='account-name'>{name}</h1>
-        <div className='ranking-stat'>
-          <p>#12 Most Favours</p>
-        </div>
         <h2>Level: {level}</h2>
         <div className='progress-card'>
           <p>Number of Favours: {numCompletedFavours}</p>
