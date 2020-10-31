@@ -26,7 +26,7 @@ The application was developed using a MERN (MongoDB, Express, React and Node.js)
 - Easy to use interface
 - Has transitions, animations and micro interactions which was created using SVGs, CSS and HTML Canvas elements 
 - Filters and prevents usage of profanity or inappropriate words
-- Deployed application using Docker and AWS EC2 instance
+- Deployed application using Docker and AWS EC2 instance with an NGINX Load Balancer
 
 
 ## Starting the application locally:
