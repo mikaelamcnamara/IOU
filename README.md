@@ -1,6 +1,9 @@
 ## IOU APPLICATION
 The purpose of this application is to keep track of small favours among friends and groups. 
 
+## Link
+The deployed link of the application: *put the link here*
+
 ### Functionality
 Users are able to:
 - View favours they owe other people
@@ -14,7 +17,19 @@ Users are able to:
 
 Note: This app does not allow monetary transactions.
 
-## Starting the application for the first time:
+## Architecture 
+The application was developed using a MERN (MongoDB, Express, React and Node.js) tech stack with Docker to contanerize the application and an AWS EC2 instance for deployment. The application was designed using a three tier architecture which would follow the princple known as separation of concerns. This means that the front end components were separated from the data and business componenets. The client folder contains all front end and user interface (UI) components which would be handled by React. Whereas routes, services contains and models contains the business and data logic of the application. The connection between the mongoDB database and front end is through a middleware called Mongoose. The routes and models folder is responsible for handling application programming interfaces (API) requests, responses and performing CRUD (Create, Read, Update and Delete) operations to the database. The services folder is for configuring the stack for registration and login as it is using a middleware called Passport for user authentication.
+
+
+## Innovation 
+- Utilises skeleton loading for components
+- Easy to use interface
+- Has transitions, animations and micro interactions which was created using SVGs, CSS and HTML Canvas elements 
+- Filters and prevents usage of profanity or inappropriate words
+- Deployed application using Docker and AWS EC2 instance
+
+
+## Starting the application locally:
 
 ```lua
 1. npm install
