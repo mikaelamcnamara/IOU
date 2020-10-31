@@ -2,7 +2,7 @@
 The purpose of this application is to keep track of small favours among friends and groups. 
 
 ## Link
-The deployed link of the application: *put the link here*
+The deployed link of the application: [http://ec2-18-232-69-252.compute-1.amazonaws.com:3000/](http://ec2-18-232-69-252.compute-1.amazonaws.com:3000/)
 
 ### Functionality
 Users are able to:
