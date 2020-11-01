@@ -4,6 +4,12 @@ The purpose of this application is to keep track of small favours among friends 
 ## Link
 The deployed link of the application: [http://ec2-18-232-69-252.compute-1.amazonaws.com:3000/](http://ec2-18-232-69-252.compute-1.amazonaws.com:3000/)
 
+## Libraries & Packages used
+- LottieLibrary - for rendering animations onto the website
+- bad-words - Filtering profanity and inappropriate words
+- Confetti-js - Creates a confetti animation on the page
+- React-Loading-Skeleton - Shows skeleton preview of components / elements whilst the page is loading
+
 ### Functionality
 Users are able to:
 - View favours they owe other people
@@ -20,13 +26,13 @@ Note: This app does not allow monetary transactions.
 ## Architecture 
 The application was developed using a MERN (MongoDB, Express, React and Node.js) tech stack with Docker to contanerize the application and an AWS EC2 instance for deployment. The application was designed using a three tier architecture which would follow the princple known as separation of concerns. This means that the front end components were separated from the data and business components. The client folder contains all front end and user interface (UI) components which would be handled by React. Whereas routes, services contains and models contains the business and data logic of the application. The connection between the mongoDB database and front end is through a middleware called Mongoose. The routes and models folder is responsible for handling application programming interfaces (API) requests, responses and performing CRUD (Create, Read, Update and Delete) operations to the database. The services folder is for configuring the stack for registration and login as it is using a middleware called Passport for user authentication.
 
-![Architecture for Assessment 2](https://i.ibb.co/rMtLdc3/Architecture-for-Assessment-2.png)
+![Architecture for Assessment 2](https://i.ibb.co/rMtLdc3/Architecture-for-Assessment-2.png = 500x500)
 
 ## Innovation 
 - Utilises skeleton loading for components
 - Easy to use interface
-- Has transitions, animations and micro interactions which was created using SVGs, CSS and HTML Canvas elements 
-- Filters and prevents usage of profanity or inappropriate words
+- Has transitions, animations and micro interactions which was created using SVGs, CSS, Lottie Library, Confetti Generator Package and HTML Canvas elements 
+- Filters and prevents usage of profanity or inappropriate words using bad words package
 - Deployed application using Docker and AWS EC2 instance with an NGINX Load Balancer
 
 
