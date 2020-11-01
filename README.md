@@ -5,7 +5,7 @@ The purpose of this application is to keep track of small favours among friends 
 The deployed link of the application: [http://ec2-18-232-69-252.compute-1.amazonaws.com:3000/](http://ec2-18-232-69-252.compute-1.amazonaws.com:3000/)
 
 ## Libraries & Packages used
-- LottieLibrary - for rendering animations onto the website
+- LottieLibrary - For rendering animations onto the website
 - bad-words - Filtering profanity and inappropriate words
 - Confetti-js - Creates a confetti animation on the page
 - React-Loading-Skeleton - Shows skeleton preview of components / elements whilst the page is loading
