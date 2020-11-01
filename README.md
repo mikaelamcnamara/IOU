@@ -26,7 +26,7 @@ Note: This app does not allow monetary transactions.
 ## Architecture 
 The application was developed using a MERN (MongoDB, Express, React and Node.js) tech stack with Docker to contanerize the application and an AWS EC2 instance for deployment. The application was designed using a three tier architecture which would follow the princple known as separation of concerns. This means that the front end components were separated from the data and business components. The client folder contains all front end and user interface (UI) components which would be handled by React. Whereas routes, services contains and models contains the business and data logic of the application. The connection between the mongoDB database and front end is through a middleware called Mongoose. The routes and models folder is responsible for handling application programming interfaces (API) requests, responses and performing CRUD (Create, Read, Update and Delete) operations to the database. The services folder is for configuring the stack for registration and login as it is using a middleware called Passport for user authentication.
 
-![Architecture for Assessment 2](https://i.ibb.co/rMtLdc3/Architecture-for-Assessment-2.png = 500x500)
+![Architecture for Assessment 2](https://i.ibb.co/rMtLdc3/Architecture-for-Assessment-2.png {width=500px height=500px})
 
 ## Innovation 
 - Utilises skeleton loading for components
